@@ -1,45 +1,22 @@
-import React, { useEffect } from "react";
-import Home from "./components/Home";
-export const BASE_URL = "https://api.themoviedb.org/3/movie";
+import React, { useState } from "react";
+import MovieItem from "./components/MovieItem";
 
-export const TMDB_THUMBNAIL_URL =
-  "https://media.themoviedb.org/t/p/w440_and_h660_face/";
-export const TMDB_ORIGINAL_URL = "https://image.tmdb.org/t/p/original/";
-export const TMDB_BANNER_URL =
-  "https://image.tmdb.org/t/p/w1920_and_h800_multi_faces/";
-export const TMDB_MOVIE_LISTS = {
-  popular: BASE_URL + "/popular?language=ko-KR&page=1",
-  nowPlaying: BASE_URL + "/now_playing?language=ko-KR&page=1",
-  topRated: BASE_URL + "/top_rated?language=ko-KR&page=1",
-  upcoming: BASE_URL + "/upcoming?language=ko-KR&page=1",
-};
-export const TMDB_MOVIE_DETAIL_URL = "https://api.themoviedb.org/3/movie/";
-const TMDB_TOKEN = process.env.TMDB_TOKEN;
-
-export const FETCH_OPTIONS = {
-  method: "GET",
-  headers: {
-    accept: "application/json",
-    Authorization: "Bearer " + TMDB_TOKEN,
-  },
-};
-
-function App() {
-  useEffect(() => {
-    fetch(
-      "https://api.themoviedb.org/3/movie/popular?language=ko-KR&page=1",
-      FETCH_OPTIONS
-    )
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-      });
-    console.log("useEffect");
-  }, []);
+function App({ initialData }) {
+  const [movies, setMovies] = useState(initialData || []);
 
   return (
     <div>
-      <Home />
+      <ul className="thumbnail-list">
+        {movies.results?.map(({ id, title, vote_average, poster_path }) => (
+          <li key={id}>
+            <MovieItem
+              rate={vote_average}
+              title={title}
+              thumbnailUrl={poster_path}
+            />
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }
