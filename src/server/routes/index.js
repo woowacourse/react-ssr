@@ -18,8 +18,6 @@ const __dirname = path.dirname(__filename);
 const router = Router();
 
 router.get("/", async (_, res) => {
-  console.log("server side");
-
   const popularMovies = await fetch(
     TMDB_MOVIE_LISTS.popular,
     FETCH_OPTIONS
