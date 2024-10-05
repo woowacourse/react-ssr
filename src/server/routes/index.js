@@ -6,11 +6,7 @@ import { fileURLToPath } from "url";
 import React from "react";
 import { renderToString } from "react-dom/server";
 import App from "../../client/App";
-import {
-  FETCH_OPTIONS,
-  TMDB_MOVIE_LISTS,
-  TMDB_THUMBNAIL_URL,
-} from "../../constants";
+import { FETCH_OPTIONS, TMDB_MOVIE_LISTS } from "../../constants";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
