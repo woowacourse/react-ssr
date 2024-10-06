@@ -1,22 +1,12 @@
-import { Router } from "express";
-import fs from "fs";
-import path from "path";
-import { fileURLToPath } from "url";
-
-import React from "react";
-import { renderToString } from "react-dom/server";
-import App from "../../client/App";
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+import App from '../../client/App';
+import React from 'react';
+import { Router } from 'express';
+import getMovies from '../../client/apis/getMovies';
+import { renderToString } from 'react-dom/server';
 
 const router = Router();
 
-router.get("/", (_, res) => {
-  const templatePath = path.join(__dirname, "../../../views", "index.html");
-  const renderedApp = renderToString(<App />);
-
-  const template = fs.readFileSync(templatePath, "utf-8");
+router.use('*', async (_, res) => {
   // const initData = template.replace(
   //   "<!--${INIT_DATA_AREA}-->",
   //   /*html*/ `
@@ -27,9 +17,11 @@ router.get("/", (_, res) => {
   //   </script>
   // `
   // );
-  const renderedHTML = template.replace("<!--${MOVIE_ITEMS_PLACEHOLDER}-->", renderedApp);
 
-  res.send(renderedHTML);
+  const movies = await getMovies.nowPlaying();
+  const renderedApp = renderToString(<App movies={movies} />);
+
+  res.send(renderedApp);
 });
 
 export default router;
