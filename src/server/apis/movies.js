@@ -1,4 +1,4 @@
-import { TMDB_MOVIE_LISTS } from './url.js';
+import { TMDB_BANNER_URL, TMDB_MOVIE_LISTS, TMDB_THUMBNAIL_URL } from './url.js';
 
 const fetchMovieList = async (type) => {
   const response = await fetch(TMDB_MOVIE_LISTS[type || 'nowPlaying'], {
@@ -13,5 +13,12 @@ const fetchMovieList = async (type) => {
 };
 
 export async function fetchNowPlayingMovies() {
-  return await fetchMovieList('nowPlaying');
+  const data = await fetchMovieList('nowPlaying');
+
+  return data.results.map(({ title, vote_average, backdrop_path, poster_path }) => ({
+    title,
+    rate: vote_average.toFixed(1),
+    backdropUrl: `${TMDB_BANNER_URL}/${backdrop_path}`,
+    thumbnailUrl: `${TMDB_THUMBNAIL_URL}${poster_path}`,
+  }));
 }

@@ -7,8 +7,6 @@ import { renderToString } from 'react-dom/server';
 
 import { fetchNowPlayingMovies } from '../apis/movies.js';
 
-import { TMDB_BANNER_URL } from '../apis/url';
-
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
@@ -28,18 +26,8 @@ function createInitialDataScript(movies) {
           movies: ${JSON.stringify(movies)}
         }
       </script>
+      <script type="module" src="/bundle"></script>
     `;
-}
-
-function createBestMovieDetail(nowPlayingMovies) {
-  const { title, vote_average, backdrop_path } = nowPlayingMovies.results[0];
-  const backdropPath = `${TMDB_BANNER_URL}/${backdrop_path}`;
-
-  return {
-    title,
-    rate: vote_average.toFixed(1),
-    backdropPath,
-  };
 }
 
 export async function renderHTML() {
@@ -49,12 +37,7 @@ export async function renderHTML() {
 
   const renderedApp = renderToString(<App movies={nowPlayingMovies} />);
 
-  const { title, rate, backdropPath } = createBestMovieDetail(nowPlayingMovies);
-
   return template
-    .replace('<!--${INIT_DATA_AREA}-->', createInitialDataScript(nowPlayingMovies))
     .replace('<!--${MOVIE_ITEMS_PLACEHOLDER}-->', renderedApp)
-    .replace('${bestMovie.title}', title)
-    .replace('${bestMovie.rate}', rate)
-    .replace('${background-container}', backdropPath);
+    .replace('<!--${INIT_DATA_AREA}-->', createInitialDataScript(nowPlayingMovies));
 }
