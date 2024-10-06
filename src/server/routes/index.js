@@ -26,8 +26,11 @@ router.get("/", async (_, res) => {
 
   const template = fs.readFileSync(templatePath, "utf-8");
   const renderedHTML = template
-    .replace("<!--${HEADER_CONTENT_PLACEHOLDER}-->", renderedHeaderContent)
-    .replace("<!--${MOVIE_ITEMS_PLACEHOLDER}-->", renderedMovies)
+    .replace(`<header id="HEADER"></header>`, `<header id="HEADER">` + renderedHeaderContent + `</header>`)
+    .replace(
+      `<ul id="MOVIE_ITEMS" class="thumbnail-list"></ul>`,
+      `<ul id="MOVIE_ITEMS" class="thumbnail-list">` + renderedMovies + `</ul>`
+    )
     .replace(
       "<!--${INIT_DATA_AREA}-->",
       /*html*/ `

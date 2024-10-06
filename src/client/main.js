@@ -5,5 +5,5 @@ import HeaderContent from "./components/HeaderContent";
 
 const INIT_DATA = window.__INITIAL_DATA__;
 
-hydrateRoot(document.getElementById("MOVIE_ITEMS_PLACEHOLDER"), <Movies movies={INIT_DATA.movies} />);
 hydrateRoot(document.getElementById("HEADER"), <HeaderContent movie={INIT_DATA.movies[0]} />);
+hydrateRoot(document.getElementById("MOVIE_ITEMS"), <Movies movies={INIT_DATA.movies} />);
