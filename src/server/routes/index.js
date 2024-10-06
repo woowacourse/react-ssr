@@ -20,9 +20,9 @@ const router = Router();
 router.get("/", async (_, res) => {
   const templatePath = path.join(__dirname, "../../../views", "index.html");
 
-  const popularMovies = await loadMovies(TMDB_MOVIE_LISTS.popular);
-  const renderedHeaderContent = renderToString(<HeaderContent movie={popularMovies[0]} />);
-  const renderedMovies = renderToString(<Movies movies={popularMovies} />);
+  const nowPlayingMovies = await loadMovies(TMDB_MOVIE_LISTS.nowPlaying);
+  const renderedHeaderContent = renderToString(<HeaderContent movie={nowPlayingMovies[0]} />);
+  const renderedMovies = renderToString(<Movies movies={nowPlayingMovies} />);
 
   const template = fs.readFileSync(templatePath, "utf-8");
   const renderedHTML = template
@@ -33,7 +33,7 @@ router.get("/", async (_, res) => {
       /*html*/ `
     <script>
       window.__INITIAL_DATA__ = {
-        movies: ${JSON.stringify(popularMovies)}
+        movies: ${JSON.stringify(nowPlayingMovies)}
       }
     </script>
     <script type='module' src="/scripts"></script>
