@@ -6,10 +6,11 @@ import { fileURLToPath } from "url";
 import React from "react";
 import { renderToString } from "react-dom/server";
 
+import { TMDB_MOVIE_LISTS } from "../../constants";
 import { loadMovies } from "../fetch";
 
 import Movies from "../../client/components/movies";
-import { TMDB_MOVIE_LISTS } from "../../constants";
+import HeaderContent from "../../client/components/HeaderContent";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -20,12 +21,16 @@ router.get("/", async (_, res) => {
   const templatePath = path.join(__dirname, "../../../views", "index.html");
 
   const popularMovies = await loadMovies(TMDB_MOVIE_LISTS.popular);
+  const renderedHeaderContent = renderToString(<HeaderContent movie={popularMovies[0]} />);
   const renderedMovies = renderToString(<Movies movies={popularMovies} />);
 
   const template = fs.readFileSync(templatePath, "utf-8");
-  const renderedHTML = template.replace("<!--${MOVIE_ITEMS_PLACEHOLDER}-->", renderedMovies).replace(
-    "<!--${INIT_DATA_AREA}-->",
-    /*html*/ `
+  const renderedHTML = template
+    .replace("<!--${HEADER_CONTENT_PLACEHOLDER}-->", renderedHeaderContent)
+    .replace("<!--${MOVIE_ITEMS_PLACEHOLDER}-->", renderedMovies)
+    .replace(
+      "<!--${INIT_DATA_AREA}-->",
+      /*html*/ `
     <script>
       window.__INITIAL_DATA__ = {
         movies: ${JSON.stringify(popularMovies)}
@@ -33,7 +38,7 @@ router.get("/", async (_, res) => {
     </script>
     <script type='module' src="/scripts"></script>
   `
-  );
+    );
 
   res.send(renderedHTML);
 });

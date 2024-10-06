@@ -1,10 +1,6 @@
 import React from "react";
 import { TMDB_THUMBNAIL_URL } from "../../constants";
-
-const round = (value, decimals = 0) => {
-  const factor = 10 ** decimals;
-  return Math.round(value * factor) / factor;
-};
+import { round } from "../utils";
 
 function MovieItem({ rate, title, thumbnailUrl, onClick }) {
   const thumbnailFullUrl = TMDB_THUMBNAIL_URL + "/" + thumbnailUrl;
