@@ -13,6 +13,9 @@ export const TMDB_MOVIE_LISTS = {
 };
 export const TMDB_MOVIE_DETAIL_URL = "https://api.themoviedb.org/3/movie/";
 
+export const TMDB_BACKGROUND_THUMBNAIL =
+  "https://image.tmdb.org/t/p/w1920_and_h800_multi_faces";
+
 export const FETCH_OPTIONS = {
   method: "GET",
   headers: {
