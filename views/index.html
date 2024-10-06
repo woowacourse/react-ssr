@@ -1,51 +1,49 @@
 <!DOCTYPE html>
 <html lang="ko">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="../assets/styles/reset.css" />
-    <link rel="stylesheet" href="../assets/styles/main.css" />
-    <link rel="stylesheet" href="../assets/styles/modal.css" />
-    <link rel="stylesheet" href="../assets/styles/tab.css" />
-    <link rel="stylesheet" href="../assets/styles/thumbnail.css" />
-    <script src="./"></script>
-    <title>영화 리뷰</title>
-  </head>
-  <body>
-    <div id="wrap">
-      <header>
-        <div class="background-container" style="background-image: url('${background-container}')">
-          <div class="overlay" aria-hidden="true"></div>
-          <div class="top-rated-container">
-            <h1 class="logo"><img src="../assets/images/logo.png" alt="MovieList" /></h1>
-            <div class="top-rated-movie">
-              <div class="rate">
-                <img src="../assets/images/star_empty.png" class="star" />
-                <span class="rate-value">${bestMovie.rate}</span>
-              </div>
-              <div class="title">${bestMovie.title}</div>
-              <button class="primary detail">자세히 보기</button>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="../assets/styles/reset.css" />
+  <link rel="stylesheet" href="../assets/styles/main.css" />
+  <link rel="stylesheet" href="../assets/styles/modal.css" />
+  <link rel="stylesheet" href="../assets/styles/tab.css" />
+  <link rel="stylesheet" href="../assets/styles/thumbnail.css" />
+  <!-- <script defer src="./"></script> -->
+  <title>영화 리뷰</title>
+</head>
+<body>
+  <div id="wrap">
+    <header>
+      <div class="background-container" style="background-image: url('${background-container}')">
+        <div class="overlay" aria-hidden="true"></div>
+        <div class="top-rated-container">
+          <h1 class="logo"><img src="../assets/images/logo.png" alt="MovieList" /></h1>
+          <div class="top-rated-movie">
+            <div class="rate">
+              <img src="../assets/images/star_empty.png" class="star" />
+              <span class="rate-value">${bestMovie.rate}</span>
             </div>
+            <div class="title">${bestMovie.title}</div>
+            <button class="primary detail">자세히 보기</button>
           </div>
         </div>
-      </header>
-      <div class="container">
-        <main>
-          <section>
-            <h2>지금 인기 있는 영화</h2>
-            <ul class="thumbnail-list">
-              <!--${MOVIE_ITEMS_PLACEHOLDER}-->
-            </ul>
-          </section>
-        </main>
       </div>
-
-      <footer class="footer">
-        <p>&copy; 우아한테크코스 All Rights Reserved.</p>
-        <p><img src="../assets/images/woowacourse_logo.png" width="180" /></p>
-      </footer>
+    </header>
+    <div class="container">
+      <main>
+        <section>
+          <h2>지금 인기 있는 영화</h2>
+          <!--${MOVIE_ITEMS_PLACEHOLDER}-->
+        </section>
+      </main>
     </div>
-    <!--${MODAL_AREA}-->
-  </body>
-  <!--${INIT_DATA_AREA}-->
+
+    <footer class="footer">
+      <p>&copy; 우아한테크코스 All Rights Reserved.</p>
+      <p><img src="../assets/images/woowacourse_logo.png" width="180" /></p>
+    </footer>
+  </div>
+  <!--${MODAL_AREA}-->
+</body>
+<!--${INIT_DATA_AREA}-->
 </html>
