@@ -18,9 +18,9 @@ const router = Router();
 
 router.get("/", async (_, res) => {
   const templatePath = path.join(__dirname, "../../../views", "index.html");
-  const renderedMovies = renderToString(<Movies />);
 
   const popularMovies = await loadMovies(TMDB_MOVIE_LISTS.popular);
+  const renderedMovies = renderToString(<Movies movies={popularMovies} />);
 
   const template = fs.readFileSync(templatePath, "utf-8");
   const renderedHTML = template.replace("<!--${MOVIE_ITEMS_PLACEHOLDER}-->", renderedMovies).replace(

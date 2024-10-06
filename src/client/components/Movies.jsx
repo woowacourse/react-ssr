@@ -23,12 +23,17 @@ function MovieItem({ rate, title, thumbnailUrl, onClick }) {
   );
 }
 
-export default function Movies({ initData }) {
+export default function Movies({ movies }) {
   return (
     <>
-      {initData?.movies.map(({ id, title, vote_average, poster_path }) => (
+      {movies.map(({ id, title, vote_average, poster_path }) => (
         <li key={id}>
-          <MovieItem rate={vote_average} title={title} thumbnailUrl={poster_path} />
+          <MovieItem
+            rate={vote_average}
+            title={title}
+            thumbnailUrl={poster_path}
+            onClick={() => console.log("hydrate")}
+          />
         </li>
       ))}
     </>

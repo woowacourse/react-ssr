@@ -4,4 +4,4 @@ import Movies from "./components/movies";
 
 const INIT_DATA = window.__INITIAL_DATA__;
 
-hydrateRoot(document.getElementById("MOVIE_ITEMS_PLACEHOLDER"), <Movies initData={INIT_DATA} />);
+hydrateRoot(document.getElementById("MOVIE_ITEMS_PLACEHOLDER"), <Movies movies={INIT_DATA.movies} />);
