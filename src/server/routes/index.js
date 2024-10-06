@@ -7,6 +7,7 @@ import React from 'react';
 import { renderToString } from 'react-dom/server';
 import App from '../../client/App';
 import fetchNowPlayingMovies from '../apis/movies.js';
+import { TMDB_BANNER_URL } from '../constants/movies.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -31,7 +32,17 @@ router.get('/', async (_, res) => {
     </script>
   `
   );
-  const renderedHTML = initData.replace('<!--${MOVIE_ITEMS_PLACEHOLDER}-->', renderedApp);
+
+  const bestMovie = nowPlayingMovies[0];
+  const bestMovieRate = bestMovie.vote_average.toFixed(1);
+  const bestMovieTitle = bestMovie.title;
+  const bestMovieBackground = TMDB_BANNER_URL + '/' + bestMovie.backdrop_path;
+
+  const renderedHTML = initData
+    .replace('<!--${MOVIE_ITEMS_PLACEHOLDER}-->', renderedApp)
+    .replace('${bestMovie.rate}', bestMovieRate)
+    .replace('${bestMovie.title}', bestMovieTitle)
+    .replace('${background-container}', bestMovieBackground);
 
   res.send(renderedHTML);
 });
