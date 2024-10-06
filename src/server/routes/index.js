@@ -27,11 +27,19 @@ router.get("/", async (_, res) => {
     const bestMovie = popularMovies.results[0];
 
     const templatePath = path.join(__dirname, "../../../views", "index.html");
-    const renderedApp = renderToString(<App initialData={popularMovies} />);
+    const renderedApp = renderToString(<App />);
 
     const template = fs.readFileSync(templatePath, "utf-8");
+    const initData = template.replace(
+      "<!--${INIT_DATA_AREA}-->",
+      /*html*/ `
+      <script>
+        window.__INITIAL_DATA__ = ${JSON.stringify(popularMovies)};
+      </script>
+    `
+    );
 
-    const renderedHTML = template
+    const renderedHTML = initData
       .replace("<!--${MOVIE_ITEMS_PLACEHOLDER}-->", renderedApp)
       .replace("${bestMovie.rate}", bestMovie.vote_average)
       .replace("${bestMovie.title}", bestMovie.title)
