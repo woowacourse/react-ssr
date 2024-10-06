@@ -1,4 +1,12 @@
-import { FETCH_OPTIONS, TMDB_MOVIE_DETAIL_URL } from "./constants.js";
+import { TMDB_MOVIE_DETAIL_URL } from "../constants.js";
+
+const FETCH_OPTIONS = {
+  method: "GET",
+  headers: {
+    accept: "application/json",
+    Authorization: "Bearer " + process.env.TMDB_TOKEN,
+  },
+};
 
 export const loadMovies = async (url) => {
   const response = await fetch(url, FETCH_OPTIONS);

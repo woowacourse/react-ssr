@@ -6,10 +6,10 @@ import { fileURLToPath } from "url";
 import React from "react";
 import { renderToString } from "react-dom/server";
 
-import { TMDB_MOVIE_LISTS } from "../utils/constants";
-import { loadMovies } from "../utils/fetch";
+import { loadMovies } from "../fetch";
 
 import Movies from "../../client/components/movies";
+import { TMDB_MOVIE_LISTS } from "../../constants";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
