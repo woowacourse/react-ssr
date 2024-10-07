@@ -1,11 +1,21 @@
 import React from "react";
-import Home from "./components/Home";
+import Header from "./components/Header/Header";
+import MovieList from "./components/MovieList";
 
-function App() {
+function App({ bestMovie, movies }) {
   return (
-    <div>
-      <Home />
-    </div>
+    <>
+      <Header bestMovie={bestMovie} />
+      <div className="container">
+        <main>
+          <section>
+          <ul className="thumbnail-list">
+            <MovieList movies={movies}/>
+            </ul>
+          </section>
+        </main>
+      </div>
+    </>
   );
 }
 
