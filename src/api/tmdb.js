@@ -13,6 +13,8 @@ export const TMDB_MOVIE_LISTS = {
 };
 const TMDB_BANNER_URL =
   "https://image.tmdb.org/t/p/w1920_and_h800_multi_faces/";
+const TMDB_THUMBNAIL_URL =
+  "https://media.themoviedb.org/t/p/w440_and_h660_face/";
 
 export const getMovies = async (url) => {
   const response = await fetch(url, FETCH_OPTIONS);
@@ -22,4 +24,8 @@ export const getMovies = async (url) => {
 
 export const getBackgroundImageUrl = (movie) => {
   return TMDB_BANNER_URL + movie.backdrop_path;
+};
+
+export const getThumbnailUrl = (movie) => {
+  return TMDB_THUMBNAIL_URL + movie.poster_path;
 };

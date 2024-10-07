@@ -30,7 +30,7 @@ router.get("/", async (_, res) => {
     vote_average: 0,
   };
 
-  const renderedApp = renderToString(<App />);
+  const renderedApp = renderToString(<App movies={movies} />);
 
   // const initData = template.replace(
   //   "<!--${INIT_DATA_AREA}-->",
