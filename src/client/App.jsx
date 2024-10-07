@@ -1,11 +1,15 @@
 import React from "react";
-import Home from "./components/Home";
+import Header from "@src/client/components/Header";
+import Container from "@src/client/components/Container";
+import Footer from "@src/client/components/Footer";
 
-function App() {
+function App({ movieList }) {
   return (
-    <div>
-      <Home />
-    </div>
+    <>
+      <Header movie={movieList[0]} />
+      <Container movieList={movieList} />
+      <Footer />
+    </>
   );
 }
 
