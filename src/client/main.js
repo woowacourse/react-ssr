@@ -6,5 +6,8 @@ const data = window.__INITIAL_DATA__;
 
 hydrateRoot(
   document.getElementById("wrap"),
-  <App popularMovies={data.movies.results} />
+  <App
+    popularMovies={data.movies.results}
+    bestMovieItem={data.movies.results[0]}
+  />
 );
