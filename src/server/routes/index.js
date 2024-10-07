@@ -36,7 +36,7 @@ router.get("/", async (_, res) => {
   `
   );
   const renderedHTML = template.replace(
-    "<!--${MOVIE_ITEMS_PLACEHOLDER}-->",
+    "<!--${REACT_APP_PLACEHOLDER}-->",
     renderedApp
   );
 
