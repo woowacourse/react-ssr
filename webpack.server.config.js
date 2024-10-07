@@ -6,6 +6,9 @@ module.exports = {
   entry: path.resolve(__dirname, "src/server/main.js"),
   resolve: {
     extensions: [".js", ".jsx"],
+    alias: {
+      "@src": path.resolve(__dirname, "src"),
+    },
   },
   module: {
     rules: [
