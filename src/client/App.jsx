@@ -1,10 +1,10 @@
 import React from "react";
 import Home from "./components/Home";
 
-function App() {
+function App({ popularMovies }) {
   return (
     <div>
-      <Home />
+      <Home popularMovie={popularMovies[0]} />
     </div>
   );
 }
