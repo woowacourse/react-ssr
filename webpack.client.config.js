@@ -1,15 +1,15 @@
-const path = require("path");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
-const CopyPlugin = require("copy-webpack-plugin");
+const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
 
 module.exports = {
-  module: "development",
-  entry: "./src/client/main.js",
+  module: 'development',
+  entry: './src/client/main.js',
   output: {
-    path: path.resolve("dist/client"),
-    filename: "bundle.js",
+    path: path.resolve('dist/client'),
+    filename: 'bundle.js',
     clean: true,
-    publicPath: "/",
+    publicPath: '/',
   },
   module: {
     rules: [
@@ -17,29 +17,33 @@ module.exports = {
         test: /\.(jsx?)$/,
         exclude: /node_modules/,
         use: {
-          loader: "babel-loader",
+          loader: 'babel-loader',
           options: {
-            presets: ["@babel/preset-env", "@babel/preset-react"],
+            presets: ['@babel/preset-env', '@babel/preset-react'],
           },
         },
       },
       {
         test: /\.css$/,
-        use: ["style-loader", "css-loader"],
+        use: ['style-loader', 'css-loader'],
+      },
+      {
+        test: /\.(png)$/,
+        use: ['file-loader'],
       },
     ],
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: "./views/index.html",
+      template: './views/index.html',
     }),
     new CopyPlugin({
       patterns: [
-        { from: "public/images", to: "images" }, // public 폴더의 이미지를 dist로 복사
+        { from: 'public/images', to: 'images' }, // public 폴더의 이미지를 dist로 복사
       ],
     }),
   ],
   resolve: {
-    extensions: [".js", ".jsx"],
+    extensions: ['.js', '.jsx'],
   },
 };
