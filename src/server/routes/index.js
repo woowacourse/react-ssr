@@ -22,18 +22,18 @@ router.get("/", async (_, res) => {
     const movies = await fetchNowPlayingMovieItems();
     const renderedApp = renderToString(<App movies={movies} />);
     const renderedHeader = renderToString(<Header movie={movies[0]} />);
-    // const initData = template.replace(
-    //   "<!--${INIT_DATA_AREA}-->",
-    //   /*html*/ `
-    //   <script>
-    //     window.__INITIAL_DATA__ = {
-    //       movies: ${JSON.stringify(movies)}
-    //     }
-    //   </script>
-    // `
-    // );
+    const initData = template.replace(
+      "<!--${INIT_DATA_AREA}-->",
+      /*html*/ `
+      <script>
+        window.__INITIAL_DATA__ = {
+          movies: ${JSON.stringify(movies)}
+        }
+      </script>
+    `
+    );
 
-    const headerHtml = template.replace(
+    const headerHtml = initData.replace(
       "<!--${HEADERS_PLACEHOLDER}-->",
       renderedHeader
     );
