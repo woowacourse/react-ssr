@@ -1,11 +1,11 @@
-import React from "react";
-import Home from "./components/Home";
+import React from 'react';
+import Home from './components/Home';
 
-function App() {
+function App({ movieList }) {
   return (
-    <div>
-      <Home />
-    </div>
+    <>
+      <Home movieList={movieList} />
+    </>
   );
 }
 
