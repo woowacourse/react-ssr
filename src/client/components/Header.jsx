@@ -17,9 +17,9 @@ const Header = ({ bestMovie }) => {
           <div className='top-rated-movie'>
             <div className='rate'>
               <img src='../assets/images/star_empty.png' className='star' />
-              <span className='rate-value'>${bestMovieRate}</span>
+              <span className='rate-value'>{bestMovieRate}</span>
             </div>
-            <div className='title'>${bestMovieTitle}</div>
+            <div className='title'>{bestMovieTitle}</div>
             <button className='primary detail'>자세히 보기</button>
           </div>
         </div>
