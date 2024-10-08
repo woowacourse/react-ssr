@@ -36,22 +36,21 @@ router.get("/", async (_, res) => {
 
   const renderedApp = renderToString(<App movies={movies} />);
 
-  // const initData = template.replace(
-  //   "<!--${INIT_DATA_AREA}-->",
-  //   /*html*/ `
-  //   <script>
-  //     window.__INITIAL_DATA__ = {
-  //       movies: ${JSON.stringify(popularMovies)}
-  //     }
-  //   </script>
-  // `
-  // );
-
   const renderedHTML = template
     .replace("<!--${MOVIE_ITEMS_PLACEHOLDER}-->", renderedApp)
     .replace("${background-container}", getBackgroundImageUrl(movie))
     .replace("${bestMovie.rate}", round(movie.vote_average, 1))
-    .replace("${bestMovie.title}", movie.title);
+    .replace("${bestMovie.title}", movie.title)
+    .replace(
+      "<!--${INIT_DATA_AREA}-->",
+      /*html*/ `
+        <script>
+          window.__INITIAL_DATA__ = {
+            movies: ${JSON.stringify(movies)}
+          }
+        </script>
+      `
+    );
 
   res.send(renderedHTML);
 });
