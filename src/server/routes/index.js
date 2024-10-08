@@ -6,30 +6,38 @@ import { fileURLToPath } from "url";
 import React from "react";
 import { renderToString } from "react-dom/server";
 import App from "../../client/App";
+import { fetchNowPlayingMovies } from "../movies.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const router = Router();
 
-router.get("/", (_, res) => {
+router.get("/", async (_, res) => {
   const templatePath = path.join(__dirname, "../../../views", "index.html");
-  const renderedApp = renderToString(<App />);
+  let template = fs.readFileSync(templatePath, "utf-8");
 
-  const template = fs.readFileSync(templatePath, "utf-8");
-  // const initData = template.replace(
-  //   "<!--${INIT_DATA_AREA}-->",
-  //   /*html*/ `
-  //   <script>
-  //     window.__INITIAL_DATA__ = {
-  //       movies: ${JSON.stringify(popularMovies)}
-  //     }
-  //   </script>
-  // `
-  // );
-  const renderedHTML = template.replace("<!--${MOVIE_ITEMS_PLACEHOLDER}-->", renderedApp);
+  const fetchedMovies = await fetchNowPlayingMovies();
+  const movies = fetchedMovies.results;
+  const renderedApp = renderToString(<App movies={movies} />);
 
-  res.send(renderedHTML);
+  template = template.replace(
+    `<div id="wrap"></div>`,
+    `<div id="wrap">${renderedApp}</div>`
+  );
+
+  template = template.replace(
+    "<!--${INIT_DATA_AREA}-->",
+    /*html*/ `
+  <script>
+    window.__INITIAL_DATA__ = {
+      movies: ${JSON.stringify(movies)}
+    }
+  </script>
+  `
+  );
+
+  res.send(template);
 });
 
 export default router;
