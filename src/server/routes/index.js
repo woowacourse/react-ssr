@@ -49,10 +49,10 @@ router.get('/', async (_, res) => {
       movieList: ${JSON.stringify(movieList)}
     }
   </script>
-`,
+  `,
   );
 
-  const renderedHTML = template.replace('<!--${APP_AREA}-->', renderedApp);
+  const renderedHTML = initData.replace('<!--${APP_AREA}-->', renderedApp);
 
   res.send(renderedHTML);
 });
