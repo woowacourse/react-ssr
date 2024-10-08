@@ -1,7 +1,7 @@
 import React from "react";
 
-import { TMDB_THUMBNAIL_URL } from "../../constant/url";
-import { round } from "../../utils";
+import { TMDB_THUMBNAIL_URL } from "../../../constant/url";
+import { round } from "../../../utils";
 
 function MovieItem({ rate, title, thumbnailUrl, onClick }) {
   const thumbnailFullUrl = TMDB_THUMBNAIL_URL + "/" + thumbnailUrl;

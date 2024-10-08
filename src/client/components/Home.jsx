@@ -1,5 +1,5 @@
 import React from "react";
-import MovieItem from "./MovieItem";
+import MovieItem from "./base/MovieItem";
 
 function Home({ movies }) {
   return (

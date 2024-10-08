@@ -1,11 +1,22 @@
 import React from "react";
+import Container from "./components/Container";
+import Footer from "./components/Footer";
+import Header from "./components/Header";
 import Home from "./components/Home";
 
 function App({ initialData }) {
+  const movies = initialData.movies;
+  const popularMovie = movies[0];
   return (
-    <div>
-      <Home movies={initialData.movies} />
-    </div>
+    <>
+      <div id="wrap">
+        <Header movie={popularMovie} />
+        <Container>
+          <Home movies={movies} />
+        </Container>
+        <Footer />
+      </div>
+    </>
   );
 }
 
