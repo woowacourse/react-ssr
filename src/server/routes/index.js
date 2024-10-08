@@ -5,9 +5,9 @@ import { fileURLToPath } from "url";
 
 import React from "react";
 import { renderToString } from "react-dom/server";
-import App from "../../client/App";
 import { fetchNowPlayingMovieItems } from "../../apis/fetchMovies";
 import Header from "../../client/components/Header";
+import Home from "../../client/components/Home";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -19,8 +19,8 @@ router.get("/", async (_, res) => {
 
   try {
     const template = fs.readFileSync(templatePath, "utf-8");
-    const movies = await fetchNowPlayingMovieItems();
-    const renderedApp = renderToString(<App movies={movies} />);
+    const movies = (await fetchNowPlayingMovieItems()) || [];
+    const renderedApp = renderToString(<Home movies={movies} />);
     const renderedHeader = renderToString(<Header movie={movies[0]} />);
     const initData = template.replace(
       "<!--${INIT_DATA_AREA}-->",
