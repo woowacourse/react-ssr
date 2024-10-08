@@ -27,7 +27,7 @@ router.get("/", async (_, res) => {
     const bestMovie = popularMovies.results[0];
 
     const templatePath = path.join(__dirname, "../../../views", "index.html");
-    const renderedApp = renderToString(<App />);
+    const renderedApp = renderToString(<App initialData={popularMovies} />);
 
     const template = fs.readFileSync(templatePath, "utf-8");
     const initData = template.replace(
