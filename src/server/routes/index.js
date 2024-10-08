@@ -22,17 +22,7 @@ router.get("/", async (_, res) => {
   const renderedApp = renderToString(<App movieList={popularMovieList} />);
 
   const template = fs.readFileSync(templatePath, "utf-8");
-  const initData = template.replace(
-    "<!--${INIT_DATA_AREA}-->",
-    /*html*/ `
-    <script>
-      window.__INITIAL_DATA__ = {
-        movies: ${JSON.stringify(popularMovieList)}
-      }
-    </script>
-  `
-  );
-  const renderedHTML = initData.replace("<!--${APP_AREA}-->", renderedApp);
+  const renderedHTML = template.replace("<!--${APP_AREA}-->", renderedApp);
 
   res.send(renderedHTML);
 });
