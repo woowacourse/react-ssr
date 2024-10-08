@@ -1,6 +1,12 @@
 import React from "react";
-import { getThumbnailUrl } from "../../api/tmdb";
 import round from "../../utils/round";
+
+const TMDB_THUMBNAIL_URL =
+  "https://media.themoviedb.org/t/p/w440_and_h660_face/";
+
+const getThumbnailUrl = (movie) => {
+  return TMDB_THUMBNAIL_URL + movie.poster_path;
+};
 
 export default function MovieList({ movies }) {
   return (

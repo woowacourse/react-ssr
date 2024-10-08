@@ -10,7 +10,7 @@ import {
   getMovies,
   getBackgroundImageUrl,
   TMDB_MOVIE_LISTS,
-} from "../../api/tmdb";
+} from "../api/tmdb";
 import round from "../../utils/round";
 
 const __filename = fileURLToPath(import.meta.url);
