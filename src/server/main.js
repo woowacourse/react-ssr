@@ -12,6 +12,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 app.use("/assets", express.static(path.join(__dirname, "../../public")));
+app.use("/client", express.static(path.join(__dirname, "../../dist/client")));
 
 app.use("/", movieRouter);
 

@@ -19,7 +19,11 @@ const __dirname = path.dirname(__filename);
 const router = Router();
 
 router.get("/", async (_, res) => {
-  const templatePath = path.join(__dirname, "../../../views", "index.html");
+  const templatePath = path.join(
+    __dirname,
+    "../../../dist/client",
+    "index.html"
+  );
   const template = fs.readFileSync(templatePath, "utf-8");
 
   const movies = await getMovies(TMDB_MOVIE_LISTS.nowPlaying);
