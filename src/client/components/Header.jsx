@@ -1,7 +1,7 @@
 import React from "react";
 
 const Header = ({ bestMovie }) => {
-  const { thumbnail, title, rate } = bestMovie;
+  const { title, rate } = bestMovie;
   return (
     <header>
       <div className="background-container" style={{ backgroundImage: "" }}>

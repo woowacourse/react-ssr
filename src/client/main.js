@@ -1,12 +1,15 @@
-import React from "react";
+import React, { Suspense } from "react";
 import { hydrateRoot } from "react-dom/client";
 import App from "./App";
 
-const initialData = window.__INITIAL_DATA__ || {};
+const initialData =
+  typeof window !== "undefined" ? window.__INITIAL_DATA__ || {} : {};
 
 hydrateRoot(
   document.getElementById("root"),
-  <Suspense fallback={<div>Loading...</div>}>
-    <App popularMovies={initialData} />
+  <Suspense>
+    <div id="root">
+      <App popularMovies={initialData} />
+    </div>
   </Suspense>
 );
