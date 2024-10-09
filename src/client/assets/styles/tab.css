@@ -1,0 +1,32 @@
+@import "./colors.css";
+
+.tab {
+  display: flex;
+  margin: 32px 0;
+}
+
+.tab-item {
+  cursor: pointer;
+  user-select: none;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 120px;
+  height: 40px;
+
+  border-radius: 40px;
+  background: linear-gradient(90deg, #14191f 0%, #0a0d12 100%);
+}
+
+.tab-item.selected {
+  background: linear-gradient(90deg, #4b8bf4 0%, #1c2a3a 100%);
+}
+
+.tab-item:hover {
+  background: linear-gradient(90deg, #2f3e54 0%, #4b8bf4 100%);
+}
+
+.tab li:not(:last-child) {
+  margin-right: 8px;
+}
