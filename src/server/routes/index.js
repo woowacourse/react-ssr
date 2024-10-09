@@ -1,10 +1,11 @@
-import App from "../../client/App";
 import fs from "fs";
 import path from "path";
 
 import React from "react";
 import { Router } from "express";
 import { renderToString } from "react-dom/server";
+
+import Header from "../../client/components/Header";
 
 const router = Router();
 
@@ -56,11 +57,16 @@ router.use("/", async (_, res) => {
       vote_count: 4103,
     },
   ];
-  const renderedApp = renderToString(<App movies={movies} />);
+  const renderedHeader = renderToString(<Header movie={movies[0]} />);
   const templatePath = path.resolve(__dirname, "index.html");
   const template = fs.readFileSync(templatePath, "utf8");
 
-  res.send(template.replace('<div id="root"></div>', `<div id="root">${renderedApp}</div>`));
+  res.send(
+    template.replace(
+      '<header id="header"></header>',
+      `<header id="header">${renderedHeader}</header>`
+    )
+  );
 });
 
 export default router;
