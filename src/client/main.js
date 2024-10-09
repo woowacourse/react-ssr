@@ -1,5 +1,9 @@
-import React from "react";
-import { hydrateRoot } from "react-dom/client";
-import App from "./App";
+import { hydrateRoot } from 'react-dom/client';
+import App from './App';
 
-hydrateRoot(document.getElementById("root"), <App />);
+const moviesData = window.__INITIAL_DATA__;
+
+hydrateRoot(
+  document.getElementById('wrap'),
+  <App movies={moviesData.movies} />,
+);

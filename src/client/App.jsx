@@ -1,12 +1,7 @@
-import React from "react";
-import Home from "./components/Home";
+import React from 'react';
 
-function App() {
-  return (
-    <div>
-      <Home />
-    </div>
-  );
+function App({ movies }) {
+  return <div id='wrap'></div>;
 }
 
 export default App;
