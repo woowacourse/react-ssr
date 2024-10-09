@@ -1,6 +1,8 @@
 import React from "react";
-import { TMDB_BANNER_URL } from "@src/client/constants";
-import { round } from "@src/client/utils";
+import { TMDB_BANNER_URL } from "../constants";
+import { round } from "../utils";
+import starEmptyImage from "@images/star_empty.png";
+import logoImage from "@images/logo.png";
 
 function Header({ movie }) {
   const { title, vote_average, backdrop_path } = movie;
@@ -15,12 +17,12 @@ function Header({ movie }) {
         <div className="overlay" aria-hidden="true"></div>
         <div className="top-rated-container">
           <h1 className="logo">
-            <img src="/assets/images/logo.png" alt="MovieList" />
+            <img src={logoImage} alt="MovieList" />
           </h1>
           <div className="top-rated-movie">
             <div className="rate">
               <img
-                src="/assets/images/star_empty.png"
+                src={starEmptyImage}
                 className="star"
                 alt="empty start icon"
               />

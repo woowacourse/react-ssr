@@ -1,5 +1,5 @@
 import React from "react";
-import MovieItem from "@src/client/components/MovieItem";
+import MovieItem from "./MovieItem";
 
 function Container({ movieList }) {
   return (

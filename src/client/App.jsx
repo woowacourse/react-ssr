@@ -1,7 +1,7 @@
 import React from "react";
-import Header from "@src/client/components/Header";
-import Container from "@src/client/components/Container";
-import Footer from "@src/client/components/Footer";
+import Header from "./components/Header";
+import Container from "./components/Container";
+import Footer from "./components/Footer";
 
 function App({ movieList }) {
   return (

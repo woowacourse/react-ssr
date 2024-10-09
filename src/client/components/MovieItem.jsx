@@ -1,6 +1,7 @@
 import React from "react";
-import { round } from "@src/client/utils";
-import { TMDB_THUMBNAIL_URL } from "@src/client/constants";
+import { round } from "../utils";
+import { TMDB_THUMBNAIL_URL } from "../constants";
+import starEmptyImage from "@images/star_empty.png";
 
 function MovieItem({ rate, title, thumbnailUrl, onClick }) {
   const thumbnailFullUrl = TMDB_THUMBNAIL_URL + "/" + thumbnailUrl;
@@ -10,7 +11,7 @@ function MovieItem({ rate, title, thumbnailUrl, onClick }) {
       <img className="thumbnail" src={thumbnailFullUrl} alt={title} />
       <div className="item-desc">
         <p className="rate">
-          <img src="/assets/images/star_empty.png" className="star" alt="" />
+          <img src={starEmptyImage} className="star" alt="" />
           <span>{round(rate, 1)}</span>
         </p>
         <strong>{title}</strong>
