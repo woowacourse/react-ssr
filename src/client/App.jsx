@@ -1,8 +1,16 @@
 import React from "react";
-import Home from "./components/Home";
+import Header from "./components/Header";
+import MovieList from "./components/MovieList";
+import Footer from "./components/Footer";
 
 function App({ popularMovies }) {
-  return <Home popularMovies={popularMovies} />;
+  return (
+    <>
+      <Header bestMovie={popularMovies[0]} />
+      <MovieList movieList={popularMovies} />
+      <Footer />
+    </>
+  );
 }
 
 export default App;

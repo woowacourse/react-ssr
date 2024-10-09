@@ -7,9 +7,5 @@ const initialData =
 
 hydrateRoot(
   document.getElementById("root"),
-  <Suspense>
-    <div id="root">
-      <App popularMovies={initialData} />
-    </div>
-  </Suspense>
+  <App popularMovies={initialData.movies} />
 );

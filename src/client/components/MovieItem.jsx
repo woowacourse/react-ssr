@@ -16,7 +16,7 @@ const MovieItem = ({ movie }) => {
           <div className="item-desc">
             <p className="rate">
               <img src={starEmptyImage} className="star" />
-              <span>{rate}</span>
+              <span>{rate.toFixed(1)}</span>
             </p>
             <strong>{title}</strong>
           </div>
