@@ -15,22 +15,25 @@ const router = Router();
 
 router.get('/', async (_, res) => {
   const popularMovies = await fetchMovies();
-
-  const templatePath = path.join(__dirname, '../../../views', 'index.html');
+  const templatePath = path.join(
+    __dirname,
+    '../../../dist/client',
+    'index.html'
+  );
   const renderedApp = renderToString(<App movies={popularMovies} />);
 
   const template = fs.readFileSync(templatePath, 'utf-8');
-  // const initData = template.replace(
-  //   '<!--${INIT_DATA_AREA}-->',
-  //   /*html*/ `
-  //   <script>
-  //     window.__INITIAL_DATA__ = {
-  //       movies: ${JSON.stringify(popularMovies)}
-  //     }
-  //   </script>
-  // `
-  // );
-  const renderedHTML = template.replace(
+  const initData = template.replace(
+    '<!--${INIT_DATA_AREA}-->',
+    /*html*/ `
+    <script>
+      window.__INITIAL_DATA__ = {
+        movies: ${JSON.stringify(popularMovies)}
+      }
+    </script>
+  `
+  );
+  const renderedHTML = initData.replace(
     '<!--${MOVIE_ITEMS_PLACEHOLDER}-->',
     renderedApp
   );
