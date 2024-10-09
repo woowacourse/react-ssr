@@ -19,7 +19,7 @@ const Container = ({ movies }) => {
                     <div className="item-desc">
                       <p className="rate">
                         <img
-                          src="../../assets/images/star_empty.png"
+                          src="/static/images/star_empty.png"
                           className="star"
                         />
                         <span>{vote_average.toFixed(1)}</span>

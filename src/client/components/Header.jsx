@@ -14,11 +14,11 @@ const Header = ({ bestMovie }) => {
         <div className="overlay" aria-hidden="true"></div>
         <div className="top-rated-container">
           <h1 className="logo">
-            <img src="../assets/images/logo.png" alt="MovieList" />
+            <img src="/static/images/logo.png" alt="MovieList" />
           </h1>
           <div className="top-rated-movie">
             <div className="rate">
-              <img src="../assets/images/star_empty.png" className="star" />
+              <img src="/static/images/star_empty.png" className="star" />
               <span className="rate-value">
                 {bestMovie.vote_average.toFixed(1)}
               </span>
@@ -26,7 +26,7 @@ const Header = ({ bestMovie }) => {
             <div className="title">{bestMovie.title}</div>
             <button
               className="primary detail"
-              onClick={() => console.log(click)}
+              onClick={() => console.log("click")}
             >
               자세히 보기
             </button>
