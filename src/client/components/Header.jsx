@@ -26,7 +26,7 @@ const Header = ({ bestMovie }) => {
             <div className="title">{bestMovie.title}</div>
             <button
               className="primary detail"
-              onClick={() => console.log("click")}
+              onClick={() => console.log("click")} // hydration 작동 확인을 위한 코드
             >
               자세히 보기
             </button>
