@@ -1,6 +1,8 @@
 import React from 'react';
 import { TMDB_BANNER_URL } from '../../server/constants/constant';
 import { round } from '../utils/round';
+import LogoImage from '@images/logo.png';
+import StarEmptyImage from '@images/star_empty.png';
 
 const Header = ({ bestMovieItem }) => {
   const { backdrop_path, vote_average, title } = bestMovieItem;
@@ -15,11 +17,11 @@ const Header = ({ bestMovieItem }) => {
         <div className='overlay' aria-hidden='true'></div>
         <div className='top-rated-container'>
           <h1 className='logo'>
-            <img src='../assets/images/logo.png' alt='MovieList' />
+            <img src={LogoImage} alt='MovieList' />
           </h1>
           <div className='top-rated-movie'>
             <div className='rate'>
-              <img src='../assets/images/star_empty.png' className='star' />
+              <img src={StarEmptyImage} className='star' />
               <span className='rate-value'>{round(vote_average, 1)}</span>
             </div>
             <div className='title'>{title}</div>

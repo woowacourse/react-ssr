@@ -1,5 +1,7 @@
 import React from 'react';
 import { round } from '../utils/round';
+import { TMDB_THUMBNAIL_URL } from '../../server/constants/constant';
+import StarEmptyImage from '@images/star_empty.png';
 
 const MovieItem = ({ movieItem }) => {
   const { id, title, poster_path, vote_average } = movieItem;
@@ -9,12 +11,12 @@ const MovieItem = ({ movieItem }) => {
         <div className='item'>
           <img
             className='thumbnail'
-            src={`https://media.themoviedb.org/t/p/w440_and_h660_face/${poster_path}`}
+            src={`${TMDB_THUMBNAIL_URL}${poster_path}`}
             alt='${title}'
           />
           <div className='item-desc'>
             <p className='rate'>
-              <img src='../assets/images/star_empty.png' className='star' />
+              <img src={StarEmptyImage} className='star' />
               <span>{round(vote_average, 1)}</span>
             </p>
             <strong>{title}</strong>
