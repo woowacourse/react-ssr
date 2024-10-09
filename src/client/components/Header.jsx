@@ -1,5 +1,6 @@
 import React from 'react';
 import { TMDB_BANNER_URL } from '../../server/constants/constant';
+import { round } from '../utils/round';
 
 const Header = ({ bestMovieItem }) => {
   const { backdrop_path, vote_average, title } = bestMovieItem;
@@ -19,7 +20,7 @@ const Header = ({ bestMovieItem }) => {
           <div className='top-rated-movie'>
             <div className='rate'>
               <img src='../assets/images/star_empty.png' className='star' />
-              <span className='rate-value'>{vote_average}</span>
+              <span className='rate-value'>{round(vote_average, 1)}</span>
             </div>
             <div className='title'>{title}</div>
             <button className='primary detail'>자세히 보기</button>
