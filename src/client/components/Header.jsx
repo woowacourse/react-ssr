@@ -1,5 +1,8 @@
 import React from 'react';
 
+import logo from '@images/logo.png';
+import starEmptyImage from '@images/star_empty.png';
+
 export default function Header({ movie }) {
   return (
     <header>
@@ -10,11 +13,11 @@ export default function Header({ movie }) {
         <div className="overlay" aria-hidden="true"></div>
         <div className="top-rated-container">
           <h1 className="logo">
-            <img src="../assets/images/logo.png" alt="MovieList" />
+            <img src={logo} alt="MovieList" />
           </h1>
           <div className="top-rated-movie">
             <div className="rate">
-              <img src="../assets/images/star_empty.png" className="star" alt="Star rating" />
+              <img src={starEmptyImage} className="star" alt="Star rating" />
               <span className="rate-value">{movie.rate}</span>
             </div>
             <div className="title">{movie.title}</div>

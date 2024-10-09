@@ -2,6 +2,8 @@ import React from 'react';
 import MovieListItem from './components/MovieListItem.jsx';
 import Header from './components/Header.jsx';
 
+import woowacourseLogo from '@images/woowacourse_logo.png';
+
 function App({ movies }) {
   return (
     <>
@@ -21,7 +23,7 @@ function App({ movies }) {
       <footer class="footer">
         <p>&copy; 우아한테크코스 All Rights Reserved.</p>
         <p>
-          <img src="../assets/images/woowacourse_logo.png" width="180" />
+          <img src={woowacourseLogo} width="180" />
         </p>
       </footer>
     </>
