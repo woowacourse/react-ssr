@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ko">
   <head>
     <meta charset="UTF-8" />
@@ -14,20 +14,7 @@
   <body>
     <div id="wrap">
       <header>
-        <div class="background-container" style="background-image: url('${background-container}')">
-          <div class="overlay" aria-hidden="true"></div>
-          <div class="top-rated-container">
-            <h1 class="logo"><img src="../assets/images/logo.png" alt="MovieList" /></h1>
-            <div class="top-rated-movie">
-              <div class="rate">
-                <img src="../assets/images/star_empty.png" class="star" />
-                <span class="rate-value">${bestMovie.rate}</span>
-              </div>
-              <div class="title">${bestMovie.title}</div>
-              <button class="primary detail">자세히 보기</button>
-            </div>
-          </div>
-        </div>
+        <!--${TOP_RATED_MOVIE_PLACEHOLDER}-->
       </header>
       <div class="container">
         <main>
@@ -39,7 +26,6 @@
           </section>
         </main>
       </div>
-
       <footer class="footer">
         <p>&copy; 우아한테크코스 All Rights Reserved.</p>
         <p><img src="../assets/images/woowacourse_logo.png" width="180" /></p>
