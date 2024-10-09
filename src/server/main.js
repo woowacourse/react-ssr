@@ -8,8 +8,6 @@ import movieRouter from "./routes/index.js";
 const app = express();
 const PORT = 3000;
 
-const __dirname = path.dirname(__filename);
-
 // 정적 파일 제공
 app.use("/static", express.static(path.join(__dirname)));
 
