@@ -7,6 +7,8 @@ const app = express();
 const PORT = 3000;
 
 // 정적 파일 제공
+app.use('/assets', express.static(path.join(__dirname)));
+
 app.use('/static', express.static(path.join(__dirname)));
 
 // 존재하지 않는 정적 파일에 대한 404 처리
