@@ -14,6 +14,10 @@ router.use('/', async (_, res) => {
   const data = await fetchMovies.popular();
   const movies = data.results;
 
+  const renderedApp = renderToString(<App movies={movies} />);
+  const templatePath = path.resolve(__dirname, 'index.html');
+  const template = fs.readFileSync(templatePath, 'utf8');
+
   const initData = /*html*/ `
     <script>
       window.__INITIAL_DATA__ = {
@@ -22,14 +26,10 @@ router.use('/', async (_, res) => {
     </script>
   `;
 
-  const renderedApp = renderToString(<App movies={movies} />);
-  const templatePath = path.resolve(__dirname, 'index.html');
-  const template = fs.readFileSync(templatePath, 'utf8');
-
   res.send(
     template
       .replace('<!--${INIT_DATA_AREA}-->', initData)
-      .replace('<!--${MOVIE_ITEMS_PLACEHOLDER}-->', renderedApp)
+      .replace('<div id="root"></div>', `<div id="root">${renderedApp}</div>`)
   );
 });
 

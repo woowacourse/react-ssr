@@ -4,7 +4,7 @@ import MovieItem from './MovieItem';
 
 function Home({ movies }) {
   return (
-    <div>
+    <>
       <Header bannerMovie={movies[0]} />
       <div className="container">
         <main>
@@ -20,7 +20,7 @@ function Home({ movies }) {
           </section>
         </main>
       </div>
-    </div>
+    </>
   );
 }
 
