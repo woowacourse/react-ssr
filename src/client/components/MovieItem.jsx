@@ -1,7 +1,7 @@
 import React from 'react';
 import { round } from '../utils/round';
-import { TMDB_THUMBNAIL_URL } from '../../server/constants/constant';
 import StarEmptyImage from '@images/star_empty.png';
+import { TMDB_THUMBNAIL_URL } from '../constants/constant';
 
 const MovieItem = ({ movieItem }) => {
   const { id, title, poster_path, vote_average } = movieItem;

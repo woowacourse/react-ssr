@@ -1,8 +1,8 @@
 import React from 'react';
-import { TMDB_BANNER_URL } from '../../server/constants/constant';
 import { round } from '../utils/round';
 import LogoImage from '@images/logo.png';
 import StarEmptyImage from '@images/star_empty.png';
+import { TMDB_BANNER_URL } from '../constants/constant';
 
 const Header = ({ bestMovieItem }) => {
   const { backdrop_path, vote_average, title } = bestMovieItem;
@@ -25,7 +25,9 @@ const Header = ({ bestMovieItem }) => {
               <span className='rate-value'>{round(vote_average, 1)}</span>
             </div>
             <div className='title'>{title}</div>
-            <button className='primary detail'>자세히 보기</button>
+            <button className='primary detail' onClick={() => alert('안녕')}>
+              자세히 보기
+            </button>
           </div>
         </div>
       </div>
