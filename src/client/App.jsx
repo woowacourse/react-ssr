@@ -1,11 +1,18 @@
 import React from "react";
-import Home from "./components/Home";
 
-function App() {
+import Header from "./components/Header";
+import MovieList from "./components/MovieList";
+import Footer from "./components/Footer";
+
+function App({ movies }) {
+  const bestMovie = movies[0];
+
   return (
-    <div>
-      <Home />
-    </div>
+    <>
+      <Header bestMovie={bestMovie} />
+      <MovieList movies={movies} />
+      <Footer />
+    </>
   );
 }
 
