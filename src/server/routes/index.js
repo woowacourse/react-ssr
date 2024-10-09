@@ -19,28 +19,26 @@ router.get("/", async (_, res) => {
   const movieItems = parseMovieItems(popularMovies);
   const bestMovieItem = movieItems[0];
 
+  const templatePath = path.resolve(__dirname, "../../../dist", "index.html");
+  const template = fs.readFileSync(templatePath, "utf-8");
+
+  const initData = /*html*/ `
+    <script>
+      window.__INITIAL_DATA__ = {
+        movies: ${JSON.stringify(movieItems)}
+      }
+    </script>
+  `;
+
   const renderedApp = renderToString(
     <App popularMovies={movieItems} bestMovieItem={bestMovieItem} />
   );
 
-  const templatePath = path.join(__dirname, "../../../views", "index.html");
-  let template = fs.readFileSync(templatePath, "utf-8");
-  template = template.replace(
-    "<!--${INIT_DATA_AREA}-->",
-    /*html*/ `
-    <script>
-      window.__INITIAL_DATA__ = {
-        movies: ${JSON.stringify(popularMovies)}
-      }
-    </script>
-  `
+  res.send(
+    template
+      .replace('<div id="root"></div>', `<div id="root">${renderedApp}</div>`)
+      .replace("<!--${INIT_DATA_AREA}-->", initData)
   );
-  const renderedHTML = template.replace(
-    "<!--${REACT_APP_PLACEHOLDER}-->",
-    renderedApp
-  );
-
-  res.send(renderedHTML);
 });
 
 export default router;

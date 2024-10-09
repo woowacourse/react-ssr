@@ -14,7 +14,7 @@ const MovieItems = ({ movieItems }) => {
               />
               <div className="item-desc">
                 <p className="rate">
-                  <img src="/assets/images/star_empty.png" className="star" />
+                  <img src="/static/images/star_empty.png" className="star" />
                   <span>{rate}</span>
                 </p>
                 <strong>{title}</strong>
