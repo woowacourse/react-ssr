@@ -1,12 +1,14 @@
 import React from "react";
-import { TMDB_THUMBNAIL_URL } from "../../server/constant";
+import { TMDB_THUMBNAIL_URL } from "../../constant";
+
+import starEmptyImage from "@images/star_empty.png";
 
 const MovieList = ({ movies }) => {
   return (
     <>
       {movies.map(({ id, title, backdrop_path, vote_average }) => (
         <li key={id}>
-          <a href={`/detail/${id}`}>
+          <a href="/">
             <div className="item">
               <img
                 className="thumbnail"
@@ -16,7 +18,7 @@ const MovieList = ({ movies }) => {
               <div className="item-desc">
                 <p className="rate">
                   <img
-                    src="../assets/images/star_empty.png"
+                    src={starEmptyImage}
                     className="star"
                   />
                   <span>{vote_average}</span>
