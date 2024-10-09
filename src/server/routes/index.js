@@ -33,7 +33,7 @@ router.get('/', async (_, res) => {
       `,
     );
 
-    const renderedHTML = initData.replace('<!-- ${APP_AREA} -->', renderedApp);
+    const renderedHTML = initData.replace('<div id="root"></div>', renderedApp);
 
     res.send(renderedHTML);
   } catch (error) {
