@@ -6,5 +6,7 @@ const initialData = window.__INITIAL_DATA__ || {};
 
 hydrateRoot(
   document.getElementById("root"),
-  <App popularMovies={initialData} />
+  <Suspense fallback={<div>Loading...</div>}>
+    <App popularMovies={initialData} />
+  </Suspense>
 );
