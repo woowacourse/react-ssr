@@ -1,10 +1,13 @@
 import React from "react";
 import Home from "./components/Home";
+import BestMovieSection from "./components/BestMovieSection";
 
-function App() {
+function App({ movies }) {
   return (
     <div>
-      <Home />
+      <div id="wrap">
+        <Home movies={movies} />
+      </div>
     </div>
   );
 }
