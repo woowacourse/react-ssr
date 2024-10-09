@@ -2,6 +2,7 @@ import "./config.js";
 import express from "express";
 import path from "path";
 import movieRouter from "./routes/index.js";
+import { fetchNowPlayingMovieItems } from "../apis/fetchMovies.js";
 
 const app = express();
 const PORT = 3000;
@@ -16,6 +17,11 @@ app.use("/static", (req, res) => {
 
 // 메인 페이지 라우트 (React 앱 렌더링)
 app.get("/", movieRouter);
+
+app.get("/api/movies", async (req, res) => {
+  const movies = await fetchNowPlayingMovieItems();
+  res.json(movies);
+});
 
 // 그 외 모든 경로에 대한 404 처리
 app.use((req, res) => {
