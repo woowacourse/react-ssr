@@ -5,22 +5,21 @@ import { fileURLToPath } from "url";
 import { renderToString } from "react-dom/server";
 import React from "react";
 import { fetchNowPlayingMovies } from "../api";
-import App from "../../client/App.jsx";
-import { TMDB_BANNER_URL } from "../constant.js";
+import App from "../../client/App";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const router = Router();
 
-router.get("/", async (_, res) => {
+router.use("/", async (_, res) => {
   const movies = await fetchNowPlayingMovies();
-  const bestMovieItem = movies.results[0];
 
   const templatePath = path.join(__dirname, "../../../views", "index.html");
+  const template = fs.readFileSync(templatePath, "utf-8");
+
   const renderedApp = renderToString(<App movies={movies.results} />);
 
-  const template = fs.readFileSync(templatePath, "utf-8");
   const initData = template.replace(
     "<!--${INIT_DATA_AREA}-->",
     /*html*/ `
@@ -32,13 +31,7 @@ router.get("/", async (_, res) => {
   `
   );
 
-  const renderedHTML = initData
-    .replace("${background-container}", TMDB_BANNER_URL + bestMovieItem.backdrop_path)
-    .replace("${bestMovie.rate}", bestMovieItem.vote_average)
-    .replace("${bestMovie.title}", bestMovieItem.title)
-    .replace("<!--${MOVIE_ITEMS_PLACEHOLDER}-->", renderedApp);
-
-  res.send(renderedHTML);
+  res.send(initData.replace('<div id="root"></div>', `<div id="root">${renderedApp}</div>`));
 });
 
 export default router;
