@@ -1,4 +1,5 @@
 export const MOVIE_LIST_TYPE = {
+  default: 'popular',
   popular: 'popular',
   nowPlaying: 'nowPlaying',
   topRated: 'topRated',
