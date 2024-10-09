@@ -1,9 +1,14 @@
 import React from 'react';
+import Header from './Header';
+import Container from './Container';
+import Footer from './Footer';
 
-function Home() {
+function Home({ movies }) {
   return (
     <div>
-      <img src={starEmptyImage} />
+      <Header movie={movies[0]} />
+      <Container movies={movies} />
+      <Footer />
     </div>
   );
 }
