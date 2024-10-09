@@ -6,11 +6,8 @@ import { fileURLToPath } from "url";
 import React from "react";
 import { renderToString } from "react-dom/server";
 import App from "../../client/App";
-import {
-  FETCH_OPTIONS,
-  TMDB_MOVIE_LISTS,
-  TMDB_THUMBNAIL_URL,
-} from "../../apis/constants";
+
+import { TMDB_THUMBNAIL_URL } from "../../apis/constants";
 import { fetchPopularMovieItems } from "../../apis/movies";
 
 const __filename = fileURLToPath(import.meta.url);

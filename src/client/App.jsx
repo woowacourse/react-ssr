@@ -3,7 +3,7 @@ import MovieItem from "./components/MovieItem";
 
 function App({ initialData }) {
   const [movies, setMovies] = useState(initialData || []);
-  console.log(movies);
+
   return (
     <ul className="thumbnail-list">
       {movies?.map(({ id, title, vote_average, poster_path }) => (
