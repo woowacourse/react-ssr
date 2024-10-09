@@ -13,8 +13,6 @@ const router = Router();
 router.use("/", async (_, res) => {
   const popularMovieList = await fetchPopularMovieList();
 
-  if (!popularMovieList[0]) return "";
-
   const renderedApp = renderToString(<App movieList={popularMovieList} />);
 
   const templatePath = path.resolve(__dirname, "index.html");
