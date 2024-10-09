@@ -1,12 +1,12 @@
-import MovieItem from "./base/MovieItem";
+import React from "react";
 
-function Container(children) {
+function Container({ children }) {
   return (
     <div className="container">
       <main>
         <section>
           <h2>지금 인기 있는 영화</h2>
-          {children}
+          <ul className="thumbnail-list">{children}</ul>
         </section>
       </main>
     </div>

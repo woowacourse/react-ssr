@@ -8,10 +8,20 @@ export const TMDB_MOVIE_LISTS = {
   NOW_PLAYING: BASE_URL + "/now_playing?language=ko-KR&page=1",
 };
 
+const getTMDBToken = () => {
+  if (typeof window !== "undefined") {
+    // 클라이언트 사이드
+    return;
+  } else {
+    // 서버 사이드
+    return process.env.TMDB_TOKEN;
+  }
+};
+
 export const FETCH_OPTIONS = {
   method: "GET",
   headers: {
     accept: "application/json",
-    Authorization: "Bearer " + process.env.TMDB_TOKEN,
+    Authorization: "Bearer " + getTMDBToken(),
   },
 };
