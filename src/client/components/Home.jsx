@@ -1,7 +1,11 @@
-import React from "react";
+import React from 'react';
 
 function Home() {
-  return <div>Home</div>;
+  return (
+    <div>
+      <img src={starEmptyImage} />
+    </div>
+  );
 }
 
 export default Home;
