@@ -11,7 +11,6 @@ const FETCH_OPTIONS = {
 export const fetchMovies = async () => {
   const response = await fetch(POPULAR, FETCH_OPTIONS);
   const results = await response.json().then((data) => data.results);
-  console.log('results', results);
 
   return results;
 };
