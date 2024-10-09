@@ -1,4 +1,5 @@
 import React from "react";
+<<<<<<< HEAD
 import MovieItem from "./base/MovieItem";
 
 function Home({ movies }) {
@@ -19,6 +20,14 @@ function Home({ movies }) {
       ) : (
         <p>영화가 없어요</p>
       )}
+=======
+import starEmptyImage from "@images/star_empty.png";
+
+function Home() {
+  return (
+    <div>
+      <img src={starEmptyImage} />
+>>>>>>> 8c9afb03c9eccd04f1c01f3233df2406c8aa6b75
     </div>
   );
 }
