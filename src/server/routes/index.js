@@ -16,11 +16,17 @@ router.use("/", async (_, res) => {
   const templatePath = path.resolve(__dirname, "index.html");
   const template = fs.readFileSync(templatePath, "utf8");
 
+  const initData = /*html*/ `
+    <script>
+      window.__INITIAL_DATA__ = {
+        movies: ${JSON.stringify(movies)}
+      }
+    </script>
+  `;
 
-  const renderedHTML = template.replace(
-    '<div id="root"></div>',
-    `<div id="root">${renderedApp}</div>`
-  );
+  const renderedHTML = template
+    .replace('<div id="root"></div>', `<div id="root">${renderedApp}</div>`)
+    .replace("<!--${INIT_DATA_AREA}-->", initData);
 
   res.send(renderedHTML);
 });
