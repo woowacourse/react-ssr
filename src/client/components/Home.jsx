@@ -1,5 +1,5 @@
-import React from "react";
-import starEmptyImage from "@images/star_empty.png";
+import React from 'react';
+import starEmptyImage from '@images/star_empty.png';
 
 function Home() {
   return (
