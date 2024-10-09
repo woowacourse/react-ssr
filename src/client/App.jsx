@@ -1,16 +1,16 @@
-import React from 'react';
-import Home from './components/Home';
-import Footer from './components/Footer';
-import Header from './components/Header';
+import React from "react";
+import MoviePage from "./components/MoviePage";
+import Footer from "./components/Footer";
 
-function App({ movies }) {
-	return (
-		<div>
-			<Header movies={movies} />
-			<Home movies={movies} />
-			<Footer />
-		</div>
-	);
+function App() {
+  const movies = window.__INITIAL_DATA__;
+
+  return (
+    <div>
+      <MoviePage movies={movies} />
+      <Footer />
+    </div>
+  );
 }
 
 export default App;
