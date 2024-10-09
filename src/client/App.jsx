@@ -4,19 +4,16 @@ import Footer from "./components/Footer";
 import Header from "./components/Header";
 import Home from "./components/Home";
 
-function App({ initialData }) {
-  const movies = initialData.movies;
+function App({ movies }) {
   const popularMovie = movies[0];
   return (
-    <>
-      <div id="wrap">
-        <Header movie={popularMovie} />
-        <Container>
-          <Home movies={movies} />
-        </Container>
-        <Footer />
-      </div>
-    </>
+    <div id="wrap">
+      <Header movie={popularMovie} />
+      <Container>
+        <Home movies={movies} />
+      </Container>
+      <Footer />
+    </div>
   );
 }
 
