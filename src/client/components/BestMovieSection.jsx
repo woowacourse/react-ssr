@@ -32,7 +32,6 @@ function BestMovieSection({ bestMovie }) {
             </div>
             <div className="title">{title}</div>
             <button className="primary detail">자세히 보기</button>
-         
           </div>
         </div>
       </div>
