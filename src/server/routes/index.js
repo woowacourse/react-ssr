@@ -15,20 +15,20 @@ router.get("/", async (_, res) => {
   const movieItems = parseMovieItems(popularMovies);
   const bestMovieItem = movieItems[0];
 
-  const templatePath = path.resolve(__dirname, "index.html");
-  const template = fs.readFileSync(templatePath, "utf-8");
-
   const initData = /*html*/ `
-    <script>
-      window.__INITIAL_DATA__ = {
-        movies: ${JSON.stringify(movieItems)}
-      }
-    </script>
+  <script>
+    window.__INITIAL_DATA__ = {
+      movies: ${JSON.stringify(movieItems)}
+    }
+  </script>
   `;
 
   const renderedApp = renderToString(
     <App popularMovies={movieItems} bestMovieItem={bestMovieItem} />
   );
+
+  const templatePath = path.resolve(__dirname, "index.html");
+  const template = fs.readFileSync(templatePath, "utf-8");
 
   res.send(
     template
