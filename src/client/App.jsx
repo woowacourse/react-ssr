@@ -1,11 +1,18 @@
-import React from "react";
-import Home from "./components/Home";
+import React from 'react';
 
-function App() {
+import Header from './components/Header.jsx';
+import Container from './components/Container.jsx';
+import Footer from './components/Footer.jsx';
+
+function App({ movies }) {
+  const bestMovieItem = movies[0];
+
   return (
-    <div>
-      <Home />
-    </div>
+    <>
+      <Header bestMovieItem={bestMovieItem} />
+      <Container movieItems={movies} />
+      <Footer />
+    </>
   );
 }
 
