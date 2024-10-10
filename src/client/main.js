@@ -6,5 +6,5 @@ const popularMovies = window.__INITIAL_DATA__;
 
 hydrateRoot(
   document.getElementById("root"),
-  <App initialData={popularMovies} />
+  <App popularMovies={popularMovies} />
 );

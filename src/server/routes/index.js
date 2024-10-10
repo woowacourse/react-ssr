@@ -24,31 +24,15 @@ router.get("/", async (_, res) => {
       FETCH_OPTIONS
     ).then((res) => res.json());
 
-    const bestMovie = popularMovies.results[0];
-
-    const templatePath = path.join(__dirname, "../../../views", "index.html");
-    const renderedApp = renderToString(<App initialData={popularMovies} />);
-
-    const template = fs.readFileSync(templatePath, "utf-8");
-    const initData = template.replace(
-      "<!--${INIT_DATA_AREA}-->",
-      /*html*/ `
-      <script>
-        window.__INITIAL_DATA__ = ${JSON.stringify(popularMovies)};
-      </script>
-    `
+    const renderedApp = renderToString(<App popularMovies={popularMovies} />);
+    const templatePath = path.resolve(__dirname, "index.html");
+    const template = fs.readFileSync(templatePath, "utf8");
+    res.send(
+      template.replace(
+        '<div id="root"></div>',
+        `<div id="root">${renderedApp}</div>`
+      )
     );
-
-    const renderedHTML = initData
-      .replace("<!--${MOVIE_ITEMS_PLACEHOLDER}-->", renderedApp)
-      .replace("${bestMovie.rate}", bestMovie.vote_average)
-      .replace("${bestMovie.title}", bestMovie.title)
-      .replace(
-        "${background-container}",
-        TMDB_BACKGROUND_THUMBNAIL + bestMovie.backdrop_path
-      );
-
-    res.send(renderedHTML);
   } catch (error) {
     console.log(error);
   }
