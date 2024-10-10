@@ -1,12 +1,16 @@
 import React from "react";
 import Home from "./components/Home";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
 
-function App() {
+const App = ({ popularMovies, bestMovieItem }) => {
   return (
-    <div>
-      <Home />
-    </div>
+    <>
+      <Header bestMovie={bestMovieItem} />
+      <Home movieItems={popularMovies} />
+      <Footer />
+    </>
   );
-}
+};
 
 export default App;

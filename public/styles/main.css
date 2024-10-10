@@ -15,7 +15,7 @@ body {
   background-color: var(--color-bluegray-80);
 }
 
-#wrap,
+#root,
 section {
   display: flex;
   flex-direction: column;
@@ -89,7 +89,7 @@ button.primary {
   margin-top: 64px;
 }
 
-.top-rated-movie > *:not(:last-child) {
+.top-rated-movie>*:not(:last-child) {
   margin-bottom: 8px;
 }
 
@@ -103,7 +103,7 @@ h1.logo {
   color: var(--color-yellow);
 }
 
-.rate > img {
+.rate>img {
   position: relative;
   top: 2px;
 }
