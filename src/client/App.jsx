@@ -1,12 +1,8 @@
 import React from "react";
-import Home from "./components/Home";
+import MovieList from "./components/MovieList";
 
-function App() {
-  return (
-    <div>
-      <Home />
-    </div>
-  );
+function App({ movies }) {
+  return <MovieList movies={movies} />;
 }
 
 export default App;

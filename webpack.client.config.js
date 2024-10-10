@@ -9,8 +9,9 @@ module.exports = {
     path: path.resolve("dist/client"),
     filename: "bundle.js",
     clean: true,
-    publicPath: "/",
+    publicPath: "/client", // 페이지 요청과 bundle.js 요청을 구분하기 위함
   },
+  devtool: "source-map",
   module: {
     rules: [
       {
@@ -32,6 +33,11 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: "./views/index.html",
+      // 빌드 과정에서 template의 placeholder가 주석으로 인식되어 사라지는 문제 방지를 위함
+      minify: {
+        collapseWhitespace: true,
+        removeComments: false,
+      },
     }),
     new CopyPlugin({
       patterns: [
