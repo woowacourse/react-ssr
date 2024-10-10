@@ -15,16 +15,16 @@ router.use("/", async (_, res) => {
   const renderedApp = renderToString(<App bestMovie={movies[0]} movies={movies} />);
 
   let template = fs.readFileSync(templatePath, "utf-8");
-  // template = template.replace(
-  //   "<!--${INIT_DATA_AREA}-->",
-  //   /*html*/ `
-  //   <script>
-  //     window.__INITIAL_DATA__ = {
-  //       movies: ${JSON.stringify(movies)}
-  //     }
-  //   </script>
-  // `
-  // );
+  template = template.replace(
+    "<!--${INIT_DATA_AREA}-->",
+    /*html*/ `
+    <script>
+      window.__INITIAL_DATA__ = {
+        movies: ${JSON.stringify(movies)}
+      }
+    </script>
+  `
+  );
 
   res.send(template.replace('<div id="root"></div>', `<div id="root">${renderedApp}</div>`));
 });
