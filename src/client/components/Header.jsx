@@ -2,17 +2,14 @@ import React from "react";
 
 import LogoImage from "@images/logo.png";
 import StarEmptyImage from "@images/star_empty.png";
-import { TMDB_BANNER_URL } from "../constants";
-import { round } from "../utils";
 
 export default function Header({ movie }) {
-  const { id, title, vote_average, backdrop_path } = movie;
-  const bannerUrl = TMDB_BANNER_URL + backdrop_path;
+  const { backdropPath, rate, title } = movie;
 
   return (
     <div
       className="background-container"
-      style={{ backgroundImage: `url('${bannerUrl}')` }}
+      style={{ backgroundImage: `url('${backdropPath}')` }}
     >
       <div className="overlay" aria-hidden="true"></div>
       <div className="top-rated-container">
@@ -21,13 +18,13 @@ export default function Header({ movie }) {
         </h1>
         <div className="top-rated-movie">
           <div className="rate">
-            <img src={StarEmptyImage} className="star" />{" "}
-            <span className="rate-value">{round(vote_average, 1)}</span>
+            <img src={StarEmptyImage} alt="별점 이미지" className="star" />{" "}
+            <span className="rate-value">{rate}</span>
           </div>
           <div className="title">{title}</div>
-          <a href={`/detail/${id}`}>
-            <button className="primary detail">자세히 보기</button>
-          </a>
+          <button type="button" className="primary detail">
+            자세히 보기
+          </button>
         </div>
       </div>
     </div>
