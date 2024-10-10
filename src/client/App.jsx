@@ -1,11 +1,13 @@
-import React from "react";
-import Home from "./components/Home";
+import React from 'react';
+import Home from './components/Home';
+import Footer from './components/Footer';
 
-function App() {
+function App({ movies }) {
   return (
-    <div>
-      <Home />
-    </div>
+    <>
+      <Home movies={movies} />
+      <Footer />
+    </>
   );
 }
 
