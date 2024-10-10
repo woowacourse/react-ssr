@@ -15,7 +15,7 @@ body {
   background-color: var(--color-bluegray-80);
 }
 
-#wrap,
+#root,
 section {
   display: flex;
   flex-direction: column;
@@ -43,12 +43,12 @@ button.primary {
   border-radius: 4px;
 }
 
-#wrap {
+#root {
   min-width: 1440px;
   background-color: var(--color-bluegray-100);
 }
 
-#wrap h2 {
+#root h2 {
   font-size: 1.4rem;
   font-weight: bold;
   margin-bottom: 32px;
