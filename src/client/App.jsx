@@ -1,12 +1,16 @@
-import React from "react";
-import Home from "./components/Home";
+import React from 'react';
+import Header from './components/Header';
+import Main from './components/Main';
+import Footer from './components/Footer';
 
-function App() {
+const App = ({ movies, movieListType }) => {
   return (
     <div>
-      <Home />
+      <Header movie={movies[0]} />
+      <Main movies={movies} movieListType={movieListType} />
+      <Footer />
     </div>
   );
-}
+};
 
 export default App;
