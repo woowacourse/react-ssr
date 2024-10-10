@@ -1,6 +1,6 @@
-import "./config.js";
 import express from "express";
 import path from "path";
+import "./config.js";
 import movieRouter from "./routes/index.js";
 
 const app = express();

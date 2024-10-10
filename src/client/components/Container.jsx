@@ -9,9 +9,9 @@ function Container({ movies }) {
           <ul className="thumbnail-list">
             {movies.map(({ id, title, vote_average, poster_path }) => (
               <li key={id}>
-                <a href={`/detail/${id}`}>
-                  <MovieItem rate={vote_average} title={title} thumbnailUrl={poster_path} />
-                </a>
+                {/* <a href={`/detail/${id}`}> */}
+                <MovieItem rate={vote_average} title={title} thumbnailUrl={poster_path} />
+                {/* </a> */}
               </li>
             ))}
           </ul>

@@ -21,9 +21,9 @@ function Header({ movie }) {
               <img src={StarEmpty} className="star" /> <span className="rate-value">{round(vote_average, 1)}</span>
             </div>
             <div className="title">{title}</div>
-            <a href={`/detail/${id}`}>
-              <button className="primary detail">자세히 보기</button>
-            </a>
+            {/* <a href={`/detail/${id}`}> */}
+            <button className="primary detail">자세히 보기</button>
+            {/* </a> */}
           </div>
         </div>
       </div>
