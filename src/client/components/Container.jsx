@@ -1,4 +1,5 @@
 import React from "react";
+import { TMDB_THUMBNAIL_URL } from "../../server/constant";
 
 const Container = ({ movies }) => {
   return (
@@ -13,7 +14,7 @@ const Container = ({ movies }) => {
                   <div className="item">
                     <img
                       className="thumbnail"
-                      src={`https://media.themoviedb.org/t/p/w440_and_h660_face/${poster_path}`}
+                      src={`${TMDB_THUMBNAIL_URL}${poster_path}`}
                       alt={title}
                     />
                     <div className="item-desc">

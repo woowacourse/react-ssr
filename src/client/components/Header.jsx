@@ -1,9 +1,8 @@
 import React from "react";
+import { TMDB_BANNER_URL } from "../../server/constant";
 
 const Header = ({ bestMovie }) => {
-  const backgroundContainerUrl =
-    "https://image.tmdb.org/t/p/w1920_and_h800_multi_faces/" +
-    bestMovie.poster_path;
+  const backgroundContainerUrl = TMDB_BANNER_URL + bestMovie.poster_path;
 
   return (
     <header>
@@ -24,12 +23,7 @@ const Header = ({ bestMovie }) => {
               </span>
             </div>
             <div className="title">{bestMovie.title}</div>
-            <button
-              className="primary detail"
-              onClick={() => console.log("click")} // hydration 작동 확인을 위한 코드
-            >
-              자세히 보기
-            </button>
+            <button className="primary detail">자세히 보기</button>
           </div>
         </div>
       </div>
