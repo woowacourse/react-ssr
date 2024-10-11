@@ -1,10 +1,14 @@
 import React from "react";
-import Home from "./components/Home";
+import MoviePage from "./components/MoviePage";
+import Footer from "./components/Footer";
 
 function App() {
+  const movies = window.__INITIAL_DATA__;
+
   return (
     <div>
-      <Home />
+      <MoviePage movies={movies} />
+      <Footer />
     </div>
   );
 }
