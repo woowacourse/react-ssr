@@ -1,35 +1,48 @@
-import { Router } from "express";
 import fs from "fs";
 import path from "path";
-import { fileURLToPath } from "url";
 
 import React from "react";
+import { Router } from "express";
 import { renderToString } from "react-dom/server";
-import App from "../../client/App";
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+import Header from "../../client/components/Header";
+import MovieList from "../../client/components/MovieList";
+import { fetchNowPlayingMovieList } from "../apis/movies";
 
 const router = Router();
 
-router.get("/", (_, res) => {
-  const templatePath = path.join(__dirname, "../../../views", "index.html");
-  const renderedApp = renderToString(<App />);
+router.use("/", async (_, res) => {
+  const nowPlayingMovies = await fetchNowPlayingMovieList();
 
-  const template = fs.readFileSync(templatePath, "utf-8");
-  // const initData = template.replace(
-  //   "<!--${INIT_DATA_AREA}-->",
-  //   /*html*/ `
-  //   <script>
-  //     window.__INITIAL_DATA__ = {
-  //       movies: ${JSON.stringify(popularMovies)}
-  //     }
-  //   </script>
-  // `
-  // );
-  const renderedHTML = template.replace("<!--${MOVIE_ITEMS_PLACEHOLDER}-->", renderedApp);
+  const renderedHeader = renderToString(<Header movie={nowPlayingMovies[0]} />);
+  const renderedMovieList = renderToString(
+    <MovieList movies={nowPlayingMovies} />
+  );
 
-  res.send(renderedHTML);
+  const templatePath = path.resolve(__dirname, "index.html");
+  const template = fs.readFileSync(templatePath, "utf8");
+
+  res.send(
+    template
+      .replace(
+        '<header id="header"></header>',
+        `<header id="header">${renderedHeader}</header>`
+      )
+      .replace(
+        '<section id="movie-list" class="container"></section>',
+        `<section id="movie-list" class="container">${renderedMovieList}</section>`
+      )
+      .replace(
+        "<!--${INITIAL_DATA_AREA}-->",
+        /*html*/ `
+          <script>
+            window.__INITIAL_DATA__ = {
+              movies: ${JSON.stringify(nowPlayingMovies)}
+            }
+          </script>
+        `
+      )
+  );
 });
 
 export default router;
