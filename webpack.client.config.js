@@ -44,7 +44,7 @@ module.exports = {
     }),
     new CopyPlugin({
       patterns: [
-        { from: "public/images", to: "images" }, // public 폴더의 이미지를 dist로 복사
+        { from: "public/images", to: "images" },
         { from: "public/styles", to: "styles" },
       ],
     }),

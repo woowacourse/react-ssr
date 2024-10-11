@@ -27,7 +27,7 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        use: ["ignore-loader"],
+        use: ["ignore-loader"], // CSS 파일을 무시합니다.
       },
       {
         test: /\.(png|jpg|jpeg|gif|svg)$/i,

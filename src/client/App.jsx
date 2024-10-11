@@ -1,7 +1,7 @@
 import React from "react";
 import MovieItem from "./components/MovieItem";
 
-function App({ popularMovies }) {
+function App({ movies }) {
   return (
     <div id="wrap">
       <header>
@@ -31,22 +31,20 @@ function App({ popularMovies }) {
             <h2>지금 인기 있는 영화</h2>
             <ul className="thumbnail-list">
               <ul className="thumbnail-list">
-                {popularMovies.results?.map(
-                  ({ id, title, vote_average, poster_path }) => (
-                    <li
-                      key={id}
-                      onClick={() => {
-                        console.log("hello, world");
-                      }}
-                    >
-                      <MovieItem
-                        rate={vote_average}
-                        title={title}
-                        thumbnailUrl={poster_path}
-                      />
-                    </li>
-                  )
-                )}
+                {movies.map(({ id, title, vote_average, poster_path }) => (
+                  <li
+                    key={id}
+                    onClick={() => {
+                      console.log("hello, world");
+                    }}
+                  >
+                    <MovieItem
+                      rate={vote_average}
+                      title={title}
+                      thumbnailUrl={poster_path}
+                    />
+                  </li>
+                ))}
               </ul>
             </ul>
           </section>
