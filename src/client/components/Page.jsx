@@ -1,11 +1,9 @@
 import React from 'react';
-import Tab from './Tab';
 import MovieList from './MovieList';
 
 function HomePage({movies}) {
   return (
-    <div class="container">
-      <Tab currentPath={'now_playing'} />
+    <div className="container">
       <MovieList movies={movies} />
     </div>
   );
