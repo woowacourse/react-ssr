@@ -6,7 +6,7 @@ export default function MovieList({movies}) {
     <main>
       <section>
         <h2>지금 인기 있는 영화</h2>
-        <ul class="thumbnail-list">
+        <ul className="thumbnail-list">
           {movies.map(movie => (
             <Movie movie={movie} key={movie.id} />
           ))}
