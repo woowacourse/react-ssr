@@ -3,8 +3,6 @@ import React from "react";
 import MovieHeader from "./MovieHeader";
 
 function Home({ movies }) {
-  console.log(movies, movies[0]);
-
   return (
     <>
       <MovieHeader firstMovie={movies[0]} />
