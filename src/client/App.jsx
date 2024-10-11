@@ -1,13 +1,14 @@
 import React from "react";
 import Home from "./components/Home";
 import BestMovieSection from "./components/BestMovieSection";
+import Footer from "./components/Footer";
 
-function App({ movies }) {
+function App({ movies, bestMovie }) {
   return (
-    <div>
-      <div id="wrap">
-        <Home movies={movies} />
-      </div>
+    <div >
+      <BestMovieSection bestMovie={bestMovie} />
+      <Home movies={movies} />
+      <Footer /> 
     </div>
   );
 }

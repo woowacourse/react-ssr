@@ -1,19 +1,15 @@
 import React from "react";
-import MovieItem from "./MovieItem";
+import MovieList from "./MovieList";
 
 function Home({ movies }) {
   return (
-    <div>
-      <ul className="thumbnail-list">
-        {movies.map((movie) => (
-          <MovieItem
-            key={movie.id}
-            rate={movie.vote_average}
-            title={movie.title}
-            thumbnailUrl={movie.poster_path}
-          />
-        ))}
-      </ul>
+    <div className="container">
+      <main>
+        <section>
+          <h2>지금 인기 있는 영화</h2>
+          <MovieList movies={movies} />
+        </section>
+      </main>
     </div>
   );
 }
