@@ -6,7 +6,6 @@ import { FETCH_OPTIONS, TMDB_MOVIE_LISTS } from "../constants/constants";
 import React from "react";
 import { renderToString } from "react-dom/server";
 import App from "../../client/App";
-import BestMovieSection from "../../client/components/BestMovieSection";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -26,9 +25,8 @@ export const renderMoviesPage = async (_, res) => {
     );
 
     const moviesData = await response.json();
-
     const popularMovies = moviesData.results;
-
+  
     const bestMovieData = getBestMovie(moviesData.results);
     const bestMovie = {
       id: bestMovieData.id,
@@ -36,35 +34,26 @@ export const renderMoviesPage = async (_, res) => {
       vote_average: bestMovieData.vote_average.toFixed(1),
       backdrop_path: bestMovieData.backdrop_path,
     };
-
-    const renderedApp = renderToString(<App movies={popularMovies} />);
-
-    const renderedBestMovieSection = renderToString(
-      <BestMovieSection bestMovie={bestMovie} />
+  
+    const renderedApp = renderToString(
+      <App movies={popularMovies} bestMovie={bestMovie} />
     );
-
-    const templatePath = path.join(__dirname, "../../../views", "index.html");
-    const template = fs.readFileSync(templatePath, "utf-8");
-    // const initData = template.replace(
-    //   "${INIT_DATA_AREA}",
-    //   /*html*/ `
-    //   <script>
-    //     window.__INITIAL_DATA__ = {
-    //       movies: ${JSON.stringify(popularMovies)}
-    //     }
-    //   </script>
-    // `
-    // );
-
-    // const renderedHTML = initData.replace(
-    //   "${MOVIE_ITEMS_PLACEHOLDER}",
-    //   renderedApp
-    // );
-
+    const templatePath = path.resolve(__dirname, "../../../views/index.html");
+    const template = fs.readFileSync(templatePath, "utf8");
     const renderedHTML = template
-      .replace("${MOVIE_ITEMS_PLACEHOLDER}", renderedApp)
-      .replace("${BEST_MOVIE_SECTION_PLACEHOLDER}", renderedBestMovieSection);
-
+      .replace('<div id="root"></div>', `<div id="root">${renderedApp}</div>`)
+      .replace(
+        "<!--${INIT_DATA_AREA}-->",
+        /*html*/ `
+        <script>
+          window.__INITIAL_DATA__ = {
+            movies: ${JSON.stringify(popularMovies)},
+            bestMovie: ${JSON.stringify(bestMovie)}
+          }
+        </script>
+        `
+      );
+  
     res.send(renderedHTML);
   } catch (error) {
     console.error("Error fetching movies:", error);
