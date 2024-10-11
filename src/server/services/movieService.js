@@ -1,4 +1,4 @@
-import {FETCH_OPTIONS, API_MOVIE_DETAIL_ENDPOINT, API_MOVIE_ENDPOINTS} from '../../constants/constants';
+import {FETCH_OPTIONS, API_MOVIE_DETAIL_ENDPOINT, API_MOVIE_ENDPOINTS} from '../constants/constants';
 
 async function handleFetchError(response) {
   if (!response.ok) {
