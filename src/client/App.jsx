@@ -3,10 +3,6 @@ import MovieItem from "./components/MovieItem";
 import { TMDB_BACKGROUND_THUMBNAIL } from "../constants";
 
 function App({ movies, bestMovie }) {
-  const handleClick = () => {
-    console.log("click");
-  };
-
   return (
     <div id="wrap">
       <header>
@@ -40,7 +36,7 @@ function App({ movies, bestMovie }) {
             <h2>지금 인기 있는 영화</h2>
             <ul className="thumbnail-list">
               {movies.map(({ id, title, vote_average, poster_path }) => (
-                <li key={id} onClick={handleClick}>
+                <li key={id}>
                   <MovieItem
                     rate={vote_average}
                     title={title}
