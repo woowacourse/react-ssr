@@ -5,7 +5,7 @@ import path from "path";
 import React from "react";
 import { renderToString } from "react-dom/server";
 import App from "../../client/App";
-import { fetchNowPlayingMovies } from "../movies.js";
+import { fetchPopularMovies } from "../movies.js";
 
 const router = Router();
 
@@ -13,7 +13,7 @@ router.get("/", async (_, res) => {
   const templatePath = path.resolve(__dirname, "index.html");
   let template = fs.readFileSync(templatePath, "utf-8");
 
-  const fetchedMovies = await fetchNowPlayingMovies();
+  const fetchedMovies = await fetchPopularMovies();
   const movies = fetchedMovies.results;
 
   const renderedApp = renderToString(<App movies={movies} />);
