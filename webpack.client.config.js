@@ -1,6 +1,7 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const CopyPlugin = require("copy-webpack-plugin");
+const webpack = require("webpack");
 
 module.exports = {
   module: "development",
@@ -38,8 +39,14 @@ module.exports = {
         { from: "public/images", to: "images" }, // public 폴더의 이미지를 dist로 복사
       ],
     }),
+    new webpack.DefinePlugin({
+      "process.env.NODE_ENV": JSON.stringify("development"),
+    }),
   ],
   resolve: {
     extensions: [".js", ".jsx"],
+  },
+  optimization: {
+    minimize: false,
   },
 };
