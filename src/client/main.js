@@ -7,5 +7,5 @@ const initialData = window.__INITIAL_DATA__ || [];
 
 hydrateRoot(
   document.getElementById('root'),
-  <App movieList={Array.isArray(initialData) ? initialData : []} />
+  <App movieList={initialData.length > 0 ? initialData : []} />
 );
