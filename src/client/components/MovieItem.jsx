@@ -1,5 +1,5 @@
 import React from "react";
-import { TMDB_THUMBNAIL_URL } from "../../constants";
+import { TMDB_THUMBNAIL_URL } from "../constants.js";
 import starEmptyImg from "@images/star_empty.png";
 import { round } from "../utils";
 

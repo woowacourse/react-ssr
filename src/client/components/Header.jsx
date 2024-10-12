@@ -1,4 +1,4 @@
-import { TMDB_BANNER_URL } from "../../constants";
+import { TMDB_BANNER_URL } from "../constants.js";
 import logoImg from "@images/logo.png";
 import starEmptyImg from "@images/star_empty.png";
 import React from "react";
@@ -23,7 +23,9 @@ function Header({ movie }) {
               <span className="rate-value">{round(vote_average, 1)}</span>
             </div>
             <div className="title">{title}</div>
-            <button className="primary detail">자세히 보기</button>
+            <button className="primary detail" onClick={() => alert("Clicked")}>
+              자세히 보기
+            </button>
           </div>
         </div>
       </div>
