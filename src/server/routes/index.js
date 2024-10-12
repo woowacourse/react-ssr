@@ -35,7 +35,6 @@ router.get('/', async (_, res) => {
       TMDB_BANNER_URL + bestMovieItem.backdrop_path
     )
     .replace('${bestMovie.rate}', bestMovieItem.vote_average)
-    .replace('${bestMovie.rate}', bestMovieItem.vote_average)
     .replace('${bestMovie.title}', bestMovieItem.title);
 
   res.send(renderedHTML);
