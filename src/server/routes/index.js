@@ -1,35 +1,36 @@
-import { Router } from "express";
-import fs from "fs";
-import path from "path";
-import { fileURLToPath } from "url";
+import App from '../../client/App';
+import fs from 'fs';
+import path from 'path';
 
-import React from "react";
-import { renderToString } from "react-dom/server";
-import App from "../../client/App";
+import React from 'react';
+import { Router } from 'express';
+import { renderToString } from 'react-dom/server';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+import fetchMovies from '../apis/movies';
 
 const router = Router();
 
-router.get("/", (_, res) => {
-  const templatePath = path.join(__dirname, "../../../views", "index.html");
-  const renderedApp = renderToString(<App />);
+router.use('/', async (_, res) => {
+  const data = await fetchMovies.popular();
+  const movies = data.results;
 
-  const template = fs.readFileSync(templatePath, "utf-8");
-  // const initData = template.replace(
-  //   "<!--${INIT_DATA_AREA}-->",
-  //   /*html*/ `
-  //   <script>
-  //     window.__INITIAL_DATA__ = {
-  //       movies: ${JSON.stringify(popularMovies)}
-  //     }
-  //   </script>
-  // `
-  // );
-  const renderedHTML = template.replace("<!--${MOVIE_ITEMS_PLACEHOLDER}-->", renderedApp);
+  const renderedApp = renderToString(<App movies={movies} />);
+  const templatePath = path.resolve(__dirname, 'index.html');
+  const template = fs.readFileSync(templatePath, 'utf8');
 
-  res.send(renderedHTML);
+  const initData = /*html*/ `
+    <script>
+      window.__INITIAL_DATA__ = {
+        movies: ${JSON.stringify(movies)}
+      }
+    </script>
+  `;
+
+  res.send(
+    template
+      .replace('<!--${INIT_DATA_AREA}-->', initData)
+      .replace('<div id="root"></div>', `<div id="root">${renderedApp}</div>`)
+  );
 });
 
 export default router;
