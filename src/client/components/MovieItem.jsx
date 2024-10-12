@@ -1,5 +1,6 @@
 import React from "react";
-import { TMDB_THUMBNAIL_URL } from "../../constants";
+import { TMDB_THUMBNAIL_URL } from "../constants.js";
+import starEmptyImage from "@images/star_empty.png";
 
 const MovieItem = ({ posterUrl, title, voteAverage, handleClick }) => {
   return (
@@ -11,7 +12,7 @@ const MovieItem = ({ posterUrl, title, voteAverage, handleClick }) => {
       />
       <div className="item-desc">
         <p className="rate">
-          <img src="/assets/images/star_empty.png" className="star" alt="" />
+          <img src={starEmptyImage} className="star" alt="" />
           <span>{voteAverage}</span>
         </p>
         <strong>{title}</strong>

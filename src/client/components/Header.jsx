@@ -1,5 +1,7 @@
 import React from "react";
-import { TMDB_BANNER_URL } from "../../constants.js";
+import { TMDB_BANNER_URL } from "../constants.js";
+import starEmptyImage from "@images/star_empty.png";
+import logoImage from "@images/logo.png";
 
 const Header = ({ movie }) => {
   return (
@@ -13,17 +15,17 @@ const Header = ({ movie }) => {
         <div className="overlay" aria-hidden="true"></div>
         <div className="top-rated-container">
           <h1 className="logo">
-            <img src="/assets/images/logo.png" alt="MovieList" />
+            <img src={logoImage} alt="MovieList" />
           </h1>
           <div className="top-rated-movie">
             <div className="rate">
-              <img src="/assets/images/star_empty.png" className="star" />
+              <img src={starEmptyImage} className="star" />
               <span className="rate-value">{movie.vote_average}</span>
             </div>
             <div className="title">{movie.title}</div>
             <button
               className="primary detail"
-              onClick={() => alert("아니 왜 안되냐고 ")}
+              onClick={() => console.log("hydrate")}
             >
               자세히 보기
             </button>
