@@ -1,10 +1,12 @@
-import React from "react";
-import Home from "./components/Home";
+import React from 'react';
+import Header from './components/Header';
+import HomePage from './components/Page';
 
-function App() {
+function App({movies}) {
   return (
     <div>
-      <Home />
+      <Header movies={movies} />
+      <HomePage movies={movies} />
     </div>
   );
 }
