@@ -1,4 +1,5 @@
 import React from "react";
+import { TMDB_THUMBNAIL_URL } from "../../apis/constants";
 
 function MovieItem({ id, title, poster_path, vote_average = 0 }) {
   return (
@@ -6,7 +7,7 @@ function MovieItem({ id, title, poster_path, vote_average = 0 }) {
       <div className="item">
         <img
           className="thumbnail"
-          src={`https://image.tmdb.org/t/p/w440_and_h660_face/${poster_path}`}
+          src={`${TMDB_THUMBNAIL_URL}${poster_path}`}
           alt={title}
         />
         <div className="item-desc">
