@@ -6,7 +6,6 @@ import { Router } from "express";
 import React from "react";
 import { renderToString } from "react-dom/server";
 import { loadNowPlaying } from "../api/loadMovies";
-// import { movies } from "./../api/static";
 
 const router = Router();
 
