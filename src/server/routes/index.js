@@ -33,7 +33,14 @@ router.use("*", async (req, res) => {
 
   const renderedApp = renderToString(<StaticRouterProvider router={router} context={context} />);
 
-  res.send(template.replace('<div id="root"></div>', `<div id="root">${renderedApp}</div>`));
+  res.send(
+    template
+      .replace('<div id="root"></div>', `<div id="root">${renderedApp}</div>`)
+      .replace(
+        "<!--${INITIAL_DATA_PLACEHOLDER}-->",
+        `<script>window.__INITIAL_DATA__ = ${JSON.stringify(context.loaderData)}</script>`
+      )
+  );
 });
 
 export default router;

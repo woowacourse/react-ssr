@@ -2,9 +2,10 @@ import React from "react";
 import { TMDB_BANNER_URL } from "../constants";
 import logo from "@images/logo.png";
 import emptyStar from "@images/star_empty.png";
+import { Link } from "react-router-dom";
 
 export default function MovieBanner({ movie }) {
-  const { backdrop_path: backdropPath, vote_average: voteAverage, title } = movie;
+  const { id, backdrop_path: backdropPath, vote_average: voteAverage, title } = movie;
 
   return (
     <div
@@ -24,7 +25,9 @@ export default function MovieBanner({ movie }) {
             <span className="rate-value">{voteAverage.toFixed(1)}</span>
           </div>
           <div className="title">{title}</div>
-          <button className="primary detail">자세히 보기</button>
+          <Link to={`/detail/${id}`}>
+            <button className="primary detail">자세히 보기</button>
+          </Link>
         </div>
       </div>
     </div>

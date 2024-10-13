@@ -1,4 +1,4 @@
-const FETCH_OPTIONS = {
+const TMDB_FETCH_OPTIONS = {
   method: "GET",
   headers: {
     accept: "application/json",
@@ -7,7 +7,7 @@ const FETCH_OPTIONS = {
 };
 
 export const getTMDBData = async (url) => {
-  const response = await fetch(url, FETCH_OPTIONS);
+  const response = await fetch(url, TMDB_FETCH_OPTIONS);
   const data = await response.json();
 
   return data;

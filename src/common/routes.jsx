@@ -1,25 +1,27 @@
 import React from "react";
-import { useLoaderData } from "react-router-dom";
 import Home from "../client/components/Home";
-import { getTMDBData } from "./apis/getTMDBData";
-import { TMDB_MOVIE_LISTS } from "../server/constants";
+import MovieModal from "../client/components/MovieModal";
+import NotFound from "../client/components/NotFound";
+import loadMovieList from "./loaders/loadMovieList";
+import loadMovieDetail from "./loaders/loadMovieDetail";
 
 const routes = [
   {
     path: "/",
-    async loader() {
-      const { results: movies } = await getTMDBData(TMDB_MOVIE_LISTS.nowPlaying);
-      return movies;
-    },
-    Component() {
-      return <Home />;
-    },
+    id: "home",
+    element: <Home />,
+    loader: loadMovieList,
+    children: [
+      {
+        path: "/detail/:id",
+        element: <MovieModal />,
+        loader: loadMovieDetail,
+      },
+    ],
   },
   {
     path: "*",
-    Component() {
-      return <h1>404 not found</h1>;
-    },
+    element: <NotFound />,
   },
 ];
 
