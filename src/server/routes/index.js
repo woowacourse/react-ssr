@@ -4,23 +4,34 @@ import path from "path";
 
 import React from "react";
 import { renderToString } from "react-dom/server";
-import { getTMDBData } from "../apis/getTMDBData.js";
-import { TMDB_MOVIE_LISTS } from "../constants.js";
-import App from "../../client/App.jsx";
 import { fileURLToPath } from "url";
+import {
+  createStaticHandler,
+  createStaticRouter,
+  StaticRouterProvider,
+} from "react-router-dom/server";
+import routes from "../../common/routes";
+import createFetchRequest from "../utils/createFetchRequest";
 
 const router = Router();
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-router.use("/", async (_, res) => {
-  const { results: movies } = await getTMDBData(TMDB_MOVIE_LISTS["nowPlaying"]);
-
+router.use("*", async (req, res) => {
   const templatePath = path.join(__dirname, "../../../views", "index.html");
   const template = fs.readFileSync(templatePath, "utf-8");
 
-  const renderedApp = renderToString(<App movies={movies} />);
+  const { query, dataRoutes } = createStaticHandler(routes);
+  const context = await query(createFetchRequest(req, res));
+
+  if (context instanceof Response) {
+    throw context;
+  }
+
+  const router = createStaticRouter(dataRoutes, context);
+
+  const renderedApp = renderToString(<StaticRouterProvider router={router} context={context} />);
 
   res.send(template.replace('<div id="root"></div>', `<div id="root">${renderedApp}</div>`));
 });

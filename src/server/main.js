@@ -19,10 +19,6 @@ app.use("/static", (req, res) => {
 
 app.use("/", movieRouter);
 
-app.use((req, res) => {
-  res.status(404).send("Page not found");
-});
-
 // Start server
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
