@@ -1,7 +1,5 @@
 import React from 'react';
 
-// import { StarEmpty } from '../imageResource.js';
-import { StarEmpty } from '../../../public/images/star_empty.png';
 import { TMDB_THUMBNAIL_URL } from '../constants.js';
 import { round } from '../utils.js';
 
