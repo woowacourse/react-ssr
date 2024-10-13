@@ -1,35 +1,37 @@
-import { Router } from "express";
-import fs from "fs";
-import path from "path";
-import { fileURLToPath } from "url";
+import App from '../../client/App';
+import fs from 'fs';
+import path from 'path';
 
-import React from "react";
-import { renderToString } from "react-dom/server";
-import App from "../../client/App";
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+import React from 'react';
+import { Router } from 'express';
+import { renderToString } from 'react-dom/server';
+import { fetchMovies } from '../apis/fetch';
+import { TMDB_MOVIE_LISTS } from '../apis/url';
 
 const router = Router();
 
-router.get("/", (_, res) => {
-  const templatePath = path.join(__dirname, "../../../views", "index.html");
-  const renderedApp = renderToString(<App />);
+router.use('/', async (_, res) => {
+  const popularMovies = await fetchMovies(TMDB_MOVIE_LISTS.POPULAR);
 
-  const template = fs.readFileSync(templatePath, "utf-8");
-  // const initData = template.replace(
-  //   "<!--${INIT_DATA_AREA}-->",
-  //   /*html*/ `
-  //   <script>
-  //     window.__INITIAL_DATA__ = {
-  //       movies: ${JSON.stringify(popularMovies)}
-  //     }
-  //   </script>
-  // `
-  // );
-  const renderedHTML = template.replace("<!--${MOVIE_ITEMS_PLACEHOLDER}-->", renderedApp);
+  const renderedApp = renderToString(<App movies={popularMovies} />);
 
-  res.send(renderedHTML);
+  const templatePath = path.resolve(__dirname, 'index.html');
+  const template = fs.readFileSync(templatePath, 'utf8');
+
+  const filledTemplate = template
+    .replace(
+      '<!--${INIT_DATA_AREA}-->',
+      /*html*/ `
+      <script>
+        window.__INITIAL_DATA__ = {
+          movies: ${JSON.stringify(popularMovies)}
+        };
+      </script>
+    `
+    )
+    .replace('<div id="root"></div>', `<div id="root">${renderedApp}</div>`);
+
+  res.send(filledTemplate);
 });
 
 export default router;
