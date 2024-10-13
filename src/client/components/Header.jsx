@@ -23,7 +23,9 @@ const Header = ({ movie }) => {
               <span className="rate-value">{movie.vote_average}</span>
             </div>
             <div className="title">{movie.title}</div>
-            <button className="primary detail">자세히 보기</button>
+            <button className="primary detail" onClick={() => console.log("자세히 보기 클릭!")}>
+              자세히 보기
+            </button>
           </div>
         </div>
       </div>
