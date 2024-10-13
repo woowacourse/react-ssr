@@ -5,11 +5,11 @@ import Footer from './Footer';
 
 function Home({ movies }) {
   return (
-    <div>
+    <>
       <Header movie={movies[0]} />
       <Container movies={movies} />
       <Footer />
-    </div>
+    </>
   );
 }
 

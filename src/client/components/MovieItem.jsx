@@ -12,7 +12,7 @@ function MovieItem({ rate, title, thumbnailUrl, onClick }) {
       <div className="item-desc">
         <p className="rate">
           <img src={starEmptyImage} className="star" />
-          <span>{round(rate)}</span>
+          <span>{round(rate, 1)}</span>
         </p>
         <strong>{title}</strong>
       </div>
