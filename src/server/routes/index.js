@@ -36,7 +36,6 @@ router.get("/", async (_, res) => {
   const template = fs.readFileSync(templatePath, "utf-8");
 
   const popularMovies = await loadMovies(TMDB_MOVIE_LISTS.popular);
-  const renderedApp = renderToString(<App movies={popularMovies} />);
 
   const topRatedMovie = getTopRateMovie(popularMovies);
 
