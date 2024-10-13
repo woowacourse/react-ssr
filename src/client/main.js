@@ -6,5 +6,5 @@ const initialData = window.__INITIAL_DATA__;
 
 hydrateRoot(
   document.getElementById('root'),
-  <App movies={initialData.movies} />
+  <App movies={initialData.popularMovies} />
 );
