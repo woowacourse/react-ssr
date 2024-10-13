@@ -7,7 +7,7 @@ import React from "react";
 import { renderToString } from "react-dom/server";
 
 import { TMDB_MOVIE_LISTS } from "../../constants";
-import { loadMovies } from "../fetch";
+import { loadMovieDetail, loadMovies } from "../fetch";
 
 import Movies from "../../client/components/movies";
 import HeaderContent from "../../client/components/HeaderContent";
@@ -17,7 +17,7 @@ const __dirname = path.dirname(__filename);
 
 const router = Router();
 
-router.get("/", async (_, res) => {
+const rootHandler = async (_, res) => {
   const templatePath = path.join(__dirname, "../../../views", "index.html");
 
   const nowPlayingMovies = await loadMovies(TMDB_MOVIE_LISTS.nowPlaying);
@@ -44,6 +44,40 @@ router.get("/", async (_, res) => {
     );
 
   res.send(renderedHTML);
+};
+
+router.get("/", rootHandler);
+router.get("/detail/:id", rootHandler);
+
+router.get("/api/getMovie/:id", async (req, res) => {
+  const { id } = req.params;
+  if (!id) {
+    return res.status(400).json({
+      success: false,
+      error: "Movie ID is required",
+    });
+  }
+
+  try {
+    const movie = await loadMovieDetail(id);
+
+    if (!movie) {
+      return res.status(404).json({
+        success: false,
+        error: "Movie not found",
+      });
+    }
+
+    res.json({
+      success: true,
+      movie,
+    });
+  } catch (error) {
+    return res.status(400).json({
+      success: false,
+      error,
+    });
+  }
 });
 
 export default router;

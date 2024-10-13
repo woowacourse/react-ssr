@@ -19,7 +19,7 @@ export default function HeaderContent({ movie }) {
             <span className="rate-value">{round(vote_average, 1)}</span>
           </div>
           <div className="title">{title}</div>
-          <div onClick={() => console.log("hydrate")}>
+          <div onClick={() => window.history.pushState({}, "", `/detail/${id}`)}>
             <button className="primary detail">자세히 보기</button>
           </div>
         </div>
