@@ -13,8 +13,8 @@ import App from "../../client/App.jsx";
 const router = Router();
 
 router.get("/", async (_, res) => {
-  const popularMovies = await fetchMovieList(TMDB_MOVIE_LISTS.NOW_PLAYING);
-  const renderedApp = renderToString(<App movies={popularMovies} />);
+  const nowPlayingMovies = await fetchMovieList(TMDB_MOVIE_LISTS.NOW_PLAYING);
+  const renderedApp = renderToString(<App nowPlayingMovies={nowPlayingMovies} />);
 
   const templatePath = path.resolve(__dirname, "index.html");
   const template = fs.readFileSync(templatePath, "utf8");
@@ -24,7 +24,7 @@ router.get("/", async (_, res) => {
     /*html*/ `
     <script>
       window.__INITIAL_DATA__ = {
-        movies: ${JSON.stringify(popularMovies)}
+        movies: ${JSON.stringify(nowPlayingMovies)}
       }
     </script>
   `
