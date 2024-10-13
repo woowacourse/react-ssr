@@ -1,17 +1,11 @@
-const path = require('path');
-const nodeExternals = require('webpack-node-externals');
+const path = require("path");
 
 module.exports = {
-  mode: 'development',
-  target: 'node',
-  entry: path.resolve(__dirname, 'src/server/main.js'),
-  externals: [nodeExternals()],
+  mode: "development",
+  target: "node",
+  entry: path.resolve(__dirname, "src/server/main.js"),
   resolve: {
-    extensions: ['.js', '.jsx'],
-    alias: {
-      '@images': path.resolve(__dirname, 'public/images'),
-      '@styles': path.resolve(__dirname, 'public/styles'),
-    },
+    extensions: [".js", ".jsx"],
   },
   module: {
     rules: [
@@ -19,28 +13,20 @@ module.exports = {
         test: /\.(jsx?)$/,
         exclude: /node_modules/,
         use: {
-          loader: 'babel-loader',
+          loader: "babel-loader",
           options: {
-            presets: ['@babel/preset-env', '@babel/preset-react'],
+            presets: ["@babel/preset-env", "@babel/preset-react"],
           },
         },
       },
       {
         test: /\.css$/,
-        use: ['ignore-loader'], // CSS 파일을 무시합니다.
-      },
-      {
-        test: /\.(png|jpg|jpeg|gif|svg)$/i,
-        type: 'asset/resource',
-        generator: {
-          filename: 'images/[name][ext]',
-        },
+        use: ["style-loader", "css-loader"],
       },
     ],
   },
   output: {
-    filename: 'server.js',
-    path: path.resolve(__dirname, 'dist'),
-    publicPath: '/static/',
+    filename: "server.js",
+    path: path.resolve(__dirname, "dist/server"),
   },
 };

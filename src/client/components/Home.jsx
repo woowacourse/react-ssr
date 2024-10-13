@@ -1,16 +1,7 @@
-import React from 'react';
-import Header from './Header';
-import Container from './Container';
-import Footer from './Footer';
+import React from "react";
 
-function Home({ movies }) {
-  return (
-    <>
-      <Header movie={movies[0]} />
-      <Container movies={movies} />
-      <Footer />
-    </>
-  );
+function Home() {
+  return <div>Home</div>;
 }
 
 export default Home;

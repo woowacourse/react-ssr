@@ -1,4 +1,4 @@
-@import './colors.css';
+@import "./colors.css";
 
 * {
   box-sizing: border-box;
@@ -15,7 +15,7 @@ body {
   background-color: var(--color-bluegray-80);
 }
 
-#root,
+#wrap,
 section {
   display: flex;
   flex-direction: column;
@@ -43,12 +43,12 @@ button.primary {
   border-radius: 4px;
 }
 
-#root {
+#wrap {
   min-width: 1440px;
   background-color: var(--color-bluegray-100);
 }
 
-#root h2 {
+#wrap h2 {
   font-size: 1.4rem;
   font-weight: bold;
   margin-bottom: 32px;
@@ -117,12 +117,6 @@ span.rate-value {
 .title {
   font-size: 3rem;
   font-weight: bold;
-}
-
-.subtitle {
-  font-size: 1.2rem;
-  font-weight: bold;
-  margin-bottom: 1rem;
 }
 
 footer.footer {
