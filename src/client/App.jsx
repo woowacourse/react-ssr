@@ -1,15 +1,24 @@
 import React from "react";
-import Home from "./components/Home";
-import Header from "./components/Header";
-import Footer from "./components/Footer";
+import { Route, Routes } from "react-router-dom";
+import HomePage from "./pages/HomePage";
+import MovieDetailPage from "./pages/MovieDetailPage";
 
-const App = ({ popularMovies, bestMovieItem }) => {
+const App = () => {
+  const data = window.__INITIAL_DATA__;
+
   return (
-    <>
-      <Header bestMovie={bestMovieItem} />
-      <Home movieItems={popularMovies} />
-      <Footer />
-    </>
+    <Routes>
+      <Route
+        path="/"
+        element={
+          <HomePage
+            popularMovies={data.movies}
+            bestMovieItem={data.movies[0]}
+          />
+        }
+      />
+      <Route path="/detail/:movieId" element={<MovieDetailPage />} />
+    </Routes>
   );
 };
 

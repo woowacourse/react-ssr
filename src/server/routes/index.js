@@ -4,13 +4,16 @@ import path from "path";
 
 import React from "react";
 import { renderToString } from "react-dom/server";
-import App from "../../client/App";
 import { fetchMoviesPopular } from "../apis/movie";
 import { parseMovieItems } from "../models/parseMovieItems";
+import { StaticRouter } from "react-router-dom/server";
+import { Route, Routes } from "react-router-dom";
+import HomePage from "../../client/pages/HomePage";
+import MovieDetailPage from "../../client/pages/MovieDetailPage";
 
 const router = Router();
 
-router.get("/", async (_, res) => {
+router.get("/", async (req, res) => {
   const popularMovies = await fetchMoviesPopular();
   const movieItems = parseMovieItems(popularMovies);
   const bestMovieItem = movieItems[0];
@@ -24,7 +27,20 @@ router.get("/", async (_, res) => {
   `;
 
   const renderedApp = renderToString(
-    <App popularMovies={movieItems} bestMovieItem={bestMovieItem} />
+    <StaticRouter location={req.url}>
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <HomePage
+              popularMovies={movieItems}
+              bestMovieItem={bestMovieItem}
+            />
+          }
+        />
+        <Route path="/detail/:movieId" element={<MovieDetailPage />} />
+      </Routes>
+    </StaticRouter>
   );
 
   const templatePath = path.resolve(__dirname, "index.html");
