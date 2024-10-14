@@ -9,20 +9,20 @@ export const round = (value, decimals = 0) => {
 function Home({ movies }) {
   return (
     <div>
-      <ul class="thumbnail-list">
+      <ul className="thumbnail-list">
         {movies.map((movie, index) => {
           const thumbnailUrl = `https://image.tmdb.org/t/p/w200${movie.poster_path}`;
           const roundedRate = round(movie.vote_average, 1);
           return (
-            <li class="movie-item" key={index}>
+            <li className="movie-item" key={index}>
               {/*
             <a href={`/detail/${movie}`} class="item">
                           </a>
             */}
-              <img class="thumbnail" src={thumbnailUrl} alt={movie.title} />
-              <div class="movie-info">
-                <p class="rate">
-                  <img src="../assets/images/star_empty.png" class="star" />
+              <img className="thumbnail" src={thumbnailUrl} alt={movie.title} />
+              <div className="movie-info">
+                <p className="rate">
+                  <img src="../assets/images/star_empty.png" className="star" />
                   <span>{roundedRate}</span>
                 </p>
                 <strong>{movie.title}</strong>
