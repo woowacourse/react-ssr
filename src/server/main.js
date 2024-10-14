@@ -7,6 +7,12 @@ import movieRouter from './routes/index.js';
 const app = express();
 const PORT = 3000;
 
+app.use(
+  '/scripts',
+  express.static(path.join(__dirname, '../../dist/client/bundle.js'))
+);
+app.use('/assets', express.static(path.join(__dirname, '../../public')));
+
 // 정적 파일 제공
 app.use('/static', express.static(path.join(__dirname)));
 
