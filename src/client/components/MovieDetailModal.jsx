@@ -7,7 +7,7 @@ export default function MovieDetailModal({ movie }) {
     <div className="modal-background active">
       <div className="modal">
         <button className="close-modal">
-          <img src="./static/images/modal_button_close.png" />
+          <img src="/static/images/modal_button_close.png" />
         </button>
         <div className="modal-container">
           {movie ? (
@@ -21,7 +21,7 @@ export default function MovieDetailModal({ movie }) {
                   {releaseYear} · {genres.join(", ")}
                 </p>
                 <p className="rate">
-                  <img src="./static/images/star_empty.png" className="star" />
+                  <img src="/static/images/star_empty.png" className="star" />
                   <span>{rate}</span>
                 </p>
                 <hr />

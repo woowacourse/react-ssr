@@ -13,7 +13,7 @@ export default function Movies({ movies }) {
             />
             <div className="item-desc">
               <p className="rate">
-                <img src="./static/images/star_empty.png" className="star" />
+                <img src="/static/images/star_empty.png" className="star" />
                 <span>{rate}</span>
               </p>
               <strong>{title}</strong>
