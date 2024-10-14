@@ -1,4 +1,6 @@
 import React from 'react';
+import starEmptyImage from '@images/star_empty.png';
+import LogoImage from '@images/logo.png';
 import { TMDB_BANNER_URL } from '../../server/constants/movies';
 
 const Header = ({ bestMovie }) => {
@@ -12,11 +14,11 @@ const Header = ({ bestMovie }) => {
         <div className='overlay' aria-hidden='true'></div>
         <div className='top-rated-container'>
           <h1 className='logo'>
-            <img src='../assets/images/logo.png' alt='MovieList' />
+            <img src={LogoImage} alt='MovieList' />
           </h1>
           <div className='top-rated-movie'>
             <div className='rate'>
-              <img src='../assets/images/star_empty.png' className='star' />
+              <img src={starEmptyImage} className='star' />
               <span className='rate-value'>{bestMovieRate}</span>
             </div>
             <div className='title'>{bestMovieTitle}</div>

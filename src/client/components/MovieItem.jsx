@@ -1,4 +1,5 @@
 import React from 'react';
+import starEmptyImage from '@images/star_empty.png';
 import { TMDB_THUMBNAIL_URL } from '../../server/constants/movies.js';
 
 const MovieItem = ({ movie }) => {
@@ -11,7 +12,7 @@ const MovieItem = ({ movie }) => {
         <img src={thumbnailFullUrl} className='thumbnail' alt={movie.title + '이미지'} />
         <div className='item-desc'>
           <p className='rate'>
-            <img src='../assets/images/star_empty.png' className='star' alt='평점' />
+            <img src={starEmptyImage} className='star' alt='평점' />
             <span>{movieRating}</span>
           </p>
           <strong>{movie.title}</strong>
