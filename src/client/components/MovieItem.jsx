@@ -6,7 +6,7 @@ function MovieItem({ movie }) {
   const { title, poster_path, vote_average } = movie;
 
   return (
-    <div className="item">
+    <li className="item">
       <img className="thumbnail" src={TMDB_THUMBNAIL_URL + poster_path} alt={title} />
       <div className="item-desc">
         <p className="rate">
@@ -15,7 +15,7 @@ function MovieItem({ movie }) {
         </p>
         <strong>{title}</strong>
       </div>
-    </div>
+    </li>
   );
 }
 
