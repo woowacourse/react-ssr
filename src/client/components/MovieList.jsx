@@ -18,7 +18,10 @@ function MovieList({ movieList }) {
                     />
                     <div className="item-desc">
                       <p className="rate">
-                        <img src={'/images/star_empty.png'} className="star" />
+                        <img
+                          src={'/assets/images/star_empty.png'}
+                          className="star"
+                        />
                         <span>{vote_average}</span>
                       </p>
                       <strong>{title}</strong>

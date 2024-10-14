@@ -10,7 +10,7 @@ import { fetchMovieList } from '../../api/fetchMovieList.js';
 const router = Router();
 
 router.use('/', async (_, res) => {
-  const templatePath = path.join(__dirname, 'index.html');
+  const templatePath = path.join(__dirname, '../../views', 'index.html');
   const movieListData = await fetchMovieList();
   const renderedApp = renderToString(<App movieList={movieListData ?? []} />);
   const bestMovieItem =
