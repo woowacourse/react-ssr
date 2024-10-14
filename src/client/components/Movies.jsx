@@ -8,7 +8,7 @@ export default function Movies({ movies }) {
           <div className="item">
             <img
               className="thumbnail"
-              src={`https://media.themoviedb.org/t/p/w440_and_h660_face/${thumbnail}`}
+              src={`https://media.themoviedb.org/t/p/w440_and_h660_face${thumbnail}`}
               alt={title}
             />
             <div className="item-desc">
