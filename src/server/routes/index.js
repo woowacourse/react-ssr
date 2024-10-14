@@ -1,7 +1,6 @@
 import { Router } from 'express';
 import fs from 'fs';
 import path from 'path';
-import { fileURLToPath } from 'url';
 
 import React from 'react';
 import { renderToString } from 'react-dom/server';
@@ -9,12 +8,9 @@ import App from '../../client/App.jsx';
 import { fetchMovieList } from '../../api/fetchMovieList.js';
 import { TMDB_BANNER_URL } from '../../api/constants.js';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
 const router = Router();
 
-router.get('/', async (_, res) => {
+router.use('/', async (_, res) => {
   const templatePath = path.join(__dirname, '../../../views', 'index.html');
   const movieListData = await fetchMovieList(); // API 호출
   const renderedApp = renderToString(<App movieList={movieListData ?? []} />);
