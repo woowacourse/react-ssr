@@ -7,8 +7,6 @@ import React from "react";
 import { renderToString } from "react-dom/server";
 import App from "../../client/App";
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 
 const getBestMovie = (movies) => {
   return movies.reduce(
@@ -38,7 +36,7 @@ export const renderMoviesPage = async (_, res) => {
     const renderedApp = renderToString(
       <App movies={popularMovies} bestMovie={bestMovie} />
     );
-    const templatePath = path.resolve(__dirname, "../../../views/index.html");
+    const templatePath = path.resolve(__dirname, "index.html");
     const template = fs.readFileSync(templatePath, "utf8");
     const renderedHTML = template
       .replace('<div id="root"></div>', `<div id="root">${renderedApp}</div>`)
