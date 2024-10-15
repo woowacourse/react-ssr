@@ -8,6 +8,7 @@ const TMDB_FETCH_OPTIONS = {
 
 export const getTMDBData = async (url) => {
   const response = await fetch(url, TMDB_FETCH_OPTIONS);
+
   const data = await response.json();
 
   return data;
