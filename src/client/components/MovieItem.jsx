@@ -1,4 +1,4 @@
-import { TMDB_THUMBNAIL_URL } from "../../constants";
+import { TMDB_THUMBNAIL_URL } from "../constants";
 import React from "react";
 
 const MovieItem = ({ rate, title, thumbnailUrl, onClick }) => {

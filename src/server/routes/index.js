@@ -5,7 +5,7 @@ import path from "path";
 import React from "react";
 import { Router } from "express";
 import { renderToString } from "react-dom/server";
-import { TMDB_MOVIE_LISTS, FETCH_OPTIONS } from "../../constants";
+import { TMDB_MOVIE_LISTS, FETCH_OPTIONS } from "../constants";
 
 const router = Router();
 
@@ -15,8 +15,8 @@ router.use("/", async (_, res) => {
       res.json()
     )
   ).results;
-
   const bestMovie = movies[0];
+  console.log(movies);
 
   const renderedApp = renderToString(
     <App movies={movies} bestMovie={bestMovie} />
