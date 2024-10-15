@@ -5,7 +5,7 @@ import path from 'path';
 import React from 'react';
 import { renderToString } from 'react-dom/server';
 import App from '../../client/App.jsx';
-import { fetchMovieList } from '../../api/fetchMovieList.js';
+import { fetchMovieList } from '../../api/movieRequests.js';
 
 const router = Router();
 
