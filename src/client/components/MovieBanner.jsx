@@ -5,13 +5,13 @@ import emptyStar from "@images/star_empty.png";
 import { Link } from "react-router-dom";
 
 export default function MovieBanner({ movie }) {
-  const { id, backdrop_path: backdropPath, vote_average: voteAverage, title } = movie;
+  const { id, backdrop_path, vote_average, title } = movie;
 
   return (
     <div
       className="background-container"
       style={{
-        backgroundImage: `url(${`${TMDB_BANNER_URL}${backdropPath}`})`,
+        backgroundImage: `url(${`${TMDB_BANNER_URL}${backdrop_path}`})`,
       }}
     >
       <div className="overlay" aria-hidden="true"></div>
@@ -22,7 +22,7 @@ export default function MovieBanner({ movie }) {
         <div className="top-rated-movie">
           <div className="rate">
             <img src={emptyStar} className="star" />
-            <span className="rate-value">{voteAverage.toFixed(1)}</span>
+            <span className="rate-value">{vote_average.toFixed(1)}</span>
           </div>
           <div className="title">{title}</div>
           <Link to={`/detail/${id}`}>
