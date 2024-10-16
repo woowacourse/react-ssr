@@ -1,35 +1,20 @@
 import React from "react";
-import { TMDB_THUMBNAIL_URL } from "../../constant";
-
-import starEmptyImage from "@images/star_empty.png";
+import MovieItem from "./MovieItem";
 
 const MovieList = ({ movies }) => {
   return (
-    <>
-      {movies.map(({ id, title, backdrop_path, vote_average }) => (
-        <li key={id}>
-          <a href="/">
-            <div className="item">
-              <img
-                className="thumbnail"
-                src={TMDB_THUMBNAIL_URL + backdrop_path}
-                alt={title}
-              />
-              <div className="item-desc">
-                <p className="rate">
-                  <img
-                    src={starEmptyImage}
-                    className="star"
-                  />
-                  <span>{vote_average}</span>
-                </p>
-                <strong>{title}</strong>
-              </div>
-            </div>
-          </a>
-        </li>
-      ))}
-    </>
+    <div className="container">
+      <main>
+        <section>
+          <h2>지금 인기 있는 영화</h2>
+          <ul className="thumbnail-list">
+            {movies.map((movie) => (
+              <MovieItem movie={movie} />
+            ))}
+          </ul>
+        </section>
+      </main>
+    </div>
   );
 };
 
