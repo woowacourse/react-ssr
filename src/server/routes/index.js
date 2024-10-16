@@ -35,6 +35,6 @@ const render = async (res) => {
 	res.send(template);
 };
 
-router.get('/', (_, res) => render(res));
+router.use('/', (_, res) => render(res));
 
 export default router;
