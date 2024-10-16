@@ -1,6 +1,9 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 const MovieHeader = ({ firstMovie }) => {
+  const navigate = useNavigate();
+
   return (
     <header>
       <div
@@ -22,7 +25,12 @@ const MovieHeader = ({ firstMovie }) => {
               </span>
             </div>
             <div className="title">{firstMovie.title}</div>
-            <button className="primary detail">자세히 보기</button>
+            <button
+              className="primary detail"
+              onClick={() => navigate(`/detail/${firstMovie.id}`)}
+            >
+              자세히 보기
+            </button>
           </div>
         </div>
       </div>

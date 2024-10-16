@@ -1,15 +1,13 @@
 import React from "react";
-import MoviePage from "./components/MoviePage";
-import Footer from "./components/Footer";
+
+import { RouterProvider } from "react-router-dom";
+import router from "./router";
 
 function App() {
-  const movies = window.__INITIAL_DATA__;
-
   return (
-    <div>
-      <MoviePage movies={movies} />
-      <Footer />
-    </div>
+    <React.StrictMode>
+      <RouterProvider router={router} />
+    </React.StrictMode>
   );
 }
 
