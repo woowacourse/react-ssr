@@ -15,8 +15,8 @@ router.use("/", async (_, res) => {
       res.json()
     )
   ).results;
-
   const bestMovie = movies[0];
+  console.log(movies);
 
   const renderedApp = renderToString(
     <App movies={movies} bestMovie={bestMovie} />
