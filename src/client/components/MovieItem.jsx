@@ -5,8 +5,8 @@ const TMDB_THUMBNAIL_URL =
   "https://media.themoviedb.org/t/p/w440_and_h660_face/";
 
 function MovieItem({ movie, onClick }) {
-  const { vote_average: rate, title, poster_path: thumbnailUrl } = movie;
-  const thumbnailFullUrl = TMDB_THUMBNAIL_URL + thumbnailUrl;
+  const { vote_average, title, poster_path } = movie;
+  const thumbnailFullUrl = TMDB_THUMBNAIL_URL + poster_path;
 
   return (
     <div className="item" onClick={() => onClick?.()}>
@@ -14,7 +14,7 @@ function MovieItem({ movie, onClick }) {
       <div className="item-desc">
         <p className="rate">
           <img src={StarEmpty} className="star" />
-          <span>{rate.toFixed(1)}</span>
+          <span>{vote_average.toFixed(1)}</span>
         </p>
         <strong>{title}</strong>
       </div>

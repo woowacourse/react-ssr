@@ -6,17 +6,7 @@ const TMDB_BANNER_URL =
   "https://image.tmdb.org/t/p/w1920_and_h800_multi_faces/";
 
 function Header({ bannerMovie }) {
-  const movie = bannerMovie ?? {
-    id: -1,
-    title: "",
-    bannerUrl: "",
-    vote_average: 0,
-  };
-
-  const { id, title, vote_average: rate, backdrop_path: bannerImgUrl } = movie;
-
-  const bannerUrl = TMDB_BANNER_URL + bannerImgUrl;
-
+  const bannerUrl = TMDB_BANNER_URL + bannerMovie.backdrop_path;
   return (
     <header>
       <div
@@ -30,10 +20,12 @@ function Header({ bannerMovie }) {
           </h1>
           <div className="top-rated-movie">
             <div className="rate">
-              <img src={StarEmpty} className="star" />{" "}
-              <span className="rate-value">{rate.toFixed(1)}</span>
+              <img src={StarEmpty} className="star" />
+              <span className="rate-value">
+                {bannerMovie.vote_average.toFixed(1)}
+              </span>
             </div>
-            <div className="title">{title}</div>
+            <div className="title">{bannerMovie.title}</div>
             <button className="primary detail">자세히 보기</button>
           </div>
         </div>

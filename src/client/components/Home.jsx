@@ -1,6 +1,7 @@
 import React from "react";
 import Header from "./Header";
 import MovieItem from "./MovieItem";
+import Footer from "./Footer";
 
 function Home({ movies }) {
   return (
@@ -20,6 +21,7 @@ function Home({ movies }) {
           </section>
         </main>
       </div>
+      <Footer />
     </>
   );
 }
