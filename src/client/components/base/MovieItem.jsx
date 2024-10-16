@@ -3,12 +3,14 @@ import { StarEmpty } from "../../ImageResources";
 import { TMDB_THUMBNAIL_URL } from "../../Constant";
 import { round } from "../../utils";
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
-function MovieItem({ rate, title, thumbnailUrl }) {
+function MovieItem({ id, rate, title, thumbnailUrl }) {
+  const navigate = useNavigate();
   const thumbnailFullUrl = TMDB_THUMBNAIL_URL + "/" + thumbnailUrl;
 
   return (
-    <div className="item" onClick={onClick}>
+    <div className="item" onClick={() => navigate(`/detail/${id}`)}>
       <img className="thumbnail" src={thumbnailFullUrl} alt={title} />
       <div className="item-desc">
         <p className="rate">
