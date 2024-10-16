@@ -6,8 +6,20 @@ import { Route, Routes } from "react-router-dom";
 import { StaticRouter } from "react-router-dom/server";
 import MovieDetailPage from "../../client/pages/MovieDetailPage";
 import HomePage from "../../client/pages/HomePage";
+import { parseMovieItems } from "../models/parseMovieItems";
 
-const renderMovieHome = ({ movieItems, bestMovieItem, url }) => {
+const renderMovieHome = ({ popularMovies, url }) => {
+  const movieItems = parseMovieItems(popularMovies);
+  const bestMovieItem = movieItems[0];
+
+  const initData = /*html*/ `
+    <script>
+        window.__INITIAL_DATA__ = {
+        movies: ${JSON.stringify(movieItems)}
+        }
+    </script>
+  `;
+
   const renderedApp = renderToString(
     <StaticRouter location={url}>
       <Routes>
@@ -20,18 +32,18 @@ const renderMovieHome = ({ movieItems, bestMovieItem, url }) => {
             />
           }
         />
-        <Route path="/detail/:movieId" element={<MovieDetailPage />} />
+        <Route
+          path="/detail/:movieId"
+          element={
+            <MovieDetailPage
+              popularMovies={movieItems}
+              bestMovieItem={bestMovieItem}
+            />
+          }
+        />
       </Routes>
     </StaticRouter>
   );
-
-  const initData = /*html*/ `
-    <script>
-        window.__INITIAL_DATA__ = {
-        movies: ${JSON.stringify(movieItems)}
-        }
-    </script>
-  `;
 
   const templatePath = path.resolve(__dirname, "index.html");
   const template = fs.readFileSync(templatePath, "utf-8");
