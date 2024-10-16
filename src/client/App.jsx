@@ -23,6 +23,7 @@ const App = () => {
           <MovieDetailPage
             popularMovies={data.movies}
             bestMovieItem={data.movies[0]}
+            movieInfo={data.movie}
           />
         }
       />

@@ -5,9 +5,13 @@ import { useParams } from "react-router-dom";
 import { fetchMovieDetail } from "../../server/apis/movie";
 import { parseMovieDetail } from "../../server/models/parseMovieDetail";
 
-const MovieDetailPage = ({ popularMovies, bestMovieItem }) => {
+const MovieDetailPage = ({ popularMovies, bestMovieItem, movieInfo }) => {
   const { movieId } = useParams();
   const [movieDetail, setMovieDetail] = useState();
+
+  const handleClickClose = () => {
+    setMovieDetail(null);
+  };
 
   useEffect(() => {
     const fetchMovie = async (movieId) => {
@@ -16,13 +20,22 @@ const MovieDetailPage = ({ popularMovies, bestMovieItem }) => {
       setMovieDetail(movieItem);
     };
 
-    fetchMovie(movieId);
-  }, [movieId]);
+    if (movieInfo && movieInfo.movieId === Number(movieId)) {
+      setMovieDetail(movieInfo);
+    } else {
+      fetchMovie(movieId);
+    }
+  }, [movieInfo, movieId]);
 
   return (
     <>
       <HomePage popularMovies={popularMovies} bestMovieItem={bestMovieItem} />
-      {movieDetail && <MovieDetailModal movieDetail={movieDetail} />}
+      {movieDetail && (
+        <MovieDetailModal
+          movieDetail={movieDetail}
+          onClose={handleClickClose}
+        />
+      )}
     </>
   );
 };

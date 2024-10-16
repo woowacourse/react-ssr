@@ -1,13 +1,13 @@
 import React from "react";
 
-const MovieDetailModal = ({ movieDetail }) => {
+const MovieDetailModal = ({ movieDetail, onClose }) => {
   const { title, releaseYear, genres, rate, description, bannerUrl } =
     movieDetail;
 
   return (
     <div className="modal-background active" id="modalBackground">
       <div className="modal">
-        <button className="close-modal" id="closeModal">
+        <button className="close-modal" id="closeModal" onClick={onClose}>
           <img src="/static/images/modal_button_close.png" />
         </button>
         <div className="modal-container">

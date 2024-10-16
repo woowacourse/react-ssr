@@ -5,7 +5,7 @@ const MovieItems = ({ movieItems }) => {
   const navigate = useNavigate();
 
   const handleClickMovie = (movieId) => {
-    navigate(`detail/${movieId}`);
+    navigate(`/detail/${movieId}`);
   };
 
   return (
