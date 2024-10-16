@@ -8,7 +8,7 @@ import MovieDetailPage from "../../client/pages/MovieDetailPage";
 import HomePage from "../../client/pages/HomePage";
 import { parseMovieItems } from "../models/parseMovieItems";
 
-const renderMovieHome = ({ popularMovies, url }) => {
+const renderMovieHome = ({ popularMovies, url, movieInfo }) => {
   const movieItems = parseMovieItems(popularMovies);
   const bestMovieItem = movieItems[0];
 
@@ -38,6 +38,7 @@ const renderMovieHome = ({ popularMovies, url }) => {
             <MovieDetailPage
               popularMovies={movieItems}
               bestMovieItem={bestMovieItem}
+              movieInfo={movieInfo}
             />
           }
         />
