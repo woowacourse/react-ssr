@@ -17,7 +17,15 @@ const App = () => {
           />
         }
       />
-      <Route path="/detail/:movieId" element={<MovieDetailPage />} />
+      <Route
+        path="/detail/:movieId"
+        element={
+          <MovieDetailPage
+            popularMovies={data.movies}
+            bestMovieItem={data.movies[0]}
+          />
+        }
+      />
     </Routes>
   );
 };
