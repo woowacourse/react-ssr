@@ -22,13 +22,17 @@ router.use("/", async (_, res) => {
     "<!--${INIT_DATA_AREA}-->",
     /*html*/ `
     <script>
-      window.__INITIAL_DATA__ = {
+      window.__INITIAL_DATA__= {
         movieList: ${JSON.stringify(popularMovieList)}
       }
     </script>
+    
   `
   );
-  const renderedHTML = initData.replace("<!--${APP_AREA}-->", renderedApp);
+  const renderedHTML = initData.replace(
+    "<!--${ROOT_AREA}-->",
+    `<div id="root">${renderedApp}</div>`
+  );
 
   res.send(renderedHTML);
 });
