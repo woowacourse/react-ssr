@@ -1,6 +1,6 @@
 import React from "react";
 import MovieItem from "./components/MovieItem";
-import { TMDB_BACKGROUND_THUMBNAIL } from "../constants";
+import { TMDB_BACKGROUND_THUMBNAIL } from "./constants";
 
 function App({ movies, bestMovie }) {
   return (
