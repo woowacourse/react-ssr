@@ -5,15 +5,19 @@ import path from "path";
 import React from "react";
 import { Router } from "express";
 import { renderToString } from "react-dom/server";
-
+import { StaticRouter } from "react-router-dom/server";
 import { fetchPopularMovieList } from "../apis/handler";
 
 const router = Router();
 
-router.use("/", async (_, res) => {
+router.use("/", async (req, res) => {
   const popularMovieList = await fetchPopularMovieList();
-
-  const renderedApp = renderToString(<App movieList={popularMovieList} />);
+  const context = {};
+  const renderedApp = renderToString(
+    <StaticRouter location={req.url} context={context}>
+      <App movieList={popularMovieList} />
+    </StaticRouter>
+  );
 
   const templatePath = path.resolve(__dirname, "index.html");
   const template = fs.readFileSync(templatePath, "utf-8");
