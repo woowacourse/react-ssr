@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from 'react';
 
-import { Modal } from './Modal.jsx';
-import getMovies from '../apis/getMovies.js';
+import Footer from './Footer.jsx';
 import Header from './Header.jsx';
-import { emptyMovie } from '../../constants/constant.js';
+import { Modal } from './Modal.jsx';
 import MovieContainer from './MovieContainer.jsx';
+import { emptyMovie } from '../../constants/constant.js';
 import getMovieDetail from '../apis/getMovieDetail.js';
+import getMovies from '../apis/getMovies.js';
 
 function Home({ movies, movieDetail }) {
-  const [movies, setMovies] = useState(movies || []);
-  const [movieDetail, setMovieDetail] = useState(movieDetail);
+  const [moviesState, setMovies] = useState(movies || []);
+  const [movieDetailState, setMovieDetail] = useState(movieDetail);
   useEffect(() => {
     const updateMovie = async () => {
       const movies = await getMovies.nowPlaying();
@@ -29,15 +30,15 @@ function Home({ movies, movieDetail }) {
 
   return (
     <>
-      <Header movie={movies[0] || emptyMovie} />
+      <Header movie={moviesState[0] || emptyMovie} />
       <MovieContainer
         movies={movies}
         movieClickHandler={id => updateMovieDetail(id)}
       />
       <Footer />
 
-      {movieDetail && (
-        <Modal movieDetail={movieDetail} onClose={modalCloseHandler} />
+      {movieDetailState && (
+        <Modal movieDetail={movieDetailState} onClose={modalCloseHandler} />
       )}
     </>
   );

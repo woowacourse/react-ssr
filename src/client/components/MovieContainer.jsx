@@ -1,4 +1,5 @@
 import MovieThumbnail from './MovieThumbnail';
+import React from 'react';
 
 export default function MovieContainer({ movies, movieClickHandler }) {
   return (

@@ -1,3 +1,4 @@
+import React from 'react';
 import woowacourseLogo from '@images/woowacourse_logo.png';
 
 export default function Footer() {
