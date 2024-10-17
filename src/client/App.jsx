@@ -1,15 +1,26 @@
 import React from 'react';
-import Header from './components/Header';
-import MovieList from './components/MovieList';
-import Footer from './components/Footer';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import MoviePage from './pages/MoviePage.jsx';
+import MovieDetail from './pages/MovieDetail.jsx';
 
-function App({ movies }) {
+function App({ initialData }) {
+  const router = createBrowserRouter([
+    {
+      path: '/',
+      element: <MoviePage movies={initialData.movies} />,
+      children: [
+        {
+          path: '/detail/:id',
+          element: <MovieDetail detail={initialData.movieDetail} />,
+        },
+      ],
+    },
+  ]);
+
   return (
-    <>
-      <Header bestMovie={movies[0]} />
-      <MovieList movies={movies} />
-      <Footer />
-    </>
+    <React.StrictMode>
+      <RouterProvider router={router} />
+    </React.StrictMode>
   );
 }
 

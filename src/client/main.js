@@ -4,4 +4,4 @@ import App from './App';
 
 const initialData = window.__INITIAL_DATA__;
 
-hydrateRoot(document.getElementById('root'), <App movies={initialData.movies} />);
+hydrateRoot(document.getElementById('root'), <App initialData={initialData} />);
