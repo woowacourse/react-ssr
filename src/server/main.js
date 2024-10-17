@@ -2,8 +2,7 @@ import "./config.js";
 import express from "express";
 import path from "path";
 
-import movieRouter from "./routes/index.js";
-import movieDetailModalRouter from "./routes/movieDetailModal.js";
+import { movieRouter, movieDetailModalRouter } from "./routes";
 
 const app = express();
 const PORT = 3000;
