@@ -1,22 +1,19 @@
-import App from "../../client/App";
 import fs from "fs";
 import path from "path";
 
 import React from "react";
 import { Router } from "express";
 import { renderToString } from "react-dom/server";
-import { StaticRouter } from "react-router-dom/server";
 import { fetchPopularMovieList } from "../apis/handler";
+import StaticLayout from "../components/StaticLayout";
 
 const movieRouter = Router();
 
 movieRouter.use("/", async (req, res) => {
   const popularMovieList = await fetchPopularMovieList();
-  const context = {};
+
   const renderedApp = renderToString(
-    <StaticRouter location={req.url} context={context}>
-      <App movieList={popularMovieList} />
-    </StaticRouter>
+    <StaticLayout movieList={popularMovieList} />
   );
 
   const templatePath = path.resolve(__dirname, "index.html");
