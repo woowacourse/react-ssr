@@ -1,10 +1,10 @@
+import React from "react";
 import starEmptyImage from "@images/star_empty.png";
 import modalButtonCloseImage from "@images/modal_button_close.png";
 import { round } from "../utils";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 function MovieDetailModal({ movieDetail }) {
-  const navigate = useNavigate();
   const { title, bannerUrl, releaseYear, description } = movieDetail;
   const genres = movieDetail?.genres?.join(", ");
   const rate = round(movieDetail?.rate, 1);
@@ -15,13 +15,9 @@ function MovieDetailModal({ movieDetail }) {
   return (
     <div className="modal-background active" id="modalBackground">
       <div className="modal">
-        <button
-          className="close-modal"
-          id="closeModal"
-          onClick={handleCloseButtonClick}
-        >
-          <img src={modalButtonCloseImage} alt="닫힘 버튼 아이콘" />
-        </button>
+        <Link to={"/"} className="close-modal" id="closeModal">
+          <img src={modalButtonCloseImage} alt="모달 닫힘 버튼 아이콘" />
+        </Link>
         <div className="modal-container">
           <div className="modal-image">
             <img src={bannerUrl} alt={`${title} 영화 배너`} />

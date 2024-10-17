@@ -2,19 +2,13 @@ import React from "react";
 import { round } from "../utils";
 import { TMDB_THUMBNAIL_URL } from "../constants";
 import starEmptyImage from "@images/star_empty.png";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
-function MovieItem({ id, rate, title, thumbnailUrl, onClick }) {
-  const navigate = useNavigate();
-
+function MovieItem({ id, rate, title, thumbnailUrl }) {
   const thumbnailFullUrl = TMDB_THUMBNAIL_URL + "/" + thumbnailUrl;
 
-  const handleMovieItemClick = () => {
-    navigate(`/detail/${id}`);
-  };
-
   return (
-    <div className="item" onClick={handleMovieItemClick}>
+    <Link to={`/detail/${id}`} className="item">
       <img className="thumbnail" src={thumbnailFullUrl} alt={title} />
       <div className="item-desc">
         <p className="rate">
@@ -23,7 +17,7 @@ function MovieItem({ id, rate, title, thumbnailUrl, onClick }) {
         </p>
         <strong>{title}</strong>
       </div>
-    </div>
+    </Link>
   );
 }
 
