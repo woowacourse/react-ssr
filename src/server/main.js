@@ -3,6 +3,7 @@ import express from "express";
 import path from "path";
 
 import movieRouter from "./routes/index.js";
+import movieDetailModalRouter from "./routes/movieDetailModal.js";
 
 const app = express();
 const PORT = 3000;
@@ -12,6 +13,7 @@ app.use("/static", (req, res) => {
   res.status(404).send("Resource not found");
 });
 
+app.get("/detail/:id", movieDetailModalRouter);
 // 메인 페이지 라우트 (React 앱 렌더링)
 app.get("/", movieRouter);
 
