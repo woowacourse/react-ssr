@@ -37,12 +37,13 @@ export async function fetchNowPlayingMovies() {
 export async function fetchMovieDetail(movieId) {
   const movieDetailUrl = `${TMDB_MOVIE_DETAIL_URL}${movieId}`;
 
-  const { title, vote_average, backdrop_path, poster_path, genres, release_date, overview } =
+  const { id, title, vote_average, poster_path, genres, release_date, overview } =
     await movieFetcher(movieDetailUrl);
 
   const releaseYear = release_date.slice(0, 4);
 
   return {
+    id,
     title,
     releaseYear,
     rate: vote_average.toFixed(1),
