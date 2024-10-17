@@ -5,13 +5,16 @@ import { round } from "../utils";
 import { Link } from "react-router-dom";
 
 function MovieDetailModal({ movieDetail }) {
-  const { title, bannerUrl, releaseYear, description } = movieDetail;
   const genres = movieDetail?.genres?.join(", ");
   const rate = round(movieDetail?.rate, 1);
 
-  const handleCloseButtonClick = () => {
-    navigate("/");
-  };
+  if (!movieDetail) {
+    window.location.reload();
+    return "";
+  }
+
+  const { title, bannerUrl, releaseYear, description } = movieDetail;
+
   return (
     <div className="modal-background active" id="modalBackground">
       <div className="modal">
