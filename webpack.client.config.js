@@ -2,6 +2,8 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 const webpack = require('webpack');
+const dotenv = require('dotenv');
+dotenv.config();
 
 module.exports = {
   mode: 'development',
@@ -50,7 +52,7 @@ module.exports = {
       ],
     }),
     new webpack.DefinePlugin({
-      'process.env': JSON.stringify(process.env),
+      'process.env.TMDB_TOKEN': JSON.stringify(process.env.TMDB_TOKEN),
     }),
   ],
   resolve: {
