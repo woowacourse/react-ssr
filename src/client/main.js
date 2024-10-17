@@ -8,13 +8,13 @@ const initialData = window.__INITIAL_DATA__;
 
 const router = createBrowserRouter([
   {
-    path: "",
+    path: "/",
     element: <App movieList={initialData.movieList} />,
     errorElement: <div>찾으시는 페이지가 없습니다.</div>,
     children: [
       {
         path: "detail/:id",
-        element: <MovieDetailModal movieDetail={initialData.movieDetail} />,
+        element: <MovieDetailModal movieDetail={initialData.movieDetailInfo} />,
       },
     ],
   },
