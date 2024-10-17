@@ -8,10 +8,7 @@ function MovieDetailModal({ movieDetail }) {
   const genres = movieDetail?.genres?.join(", ");
   const rate = round(movieDetail?.rate, 1);
 
-  if (!movieDetail) {
-    window.location.reload();
-    return "";
-  }
+  if (!movieDetail) return "";
 
   const { title, bannerUrl, releaseYear, description } = movieDetail;
 
