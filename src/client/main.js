@@ -6,6 +6,9 @@ import { BrowserRouter } from 'react-router-dom';
 hydrateRoot(
   document.getElementById('root'),
   <BrowserRouter>
-    <App movies={window.__INITIAL_DATA__.movies} />
+    <App
+      initialMovieDetail={window.__INITIAL_DATA__.movie}
+      movies={window.__INITIAL_DATA__.movies}
+    />
   </BrowserRouter>
 );

@@ -11,10 +11,10 @@ export default function AppLayout({ movies }) {
       <div className="container">
         <Outlet />
       </div>
-      <footer class="footer">
+      <footer className="footer">
         <p>&copy; 우아한테크코스 All Rights Reserved.</p>
         <p>
-          <img src={woowacourseLogo} width="180" />
+          <img src={woowacourseLogo} width="180" alt="" />
         </p>
       </footer>
     </>

@@ -1,15 +1,22 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 
-import MainPage from './pages/MainPage';
-import AppLayout from './components/AppLayout';
 import { ROUTE_PATHS } from '../constants/routePath';
 
-export default function App({ movies }) {
+import AppLayout from './components/AppLayout';
+
+import MainPage from './pages/MainPage';
+import MovieDetailPage from './pages/MovieDetailPage';
+
+export default function App({ initialMovieDetail, movies }) {
   return (
     <Routes>
-      <Route path={ROUTE_PATHS.root} element={<AppLayout movies={movies} />}>
-        <Route index element={<MainPage movies={movies} />} />
+      <Route element={<AppLayout movies={movies} />}>
+        <Route path={ROUTE_PATHS.root} element={<MainPage movies={movies} />} />
+        <Route
+          path={ROUTE_PATHS.movieDetail}
+          element={<MovieDetailPage initialMovieDetail={initialMovieDetail} movies={movies} />}
+        />
       </Route>
     </Routes>
   );
