@@ -1,9 +1,14 @@
 const path = require('path');
+const webpack = require('webpack');
+
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
+const dotenv = require('dotenv');
+
+const env = dotenv.config().parsed;
 
 module.exports = {
-  module: 'development',
+  mode: 'development',
   entry: './src/client/main.js',
   output: {
     path: path.resolve('dist'),
@@ -51,6 +56,9 @@ module.exports = {
         { from: 'public/images', to: 'images' },
         { from: 'public/styles', to: 'styles' },
       ],
+    }),
+    new webpack.DefinePlugin({
+      'process.env': JSON.stringify(env),
     }),
   ],
   resolve: {
