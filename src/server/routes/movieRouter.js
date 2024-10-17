@@ -5,11 +5,25 @@ import {
   generateHTML,
   generateInitData,
 } from "../utils/htmlGenerator";
+import {
+  loadMovieDataFromFile,
+  saveMovieDataToFile,
+} from "../data/movieDataManager";
 
 const movieRouter = Router();
 
-movieRouter.use("/", async (req, res) => {
+const getPopularMovieList = async () => {
+  const movieData = loadMovieDataFromFile();
+  if (movieData) return movieData;
+  // 영화 데이터 없을 경우 API 요청 후, 데이터 저장
   const popularMovieList = await fetchPopularMovieList();
+  saveMovieDataToFile(popularMovieList);
+
+  return { popularMovieList };
+};
+
+movieRouter.use("/", async (req, res) => {
+  const { popularMovieList } = await getPopularMovieList();
 
   const renderedApp = generateApp(popularMovieList);
 
