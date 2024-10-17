@@ -3,9 +3,10 @@ import { TMDB_BANNER_URL } from "../constants";
 import { round } from "../utils";
 import starEmptyImage from "@images/star_empty.png";
 import logoImage from "@images/logo.png";
+import { Link } from "react-router-dom";
 
 function Header({ movie }) {
-  const { title, vote_average, backdrop_path } = movie;
+  const { title, vote_average, backdrop_path, id } = movie;
 
   const bannerUrl = TMDB_BANNER_URL + backdrop_path;
   return (
@@ -30,7 +31,9 @@ function Header({ movie }) {
             </div>
             <div className="title">{title}</div>
 
-            <button className="primary detail">자세히 보기</button>
+            <Link to={`/detail/${id}`} className="primary detail">
+              자세히 보기
+            </Link>
           </div>
         </div>
       </div>
