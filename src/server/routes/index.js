@@ -1,10 +1,10 @@
 import { Router } from 'express';
-import { renderHTML } from '../utils/render.js';
+import { renderRootHTML } from '../utils/render.js';
 
 const router = Router();
 
 router.get('/', async (_, res) => {
-  const html = await renderHTML();
+  const html = await renderRootHTML();
 
   res.send(html);
 });
