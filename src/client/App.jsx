@@ -2,7 +2,9 @@ import React from "react";
 import MovieItem from "./components/MovieItem";
 import { TMDB_BACKGROUND_THUMBNAIL } from "./constants";
 
-function App({ movies, bestMovie }) {
+function App({ movies }) {
+  const bestMovie = movies[0];
+
   return (
     <div id="wrap">
       <header>

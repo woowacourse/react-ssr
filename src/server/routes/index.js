@@ -15,12 +15,8 @@ router.use("/", async (_, res) => {
       res.json()
     )
   ).results;
-  const bestMovie = movies[0];
-  console.log(movies);
 
-  const renderedApp = renderToString(
-    <App movies={movies} bestMovie={bestMovie} />
-  );
+  const renderedApp = renderToString(<App movies={movies} />);
   const templatePath = path.resolve(__dirname, "index.html");
   const template = fs.readFileSync(templatePath, "utf8");
   const initData = template.replace(
@@ -29,7 +25,6 @@ router.use("/", async (_, res) => {
     <script>
       window.__INITIAL_DATA__ = {
         movies: ${JSON.stringify(movies)}
-        bestMovie: ${JSON.stringify(bestMovie)}
       }
     </script>
   `
