@@ -47,7 +47,10 @@ const fetchMovies = {
   },
 
   detail: async (id) => {
-    const data = await fetcher(`${TMDB_MOVIE_DETAIL_URL}${id}`, "GET");
+    const data = await fetcher(
+      `${TMDB_MOVIE_DETAIL_URL}${id}?language=ko-KR`,
+      "GET"
+    );
     return data;
   },
 };
