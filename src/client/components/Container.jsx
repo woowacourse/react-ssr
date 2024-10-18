@@ -12,6 +12,7 @@ function Container({ movieList }) {
               <li key={id}>
                 <MovieItem
                   rate={vote_average}
+                  id={id}
                   title={title}
                   thumbnailUrl={poster_path}
                 />
