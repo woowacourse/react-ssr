@@ -10,7 +10,7 @@ function MovieItem({ movie }) {
       <img className="thumbnail" src={TMDB_THUMBNAIL_URL + poster_path} alt={title} />
       <div className="item-desc">
         <p className="rate">
-          <img src="/assets/images/star_empty.png" className="star" alt="star" />
+          <img src="./static/images/star_empty.png" className="star" alt="star" />
           <span>{vote_average.toFixed(1)}</span>
         </p>
         <strong>{title}</strong>
