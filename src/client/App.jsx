@@ -1,10 +1,20 @@
 import React from "react";
-import Home from "./components/Home";
+import MovieItems from "./components/MovieItems";
+import TopRatedMovie from "./components/TopRatedMovie";
 
-function App() {
+const getTopRateMovie = (movies) => {
+  const topRateMovie = movies.reduce((highest, movie) => {
+    return movie.vote_average > highest.vote_average ? movie : highest;
+  }, movies[0]);
+
+  return topRateMovie;
+};
+
+function App({ movieItems }) {
   return (
-    <div>
-      <Home />
+    <div id="wrap">
+      <TopRatedMovie movie={getTopRateMovie(movieItems)} />
+      <MovieItems movieItems={movieItems} />
     </div>
   );
 }
