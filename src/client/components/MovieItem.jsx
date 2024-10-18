@@ -1,21 +1,23 @@
 import React from 'react';
-
-const TMDB_THUMBNAIL_URL = 'https://media.themoviedb.org/t/p/w440_and_h660_face';
+import { Link } from 'react-router-dom';
+import { TMDB_THUMBNAIL_URL } from '../constants';
 
 function MovieItem({ movie }) {
-  const { title, poster_path, vote_average } = movie;
+  const { id, title, poster_path, vote_average } = movie;
 
   return (
-    <li className="item">
-      <img className="thumbnail" src={TMDB_THUMBNAIL_URL + poster_path} alt={title} />
-      <div className="item-desc">
-        <p className="rate">
-          <img src="./static/images/star_empty.png" className="star" alt="star" />
-          <span>{vote_average.toFixed(1)}</span>
-        </p>
-        <strong>{title}</strong>
-      </div>
-    </li>
+    <Link to={`/detail/${id}`}>
+      <li className="item">
+        <img className="thumbnail" src={TMDB_THUMBNAIL_URL + poster_path} alt={title} />
+        <div className="item-desc">
+          <p className="rate">
+            <img src="/static/images/star_empty.png" className="star" alt="star" />
+            <span>{vote_average.toFixed(1)}</span>
+          </p>
+          <strong>{title}</strong>
+        </div>
+      </li>
+    </Link>
   );
 }
 

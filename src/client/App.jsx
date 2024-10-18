@@ -1,6 +1,7 @@
 import React from 'react';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import Home from './pages/Home';
+import MovieDetail from './pages/MovieDetail';
 import Layout from './pages/Layout';
 
 function App({ movies }) {
@@ -12,6 +13,10 @@ function App({ movies }) {
         {
           path: '',
           element: <Home movies={movies} />,
+        },
+        {
+          path: 'detail/:id',
+          element: <MovieDetail movies={movies} />,
         },
       ],
     },
