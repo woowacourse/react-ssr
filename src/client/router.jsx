@@ -3,6 +3,7 @@ import React from "react";
 import { createBrowserRouter } from "react-router-dom";
 import App from "./App";
 import Home from "./pages/Home";
+import MovieDetail from "./pages/MovieDetail";
 
 const initialData = window.__INITIAL_DATA__;
 
@@ -16,6 +17,10 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <Home movieItems={movies} />,
+      },
+      {
+        path: "/detail/:id",
+        element: <MovieDetail movieItems={movies} />,
       },
     ],
   },

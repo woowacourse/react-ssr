@@ -1,6 +1,6 @@
 import React from "react";
 import { TMDB_BANNER_URL } from "../../../constants/tmdb.jsx";
-import round from "../../../utils/round.js";
+import round from "../../../utils/round";
 import logo from "@images/logo.png";
 import starEmpty from "@images/star_empty.png";
 
