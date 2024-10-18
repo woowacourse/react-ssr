@@ -6,7 +6,7 @@ function useMovieDetail(initialMovieDetail, id) {
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    const isServerSideRendering = String(initialMovieDetail.id) === id;
+    const isServerSideRendering = String(initialMovieDetail?.id) === id;
 
     if (isServerSideRendering) return;
 
