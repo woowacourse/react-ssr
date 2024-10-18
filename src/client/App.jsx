@@ -1,17 +1,23 @@
 import React from 'react';
-
-import Header from './components/Header';
-import Home from './components/Home';
+import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+import Home from './pages/Home';
+import Layout from './pages/Layout';
 
 function App({ movies }) {
-  return (
-    <>
-      <Header bestMovie={movies[0]} />
-      <div className="container">
-        <Home movies={movies} />
-      </div>
-    </>
-  );
+  const router = createBrowserRouter([
+    {
+      path: '/',
+      element: <Layout bestMovie={movies[0]} />,
+      children: [
+        {
+          path: '',
+          element: <Home movies={movies} />,
+        },
+      ],
+    },
+  ]);
+
+  return <RouterProvider router={router} />;
 }
 
 export default App;
