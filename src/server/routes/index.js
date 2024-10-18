@@ -1,13 +1,15 @@
-import App from "../../client/App";
 import fs from "fs";
 import path from "path";
 
 import React from "react";
 import { Router } from "express";
 import { renderToString } from "react-dom/server";
+import { StaticRouter } from "react-router-dom/server";
 
 import { FETCH_OPTIONS } from "../../constants/fetch";
 import { TMDB_MOVIE_LISTS } from "../../constants/tmdb";
+import Home from "../../client/pages/Home";
+import Footer from "../../client/components/Footer";
 
 const router = Router();
 
@@ -18,7 +20,7 @@ const loadMovies = async (url) => {
   return data.results;
 };
 
-router.use("/", async (_, res) => {
+router.use("/", async (req, res) => {
   const popularMovies = await loadMovies(TMDB_MOVIE_LISTS.popular);
 
   const initData = /*html*/ `
@@ -29,7 +31,14 @@ router.use("/", async (_, res) => {
     </script>
   `;
 
-  const renderedApp = renderToString(<App movieItems={popularMovies} />);
+  const renderedApp = renderToString(
+    <StaticRouter location={req.url}>
+      <div id="wrap">
+        <Home movieItems={popularMovies} />
+        <Footer />
+      </div>
+    </StaticRouter>
+  );
 
   const templatePath = path.resolve(__dirname, "index.html");
   const template = fs.readFileSync(templatePath, "utf8");

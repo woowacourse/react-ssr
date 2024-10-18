@@ -1,20 +1,12 @@
 import React from "react";
-import MovieItems from "./components/MovieItems";
-import TopRatedMovie from "./components/TopRatedMovie";
+import { Outlet } from "react-router-dom";
+import Footer from "./components/Footer";
 
-const getTopRateMovie = (movies) => {
-  const topRateMovie = movies.reduce((highest, movie) => {
-    return movie.vote_average > highest.vote_average ? movie : highest;
-  }, movies[0]);
-
-  return topRateMovie;
-};
-
-function App({ movieItems }) {
+function App() {
   return (
     <div id="wrap">
-      <TopRatedMovie movie={getTopRateMovie(movieItems)} />
-      <MovieItems movieItems={movieItems} />
+      <Outlet />
+      <Footer />
     </div>
   );
 }
