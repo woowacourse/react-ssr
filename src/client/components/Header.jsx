@@ -7,7 +7,7 @@ import { round } from '../utils/round';
 const TMDB_BANNER_URL =
   'https://image.tmdb.org/t/p/w1920_and_h800_multi_faces/';
 
-function Header({ bannerMovie }) {
+export default function Header({ bannerMovie }) {
   const movie = bannerMovie ?? {
     id: -1,
     title: '',
@@ -43,5 +43,3 @@ function Header({ bannerMovie }) {
     </header>
   );
 }
-
-export default Header;

@@ -1,6 +1,31 @@
 import React from 'react';
 import { hydrateRoot } from 'react-dom/client';
-import App from './App';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
-const { movies } = window.__INITIAL_DATA__;
-hydrateRoot(document.getElementById('root'), <App movies={movies ?? []} />);
+import App from './App';
+import Home from './pages/Home';
+import MovieDetail from './pages/MovieDetail';
+
+const { movies = [] } = window.__INITIAL_DATA__;
+
+const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <App movies={movies} />,
+    children: [
+      {
+        index: true,
+        element: <Home movies={movies} />,
+      },
+      {
+        path: '/detail/:id',
+        element: <MovieDetail movies={movies} />,
+      },
+    ],
+  },
+]);
+
+hydrateRoot(
+  document.getElementById('root'),
+  <RouterProvider router={router} />
+);
