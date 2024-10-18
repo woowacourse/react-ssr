@@ -7,11 +7,7 @@ const Layout = ({ bestMovie }) => {
   return (
     <>
       <Header bestMovie={bestMovie} />
-      <div className="container">
-        <main>
-          <Outlet />
-        </main>
-      </div>
+      <Outlet />
     </>
   );
 };
