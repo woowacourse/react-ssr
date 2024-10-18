@@ -15,8 +15,7 @@ import { TMDB_MOVIE_LISTS, TMDB_MOVIE_DETAIL_URL } from '../constants/index.js';
 
 const router = Router();
 
-router.get('/', async (req, res) => {
-  console.log(req.url);
+router.get('/', async (_, res) => {
   const templatePath = path.resolve(__dirname, 'index.html');
   const template = fs.readFileSync(templatePath, 'utf8');
 
@@ -42,13 +41,13 @@ router.get('/', async (req, res) => {
 });
 
 router.get('/detail/:id', async (req, res) => {
-  const { id } = req.params;
-
   const templatePath = path.resolve(__dirname, 'index.html');
   const template = fs.readFileSync(templatePath, 'utf8');
 
   const movies = await getMovies(TMDB_MOVIE_LISTS.nowPlaying);
-  const movieDetail = await getMovieDetail(TMDB_MOVIE_DETAIL_URL + id + '?language=ko-KR');
+  const movieDetail = await getMovieDetail(
+    TMDB_MOVIE_DETAIL_URL + req.params.id + '?language=ko-KR'
+  );
 
   const renderedApp = renderToString(
     <StaticRouter location={req.url}>

@@ -4,17 +4,19 @@ import Home from './Home';
 import Modal from '../components/Modal';
 import { TMDB_MOVIE_DETAIL_URL, FETCH_OPTIONS } from '../constants';
 
-function MovieDetail({ movies, movieDetail }) {
+function MovieDetail({ movies, initialMovieDetail }) {
   const { id } = useParams();
 
-  const [currentMovieDetail, setCurrentMovieDetail] = useState(movieDetail || null);
+  const [movieDetail, setMovieDetail] = useState(initialMovieDetail || null);
 
   useEffect(() => {
+    if (initialMovieDetail) return;
+
     const getMovieDetail = async () => {
       const response = await fetch(TMDB_MOVIE_DETAIL_URL + id + '?language=ko-KR', FETCH_OPTIONS);
       const data = await response.json();
 
-      setCurrentMovieDetail(data);
+      setMovieDetail(data);
     };
 
     getMovieDetail();
@@ -23,7 +25,7 @@ function MovieDetail({ movies, movieDetail }) {
   return (
     <>
       <Home movies={movies} />
-      {currentMovieDetail && <Modal movieDetail={currentMovieDetail} />}
+      {movieDetail && <Modal movieDetail={movieDetail} />}
     </>
   );
 }
