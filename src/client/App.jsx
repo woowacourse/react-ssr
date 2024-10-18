@@ -1,20 +1,24 @@
 import React from "react";
-import Header from "./components/Header/Header";
-import MovieList from "./components/MovieList";
+import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
+import Home from "./Page/Home";
+import MovieDetailModal from "./components/Modal/MovieDetailModal";
 
-function App({ bestMovie, movies }) {
+function App({ movies, movieDetail }) {
+  const location = useLocation();
+  const state = location.state?.backgroundLocation || { pathname: "/" };
+
+  const isDetailPage = location.pathname.startsWith("/detail/");
+
   return (
     <>
-      <Header bestMovie={bestMovie} />
-      <div className="container">
-        <main>
-          <section>
-          <ul className="thumbnail-list">
-            <MovieList movies={movies}/>
-            </ul>
-          </section>
-        </main>
-      </div>
+      <Routes location={isDetailPage ? state : location}>
+        <Route path="/" element={<Home bestMovie={movies[0]} movies={movies} />} />
+        <Route path="*" element={<p>404 - Page Not Found</p>} />
+      </Routes>
+
+      {isDetailPage && (
+        <MovieDetailModal movie={movieDetail} />
+      )}
     </>
   );
 }
