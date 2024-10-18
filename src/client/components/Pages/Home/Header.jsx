@@ -1,8 +1,15 @@
 import React from "react";
-import { TMDB_BANNER_URL } from "../../server/constant";
+import { TMDB_BANNER_URL } from "../../../../server/constant";
+import { useNavigate } from "react-router-dom";
 
 const Header = ({ bestMovie }) => {
   const backgroundContainerUrl = TMDB_BANNER_URL + bestMovie.poster_path;
+
+  const navigate = useNavigate();
+
+  const handleMovieItemClick = (id) => {
+    navigate(`/detail/${id}`);
+  };
 
   return (
     <header>
@@ -23,7 +30,12 @@ const Header = ({ bestMovie }) => {
               </span>
             </div>
             <div className="title">{bestMovie.title}</div>
-            <button className="primary detail">자세히 보기</button>
+            <button
+              className="primary detail"
+              onClick={() => handleMovieItemClick(bestMovie.id)}
+            >
+              자세히 보기
+            </button>
           </div>
         </div>
       </div>
