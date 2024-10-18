@@ -4,7 +4,7 @@ import Home from './pages/Home';
 import MovieDetail from './pages/MovieDetail';
 import Layout from './pages/Layout';
 
-function App({ movies }) {
+function App({ movies, movieDetail }) {
   const router = createBrowserRouter([
     {
       path: '/',
@@ -16,7 +16,7 @@ function App({ movies }) {
         },
         {
           path: 'detail/:id',
-          element: <MovieDetail movies={movies} />,
+          element: <MovieDetail movies={movies} movieDetail={movieDetail} />,
         },
       ],
     },
