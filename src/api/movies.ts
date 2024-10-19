@@ -10,9 +10,8 @@ const FETCH_OPTIONS = {
 
 export const fetchMovies = async () => {
   const response = await fetch(POPULAR, FETCH_OPTIONS);
-  const results = await response.json().then((data) => data.results);
 
-  return results;
+  return await response.json().then((data) => data.results);
 };
 
 export const fetchMovieDetail = async (id) => {
@@ -22,7 +21,6 @@ export const fetchMovieDetail = async (id) => {
   const url = `${BASE_URL}/${id}?${params}`;
 
   const response = await fetch(url, FETCH_OPTIONS);
-  const results = await response.json().then((data) => data);
 
-  return results;
+  return await response.json();
 };

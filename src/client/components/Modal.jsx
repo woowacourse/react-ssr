@@ -1,20 +1,20 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
+import { round } from "../../utils/round";
 import CloseButton from "@images/modal_button_close.png";
 import StarEmpty from "@images/star_empty.png";
-import { round } from "../../utils/round";
-import { useNavigate } from "react-router-dom";
 
 const Modal = ({ movieDetail }) => {
+  const navigate = useNavigate();
+
   const { poster_path, title, release_date, vote_average, overview, genres } =
     movieDetail;
-
   const genresToString = genres
     ?.map((genre) => {
       return genre.name;
     })
     .join(", ");
   const rate = round(vote_average, 1);
-  const navigate = useNavigate();
 
   const onCloseButtonClick = () => {
     navigate("/", { replace: true });
