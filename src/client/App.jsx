@@ -1,10 +1,15 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { fetchMovieList } from '../api/movieRequests.js';
+import { TMDB_BANNER_URL } from '../api/constants.js';
 import MovieList from './components/MovieList.jsx';
 import Header from './components/Header.jsx';
 import Footer from './components/Footer.jsx';
-import { TMDB_BANNER_URL } from '../api/constants.js';
 
-function App({ movieList }) {
+export default function App({ movieList }) {
+  if (!movieList || movieList.length === 0) {
+    return <div>Loading...</div>;
+  }
+
   const bestMovie = movieList[0];
 
   return (
@@ -19,5 +24,3 @@ function App({ movieList }) {
     </>
   );
 }
-
-export default App;
