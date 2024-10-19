@@ -4,7 +4,7 @@ import StarEmpty from "@images/star_empty.png";
 import { round } from "../../utils/round";
 import { useNavigate } from "react-router-dom";
 
-const Modal = ({ movieDetail, toggleModal }) => {
+const Modal = ({ movieDetail }) => {
   const { poster_path, title, release_date, vote_average, overview, genres } =
     movieDetail;
 
@@ -17,7 +17,6 @@ const Modal = ({ movieDetail, toggleModal }) => {
   const navigate = useNavigate();
 
   const onCloseButtonClick = () => {
-    toggleModal();
     navigate("/", { replace: true });
   };
 

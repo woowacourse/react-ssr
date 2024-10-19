@@ -14,9 +14,7 @@ function App({ movies, movieDetail, showModal }) {
       <div id='wrap'>
         <Home movies={movies} toggleModal={toggleModal} />
       </div>
-      {modalActivated && (
-        <Modal movieDetail={movieDetail} toggleModal={toggleModal} />
-      )}
+      {modalActivated && <Modal movieDetail={movieDetail} />}
     </>
   );
 }
