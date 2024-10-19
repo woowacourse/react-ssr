@@ -13,11 +13,11 @@ const loadTemplate = () => {
   return fs.readFileSync(templatePath, 'utf8');
 };
 
-export const renderHome = async (req) => {
+export const renderHome = async (location) => {
   const { results: movies } = await fetchMovies.popular();
 
   const renderedApp = renderToString(
-    <StaticRouter location={req.url}>
+    <StaticRouter location={location}>
       <App movies={movies} movieDetail={null} />
     </StaticRouter>
   );
@@ -37,12 +37,12 @@ export const renderHome = async (req) => {
     .replace('<div id="root"></div>', `<div id="root">${renderedApp}</div>`);
 };
 
-export const renderMovieDetail = async (req, id) => {
-  const { results: movies } = await fetchMovies.popular(id);
+export const renderMovieDetail = async (location, id) => {
+  const { results: movies } = await fetchMovies.popular();
   const movieDetail = await fetchMovies.detail(id);
 
   const renderedApp = renderToString(
-    <StaticRouter location={req.url}>
+    <StaticRouter location={location}>
       <App movies={movies} movieDetail={movieDetail} />
     </StaticRouter>
   );

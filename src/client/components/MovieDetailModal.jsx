@@ -1,6 +1,6 @@
-import React from 'react';
 import CloseButton from '@images/modal_button_close.png';
 import StarEmpty from '@images/star_empty.png';
+import React from 'react';
 import { round } from '../utils/round';
 
 export default function MovieDetailModal({

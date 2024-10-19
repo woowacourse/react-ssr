@@ -1,9 +1,8 @@
 import { useEffect, useState } from 'react';
 import { round } from '../../utils/round';
 
-import fetchMovies from '@shared/apis/movies';
 import { TMDB_ORIGINAL_URL } from '@shared/apis/constants';
-import isServer from '@shared/isServer';
+import fetchMovies from '@shared/apis/movies';
 
 const DtoToMovieDetail = (dto) => ({
   title: dto.title,
@@ -17,7 +16,7 @@ const DtoToMovieDetail = (dto) => ({
 export default function useMovieDetail({ initialMovieDetail, id }) {
   const [isLoading, setIsLoading] = useState(false);
   const [movieDetail, setMovieDetail] = useState(
-    isServer() ? DtoToMovieDetail(initialMovieDetail) : {}
+    DtoToMovieDetail(initialMovieDetail)
   );
 
   useEffect(() => {

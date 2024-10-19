@@ -6,7 +6,7 @@ import { Outlet } from 'react-router-dom';
 export default function Layout({ movies, movieDetail }) {
   return (
     <>
-      <Header movie={movies[0]} />
+      <Header bannerMovie={movies[0]} />
       <div className="container">
         <Outlet context={{ movies, movieDetail }} />
       </div>
