@@ -6,22 +6,17 @@ import starEmptyImage from "@images/star_empty.png";
 
 export default function MovieList({ movies }) {
   return (
-    <div className="container">
-      <main>
-        <section>
-          <h2>지금 인기 있는 영화</h2>
-          {movies && (
-            <ul className="thumbnail-list">
-              {movies.map((movie) => (
-                <li key={movie.id}>
-                  <MovieItem movie={movie} />
-                </li>
-              ))}
-            </ul>
-          )}
-        </section>
-      </main>
-    </div>
+    <>
+      {movies && (
+        <ul className="thumbnail-list">
+          {movies.map((movie) => (
+            <li key={movie.id}>
+              <MovieItem movie={movie} />
+            </li>
+          ))}
+        </ul>
+      )}
+    </>
   );
 }
 
