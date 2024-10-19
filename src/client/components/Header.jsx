@@ -4,7 +4,7 @@ import Logo from '@images/logo.png';
 
 import { round } from '../utils/round';
 import { useNavigate } from 'react-router-dom';
-import routes from '../router/routes';
+import ROUTES from '../router/routes';
 
 const TMDB_BANNER_URL =
   'https://image.tmdb.org/t/p/w1920_and_h800_multi_faces/';
@@ -22,7 +22,7 @@ export default function Header({ bannerMovie }) {
 
   const navigate = useNavigate();
   const moveToDetail = () => {
-    navigate(routes.movieDetail(id));
+    navigate(ROUTES.movieDetail(id));
   };
 
   return (

@@ -4,13 +4,13 @@ import PATH from '@shared/paths';
 
 const router = Router();
 
-router.get(PATH.home, async (_, res) => {
-  const homePage = await renderHome();
+router.get(PATH.home, async (req, res) => {
+  const homePage = await renderHome(req);
   res.send(homePage);
 });
 
 router.get(PATH.movieDetail, async (req, res) => {
-  const movieDetailPage = await renderMovieDetail(req.params.id);
+  const movieDetailPage = await renderMovieDetail(req, req.params.id);
   res.send(movieDetailPage);
 });
 

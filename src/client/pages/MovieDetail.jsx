@@ -7,7 +7,8 @@ import useMovieDetail from '../hooks/apis/useMovieDetail';
 import routes from '../router/routes';
 
 export default function MovieDetail() {
-  const { movies, movieDetail: initialMovieDetail } = useOutletContext();
+  const { movies: initialMovies, movieDetail: initialMovieDetail } =
+    useOutletContext();
 
   const [isOpen, setIsOpen] = useState(true);
   const { id } = useParams();
@@ -21,7 +22,7 @@ export default function MovieDetail() {
 
   return (
     <>
-      <Home movies={movies} />
+      <Home movies={initialMovies} />
       {isOpen && !isLoading && (
         <MovieDetailModal movieDetail={movieDetail} close={handleCloseModal} />
       )}
