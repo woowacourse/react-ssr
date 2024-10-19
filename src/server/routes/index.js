@@ -11,6 +11,7 @@ import {
 import routes from "../../common/routes";
 
 // --------------------------------------
+// @remix-run/express에서 제공하는 fetch request 생성 함수
 function createFetchRequest(req, res) {
   let origin = `${req.protocol}://${req.get("host")}`;
   // Note: This had to take originalUrl into account for presumably vite's proxying
@@ -49,15 +50,22 @@ function createFetchRequest(req, res) {
 
 const router = Router();
 
-router.use("/", async (req, res) => {
-  const { query, dataRoutes } = createStaticHandler(routes);
+// 각 라우트에 필요한 데이터 로딩 함수와 라우트 정보를 생성
+const { query, dataRoutes } = createStaticHandler(routes);
+
+router.use("*", async (req, res) => {
+  // express reuqest를 react router에서 처리할 수 있는 fetch request로 변환
   const fetchRequest = createFetchRequest(req, res);
+  // query로 request를 처리, 처리 결과를 context에 저장
   const context = await query(fetchRequest);
   if (context instanceof Response) {
     throw context;
   }
+
+  // 라우트 정보와, 요청 처리 결과를 이용해 static router 생성
   const router = createStaticRouter(dataRoutes, context);
   const renderedApp = renderToString(
+    // 라우트 정보, 요청 처리 결과로 리액트 앱 렌더링
     <StaticRouterProvider router={router} context={context} />
   );
 
