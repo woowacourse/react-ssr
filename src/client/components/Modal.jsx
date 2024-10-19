@@ -3,7 +3,7 @@ import CloseButton from "@images/modal_button_close.png";
 import StarEmpty from "@images/star_empty.png";
 import { round } from "../../utils/round";
 
-const Modal = ({ movieDetail }) => {
+const Modal = ({ movieDetail, onCloseButtonClick }) => {
   const { poster_path, title, release_date, vote_average, overview, genres } =
     movieDetail;
   const genresToString = genres
@@ -12,10 +12,6 @@ const Modal = ({ movieDetail }) => {
     })
     .join(", ");
   const rate = round(vote_average, 1);
-
-  const onCloseButtonClick = () => {
-    console.log("click");
-  };
 
   return (
     <div className='modal-background active' id='modalBackground'>

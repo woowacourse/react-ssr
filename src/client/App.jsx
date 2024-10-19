@@ -1,11 +1,23 @@
-import React from 'react';
-import Home from './components/Home';
+import React, { useState } from "react";
+import Home from "./components/Home";
+import Modal from "./components/Modal";
 
-function App({ movies }) {
+function App({ movies, movieDetail, showModal }) {
+  const [modalActivated, setModalActivated] = useState(showModal);
+
+  const toggleModal = () => {
+    setModalActivated(!modalActivated);
+  };
+
   return (
-    <div>
-      <Home movies={movies} />
-    </div>
+    <>
+      <div id='wrap'>
+        <Home movies={movies} />
+      </div>
+      {modalActivated && (
+        <Modal movieDetail={movieDetail} onCloseButtonClick={toggleModal} />
+      )}
+    </>
   );
 }
 

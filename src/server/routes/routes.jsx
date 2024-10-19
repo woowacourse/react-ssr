@@ -2,9 +2,7 @@ import React from "react";
 import { json, useLoaderData } from "react-router-dom";
 
 import App from "../../client/App.jsx";
-import MovieItem from "../../client/components/MovieItem.jsx";
 import { fetchMovieDetail, fetchMovies } from "../../api/movies.ts";
-import Modal from "../../client/components/Modal.jsx";
 
 export const routes = [
   {
@@ -17,7 +15,7 @@ export const routes = [
     Component() {
       const movies = useLoaderData();
 
-      return <App movies={movies} />;
+      return <App movies={movies} movieDetail={{}} showModal={false} />;
     },
   },
   // {
@@ -37,14 +35,15 @@ export const routes = [
     path: "/detail/:id",
     loader: async ({ params }) => {
       const { id } = params;
+      const movies = await fetchMovies();
       const movieDetail = await fetchMovieDetail(id);
 
-      return json(movieDetail);
+      return json({ movies, movieDetail });
     },
     Component() {
-      const movieDetail = useLoaderData();
+      const { movies, movieDetail } = useLoaderData();
 
-      return <Modal movieDetail={movieDetail} />;
+      return <App movies={movies} movieDetail={movieDetail} showModal={true} />;
     },
   },
 ];
