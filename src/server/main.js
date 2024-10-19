@@ -3,7 +3,6 @@ import "./config.js";
 import express from "express";
 import path from "path";
 import React from "react";
-import movieRouter from "./routes/index.js";
 import { fetchMovieDetail, fetchPopularMovies } from "../client/api.js";
 import { renderToString } from "react-dom/server";
 import MoviePage from "../client/pages/MoviePage.jsx";
