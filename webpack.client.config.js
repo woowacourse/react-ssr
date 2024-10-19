@@ -6,10 +6,10 @@ module.exports = {
   mode: 'development',
   entry: './src/client/main.js',
   output: {
-    path: path.resolve('dist/client'),
+    path: path.resolve('dist'),
     filename: 'bundle.js',
     clean: true,
-    publicPath: '/',
+    publicPath: '/static/',
   },
   module: {
     rules: [
