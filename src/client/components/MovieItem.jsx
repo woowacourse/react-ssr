@@ -2,14 +2,13 @@ import React from "react";
 import { round } from "../../utils/round.js";
 import { Link } from "react-router-dom";
 
-const MovieItem = ({ movie }) => {
-  const TMDB_THUMBNAIL_URL =
-    "https://media.themoviedb.org/t/p/w440_and_h660_face/";
+const MovieItem = ({ movie, toggleModal }) => {
+  const TMDB_THUMBNAIL_URL = "https://image.tmdb.org/t/p/w440_and_h660_face";
 
   const thumbnailFullUrl = TMDB_THUMBNAIL_URL + "/" + movie.poster_path;
   return (
     <Link to={`/detail/${movie.id}`}>
-      <li className='item'>
+      <li className='item' onClick={toggleModal}>
         <img className='thumbnail' src={thumbnailFullUrl} alt={movie.title} />
         <div className='item-desc'>
           <div className='rate'>

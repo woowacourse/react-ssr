@@ -12,10 +12,10 @@ function App({ movies, movieDetail, showModal }) {
   return (
     <>
       <div id='wrap'>
-        <Home movies={movies} />
+        <Home movies={movies} toggleModal={toggleModal} />
       </div>
       {modalActivated && (
-        <Modal movieDetail={movieDetail} onCloseButtonClick={toggleModal} />
+        <Modal movieDetail={movieDetail} toggleModal={toggleModal} />
       )}
     </>
   );

@@ -14,6 +14,7 @@ export const routes = [
     },
     Component() {
       const movies = useLoaderData();
+      console.log("home");
 
       return <App movies={movies} movieDetail={{}} showModal={false} />;
     },
@@ -42,6 +43,7 @@ export const routes = [
     },
     Component() {
       const { movies, movieDetail } = useLoaderData();
+      console.log("detail");
 
       return <App movies={movies} movieDetail={movieDetail} showModal={true} />;
     },

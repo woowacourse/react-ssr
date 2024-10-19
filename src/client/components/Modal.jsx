@@ -2,16 +2,24 @@ import React from "react";
 import CloseButton from "@images/modal_button_close.png";
 import StarEmpty from "@images/star_empty.png";
 import { round } from "../../utils/round";
+import { useNavigate } from "react-router-dom";
 
-const Modal = ({ movieDetail, onCloseButtonClick }) => {
+const Modal = ({ movieDetail, toggleModal }) => {
   const { poster_path, title, release_date, vote_average, overview, genres } =
     movieDetail;
+
   const genresToString = genres
     ?.map((genre) => {
       return genre.name;
     })
     .join(", ");
   const rate = round(vote_average, 1);
+  const navigate = useNavigate();
+
+  const onCloseButtonClick = () => {
+    toggleModal();
+    navigate("/", { replace: true });
+  };
 
   return (
     <div className='modal-background active' id='modalBackground'>
@@ -26,7 +34,7 @@ const Modal = ({ movieDetail, onCloseButtonClick }) => {
         <div className='modal-container'>
           <div className='modal-image'>
             <img
-              src={`https://image.tmdb.org/t/p/w1920_and_h800_multi_faces${poster_path}`}
+              src={`https://image.tmdb.org/t/p/w440_and_h660_face/${poster_path}`}
             />
           </div>
           <div className='modal-description'>
