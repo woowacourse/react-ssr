@@ -9,8 +9,9 @@ import {
   StaticRouterProvider,
 } from "react-router-dom/server";
 
-import Home from "../../client/components/Home";
+import HomePage from "../../client/pages/Home";
 import { getMovies, TMDB_MOVIE_LISTS } from "../api/tmdb";
+import DetailPage from "../../client/pages/Detail";
 
 // --------------------------------------
 function createFetchRequest(req, res) {
@@ -57,11 +58,11 @@ router.use("/", async (req, res) => {
   const { query, dataRoutes } = createStaticHandler([
     {
       path: "/",
-      element: <Home movies={movies} />,
+      element: <HomePage movies={movies} />,
     },
     {
       path: "/detail/:id",
-      element: <Home movies={movies} />,
+      element: <DetailPage movies={movies} />,
     },
   ]);
   const fetchRequest = createFetchRequest(req, res);

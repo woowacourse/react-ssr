@@ -1,17 +1,18 @@
 import React from "react";
-import Home from "./components/Home";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import HomePage from "./pages/Home";
+import DetailPage from "./pages/Detail";
 
 const { movies } = window.__INITIAL_DATA__;
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Home movies={movies} />,
+    element: <HomePage movies={movies} />,
   },
   {
     path: "/detail/:id",
-    element: <Home movies={movies} />,
+    element: <DetailPage movies={movies} />,
   },
 ]);
 
