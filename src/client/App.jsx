@@ -1,8 +1,8 @@
 import React from "react";
-import MovieList from "./components/MovieList";
+import Home from "./components/Home";
 
 function App({ movies }) {
-  return <MovieList movies={movies} />;
+  return <Home movies={movies} />;
 }
 
 export default App;
