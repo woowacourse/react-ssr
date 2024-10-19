@@ -5,21 +5,22 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import App from './App';
 import Home from './pages/Home';
 import MovieDetail from './pages/MovieDetail';
+import PATH from '@shared/paths';
 
-const { movies = [] } = window.__INITIAL_DATA__;
+const { movies = [], movieDetail } = window.__INITIAL_DATA__;
 
 const router = createBrowserRouter([
   {
-    path: '/',
-    element: <App movies={movies} />,
+    path: PATH.home,
+    element: <App movies={movies} movieDetail={movieDetail} />,
     children: [
       {
         index: true,
-        element: <Home movies={movies} />,
+        element: <Home />,
       },
       {
-        path: '/detail/:id',
-        element: <MovieDetail movies={movies} />,
+        path: PATH.movieDetail,
+        element: <MovieDetail />,
       },
     ],
   },

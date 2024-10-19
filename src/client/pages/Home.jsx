@@ -1,7 +1,10 @@
 import React from 'react';
 import MovieItem from '../components/MovieItem';
+import { useOutletContext } from 'react-router-dom';
 
-export default function Home({ movies }) {
+export default function Home() {
+  const { movies } = useOutletContext();
+
   return (
     <main>
       <section>
