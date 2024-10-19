@@ -1,6 +1,12 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 function MovieList({ movieList }) {
+  const navigate = useNavigate();
+  const handleNavigateToDetail = (id) => {
+    navigate(`/detail/${id}`);
+  };
+
   return (
     <div className="container">
       <main>
@@ -9,7 +15,7 @@ function MovieList({ movieList }) {
           <ul className="thumbnail-list" id="thumbnail-list">
             {movieList.length > 0 ? (
               movieList.map(({ id, title, poster_path, vote_average }) => (
-                <li key={id}>
+                <li key={id} onClick={() => handleNavigateToDetail(id)}>
                   <div className="item">
                     <img
                       className="thumbnail"

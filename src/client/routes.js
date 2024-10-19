@@ -3,7 +3,7 @@ import App from './App';
 import Detail from './components/Detail';
 
 const initialData = window.__INITIAL_DATA__;
-const { movieList } = initialData.movieList ?? [];
+const { movieList, movieDetail } = initialData ?? [];
 
 const routes = [
   {
@@ -12,7 +12,7 @@ const routes = [
   },
   {
     path: '/detail/:id',
-    element: <Detail />,
+    element: <Detail movieDetail={movieDetail} />,
   },
 ];
 

@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from 'react';
-import { fetchMovieList } from '../api/movieRequests.js';
+import React from 'react';
 import { TMDB_BANNER_URL } from '../api/constants.js';
 import MovieList from './components/MovieList.jsx';
 import Header from './components/Header.jsx';
