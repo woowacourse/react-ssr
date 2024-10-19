@@ -4,13 +4,21 @@ import useMovieDetailModal from "../../hooks/useMovieDetailModal";
 import CloseButton from "@images/modal_button_close.png";
 import StarEmpty from "@images/star_empty.png";
 import round from "../../../utils/round";
+import { useNavigate } from "react-router-dom";
 
 function MovieDetailModal({ serverMovieDetail }) {
-  const { modalActivated, movieDetail } = useMovieDetailModal(serverMovieDetail);
+  const navigate = useNavigate();
+
+  const { modalActivated, movieDetail, toggleModal } = useMovieDetailModal(serverMovieDetail);
 
   if (!movieDetail) {
     return null;
   }
+
+  const closeModalAndNavigateHome = () => {
+    toggleModal();
+    navigate("/");
+  };
 
   const { title, bannerUrl, releaseYear, description } = movieDetail;
   const genres = movieDetail?.genres?.join(", ");
@@ -19,7 +27,7 @@ function MovieDetailModal({ serverMovieDetail }) {
   return (
     <div className={`modal-background ${modalActivated && "active"}`} id="modalBackground">
       <div className="modal">
-        <button className="close-modal" id="closeModal">
+        <button className="close-modal" id="closeModal" onClick={closeModalAndNavigateHome}>
           <img src={CloseButton} />
         </button>
         <div className="modal-container">
