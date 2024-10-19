@@ -41,7 +41,7 @@ const useMovieDetailModal = (serverMovieDetail) => {
   };
 
   useEffect(() => {
-    if (typeof serverMovieDetail !== "undefined") {
+    if (typeof serverMovieDetail !== "undefined" && serverMovieDetail.id === id) {
       setterMovieDetail(serverMovieDetail);
       return;
     }
