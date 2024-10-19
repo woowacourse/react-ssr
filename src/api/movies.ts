@@ -1,11 +1,10 @@
-const BASE_URL = 'https://api.themoviedb.org/3/movie';
-const POPULAR = BASE_URL + '/popular?language=ko-KR&page=1';
-
+const BASE_URL = "https://api.themoviedb.org/3/movie";
+const POPULAR = BASE_URL + "/popular?language=ko-KR&page=1";
 const FETCH_OPTIONS = {
-  method: 'GET',
+  method: "GET",
   headers: {
-    accept: 'application/json',
-    Authorization: 'Bearer ' + process.env.TMDB_TOKEN,
+    accept: "application/json",
+    Authorization: "Bearer " + process.env.TMDB_TOKEN,
   },
 };
 
@@ -18,7 +17,7 @@ export const fetchMovies = async () => {
 
 export const fetchMovieDetail = async (id) => {
   const params = new URLSearchParams({
-    language: 'ko-KR',
+    language: "ko-KR",
   });
   const url = `${BASE_URL}/${id}?${params}`;
 
