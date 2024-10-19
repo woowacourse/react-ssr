@@ -1,6 +1,7 @@
 import React from "react";
 import round from "../../../utils/round";
 import starEmpty from "@images/star_empty.png";
+import { useNavigate } from "react-router-dom";
 
 const TMDB_THUMBNAIL_URL =
   "https://media.themoviedb.org/t/p/w440_and_h660_face/";
@@ -10,10 +11,17 @@ const getThumbnailUrl = (movie) => {
 };
 
 export default function MovieList({ movies }) {
+  const navigate = useNavigate();
+
   return (
     <ul id="movie-list" className="thumbnail-list">
       {movies.map(({ id, title, vote_average, poster_path }) => (
-        <li key={id}>
+        <li
+          key={id}
+          onClick={() => {
+            navigate(`/detail/${id}`);
+          }}
+        >
           <a>
             <div className="item">
               <img

@@ -16,12 +16,7 @@ app.use("/static", (req, res) => {
 });
 
 // 메인 페이지 라우트 (리액트 앱 렌더링)
-app.get("/", movieRouter);
-
-// 그 외 모든 경로에 대한 404 처리
-app.use((req, res) => {
-  res.status(404).send("Page not found");
-});
+app.get("*", movieRouter);
 
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
