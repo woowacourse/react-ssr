@@ -8,10 +8,7 @@ import {
   createStaticRouter,
   StaticRouterProvider,
 } from "react-router-dom/server";
-
-import HomePage from "../../client/pages/Home";
-import { getMovies, TMDB_MOVIE_LISTS } from "../api/tmdb";
-import DetailPage from "../../client/pages/Detail";
+import routes from "../../common/routes";
 
 // --------------------------------------
 function createFetchRequest(req, res) {
@@ -53,18 +50,7 @@ function createFetchRequest(req, res) {
 const router = Router();
 
 router.use("/", async (req, res) => {
-  const movies = await getMovies(TMDB_MOVIE_LISTS.nowPlaying);
-
-  const { query, dataRoutes } = createStaticHandler([
-    {
-      path: "/",
-      element: <HomePage movies={movies} />,
-    },
-    {
-      path: "/detail/:id",
-      element: <DetailPage movies={movies} />,
-    },
-  ]);
+  const { query, dataRoutes } = createStaticHandler(routes);
   const fetchRequest = createFetchRequest(req, res);
   const context = await query(fetchRequest);
   if (context instanceof Response) {
@@ -77,18 +63,11 @@ router.use("/", async (req, res) => {
 
   const templatePath = path.resolve(__dirname, "index.html");
   const template = fs.readFileSync(templatePath, "utf8");
-  const renderedHTML = template
-    .replace('<div id="root"></div>', `<div id="root">${renderedApp}</div>`)
-    .replace(
-      "<!--${INIT_DATA_AREA}-->",
-      /*html*/ `
-      <script>
-        window.__INITIAL_DATA__ = {
-          movies: ${JSON.stringify(movies)}
-        }
-      </script>
-    `
-    );
+  const renderedHTML = template.replace(
+    '<div id="root"></div>',
+    `<div id="root">${renderedApp}</div>`
+  );
+
   res.send(renderedHTML);
 });
 

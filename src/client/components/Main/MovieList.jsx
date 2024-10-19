@@ -2,13 +2,7 @@ import React from "react";
 import round from "../../../utils/round";
 import starEmpty from "@images/star_empty.png";
 import { useNavigate } from "react-router-dom";
-
-const TMDB_THUMBNAIL_URL =
-  "https://media.themoviedb.org/t/p/w440_and_h660_face/";
-
-const getThumbnailUrl = (movie) => {
-  return TMDB_THUMBNAIL_URL + movie.poster_path;
-};
+import { getThumbnailUrl } from "../../../common/api/tmdb";
 
 export default function MovieList({ movies }) {
   const navigate = useNavigate();
@@ -19,25 +13,24 @@ export default function MovieList({ movies }) {
         <li
           key={id}
           onClick={() => {
+            console.log(id);
             navigate(`/detail/${id}`);
           }}
         >
-          <a>
-            <div className="item">
-              <img
-                className="thumbnail"
-                src={getThumbnailUrl({ poster_path })}
-                alt={title}
-              />
-              <div className="item-desc">
-                <p className="rate">
-                  <img src={starEmpty} className="star" />
-                  <span>{round(vote_average, 1)}</span>
-                </p>
-                <strong>{title}</strong>
-              </div>
+          <div className="item">
+            <img
+              className="thumbnail"
+              src={getThumbnailUrl({ poster_path })}
+              alt={title}
+            />
+            <div className="item-desc">
+              <p className="rate">
+                <img src={starEmpty} className="star" />
+                <span>{round(vote_average, 1)}</span>
+              </p>
+              <strong>{title}</strong>
             </div>
-          </a>
+          </div>
         </li>
       ))}
     </ul>

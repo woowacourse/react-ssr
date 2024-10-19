@@ -1,13 +1,7 @@
 import React from "react";
 import logo from "@images/logo.png";
 import starEmpty from "@images/star_empty.png";
-
-const TMDB_BANNER_URL =
-  "https://image.tmdb.org/t/p/w1920_and_h800_multi_faces/";
-
-const getBackgroundImageUrl = (movie) => {
-  return TMDB_BANNER_URL + movie.backdrop_path;
-};
+import { getBackgroundImageUrl } from "../../common/api/tmdb";
 
 export default function Header({ movie }) {
   return (
