@@ -19,7 +19,7 @@ export const fetchNowPlayingMovies = async () => {
 // 영화 상세 정보
 export const fetchMovieDetail = async (movieId) => {
   try {
-    const response = await fetch(BASE_URL + movieId, FETCH_OPTIONS);
+    const response = await fetch(`${BASE_URL}/${movieId}`, FETCH_OPTIONS);
     const data = await response.json();
 
     return data;
