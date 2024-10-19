@@ -7,7 +7,7 @@ import MovieDetail from "./pages/MovieDetail";
 
 const initialData = window.__INITIAL_DATA__;
 
-const { movies } = initialData;
+const { movies, movieDetail } = initialData;
 
 const router = createBrowserRouter([
   {
@@ -20,7 +20,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/detail/:id",
-        element: <MovieDetail movieItems={movies} />,
+        element: <MovieDetail movieItems={movies} serverMovieDetail={movieDetail} />,
       },
     ],
   },

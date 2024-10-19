@@ -14,8 +14,7 @@ app.use("/static", (req, res) => {
   res.status(404).send("Resource not found");
 });
 
-// 메인 페이지 라우트 (React 앱 렌더링)
-app.get("/", movieRouter);
+app.use("/", movieRouter);
 
 // 그 외 모든 경로에 대한 404 처리
 app.use((req, res) => {

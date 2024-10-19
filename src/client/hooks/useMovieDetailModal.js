@@ -4,7 +4,7 @@ import { FETCH_OPTIONS } from "../../constants/fetch";
 import { useEffect, useState } from "react";
 import round from "../../utils/round";
 
-const useMovieDetailModal = () => {
+const useMovieDetailModal = (serverMovieDetail) => {
   const { id } = useParams();
 
   const [modalActivated, setModalActivated] = useState(true);
@@ -26,8 +26,10 @@ const useMovieDetailModal = () => {
 
   const updateMovieDetail = async (id) => {
     const movieDetail = await loadMovieDetail(id);
-    console.log(movieDetail);
+    setterMovieDetail(movieDetail);
+  };
 
+  const setterMovieDetail = (movieDetail) => {
     setMovieDetail({
       title: movieDetail.title,
       bannerUrl: TMDB_ORIGINAL_URL + movieDetail.poster_path,
@@ -39,6 +41,11 @@ const useMovieDetailModal = () => {
   };
 
   useEffect(() => {
+    if (typeof serverMovieDetail !== "undefined") {
+      setterMovieDetail(serverMovieDetail);
+      return;
+    }
+
     updateMovieDetail(id);
   }, [id]);
 

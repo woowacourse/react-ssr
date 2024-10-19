@@ -5,12 +5,12 @@ import TopRatedMovie from "../components/TopRatedMovie";
 import getTopRateMovie from "../../utils/getTopRateMovie";
 import MovieDetailModal from "../components/MovieDetailModal";
 
-const MovieDetail = ({ movieItems }) => {
+const MovieDetail = ({ movieItems, serverMovieDetail }) => {
   return (
     <>
       <TopRatedMovie movie={getTopRateMovie(movieItems)} />
       <MovieItems movieItems={movieItems} />
-      <MovieDetailModal />
+      <MovieDetailModal serverMovieDetail={serverMovieDetail} />
     </>
   );
 };

@@ -5,8 +5,8 @@ import CloseButton from "@images/modal_button_close.png";
 import StarEmpty from "@images/star_empty.png";
 import round from "../../../utils/round";
 
-function MovieDetailModal() {
-  const { modalActivated, movieDetail } = useMovieDetailModal();
+function MovieDetailModal({ serverMovieDetail }) {
+  const { modalActivated, movieDetail } = useMovieDetailModal(serverMovieDetail);
 
   if (!movieDetail) {
     return null;
