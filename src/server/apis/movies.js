@@ -1,5 +1,5 @@
 import { round } from "../../client/utils.js";
-import { TMDB_API_URL, TMDB_RESOURCE, FETCH_OPTIONS } from "../constants.js";
+import { TMDB_API_URL, TMDB_RESOURCE, FETCH_OPTIONS } from "./endpoints.js";
 
 async function fetchMovieList(listType) {
   const fetchURL =
