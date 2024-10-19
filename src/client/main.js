@@ -1,10 +1,11 @@
-import React from 'react';
-import { hydrateRoot } from 'react-dom/client';
-import App from './App';
+import React from "react";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { hydrateRoot } from "react-dom/client";
+import { routes } from "../server/routes/routes";
 
-const initialData = window.__INITIAL_DATA__;
+const router = createBrowserRouter(routes);
 
 hydrateRoot(
-  document.getElementById('root'),
-  <App movies={initialData.popularMovies} />
+  document.getElementById("root"),
+  <RouterProvider router={router} />
 );
