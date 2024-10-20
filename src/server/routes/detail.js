@@ -17,7 +17,7 @@ export const renderMovieDetailModal = async (template, movieId) => {
       renderMovieDetailModal(movieDetail)
     );
 
-    template = renderMoviesDetailPage(template, movieDetail);
+    return renderMoviesDetailPage;
   } catch (err) {
     throw new Error("영화 디테일 모달 생성에 실패했습니다.");
   }
