@@ -27,7 +27,7 @@ const Header = ({ bestMovie }) => {
                 src={starEmptyImage}
                 className="star"
               />
-              <span className="rate-value">{bestMovie.vote_average}</span>
+              <span className="rate-value">{Number(bestMovie.vote_average).toFixed(1)}</span>
             </div>
             <div className="title">{bestMovie.title}</div>
             <button className="primary detail">자세히 보기</button>
