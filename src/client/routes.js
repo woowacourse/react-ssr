@@ -1,5 +1,4 @@
 import React from "react";
-import { createBrowserRouter } from "react-router-dom";
 
 import App from "./App";
 import MoviePage from "./pages/MoviePage";
@@ -7,7 +6,7 @@ import MovieDetailPage from "./pages/MovieDetailPage";
 
 const { movies, movie } = window.__INITIAL_DATA__ || {};
 
-const router = createBrowserRouter([
+const routes = [
   {
     path: "/",
     element: <App />,
@@ -22,6 +21,6 @@ const router = createBrowserRouter([
       },
     ],
   },
-]);
+];
 
-export default router;
+export default routes;

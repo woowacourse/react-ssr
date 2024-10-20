@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 import { TMDB_THUMBNAIL_URL } from "../constants";
 
@@ -21,10 +22,12 @@ export default function MovieList({ movies }) {
 }
 
 function MovieItem({ movie }) {
-  const { title, poster_path, vote_average } = movie;
+  const navigate = useNavigate();
+
+  const { id, title, poster_path, vote_average } = movie;
 
   return (
-    <div className="item">
+    <div className="item" onClick={() => navigate(`/detail/${id}`)}>
       <img
         className="thumbnail"
         src={`${TMDB_THUMBNAIL_URL}/${poster_path}`}
