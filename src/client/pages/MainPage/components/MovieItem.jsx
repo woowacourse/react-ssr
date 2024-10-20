@@ -1,7 +1,7 @@
 import React from "react";
-import { TMDB_THUMBNAIL_URL } from "../../shared/Constant";
-import { StarEmpty } from "../../shared/ImageResources";
-import { round } from "../../shared/utils";
+import { TMDB_THUMBNAIL_URL } from "../../../../../public/scripts/Constant";
+import { StarEmpty } from "../../../shared/ImageResources";
+import { round } from "../../../shared/utils";
 
 function MovieItem({ rate, title, thumbnailUrl, onClick }) {
   const thumbnailFullUrl = TMDB_THUMBNAIL_URL + "/" + thumbnailUrl;

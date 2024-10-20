@@ -1,7 +1,7 @@
 import React from "react";
-import { TMDB_BANNER_URL } from "../shared/Constant";
-import { Logo, StarEmpty } from "../shared/ImageResources";
-import { round } from "../shared/utils";
+import { TMDB_BANNER_URL } from "../../../../../public/scripts/Constant";
+import { Logo, StarEmpty } from "../../../shared/ImageResources";
+import { round } from "../../../shared/utils";
 
 function Header({ movie }) {
   const { id, title, vote_average, backdrop_path } = movie;

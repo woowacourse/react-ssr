@@ -1,6 +1,6 @@
-import { CloseButton, StarEmpty } from "../../shared/ImageResources";
-import { round } from "../../shared/utils";
-import useMovieModal from "../../hooks/useMovieModal";
+import { CloseButton, StarEmpty } from "../../../shared/ImageResources";
+import { round } from "../../../shared/utils";
+import useMovieModal from "../hooks/useMovieModal";
 import React, { useEffect } from "react";
 
 function MovieModal() {

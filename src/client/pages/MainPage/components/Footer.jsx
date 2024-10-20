@@ -1,5 +1,5 @@
 import React from "react";
-import { WoowacourseLogo } from "../shared/ImageResources";
+import { WoowacourseLogo } from "../../../shared/ImageResources";
 function Footer() {
   return (
     <footer className="footer">

@@ -6,9 +6,9 @@ import React from "react";
 import { renderToString } from "react-dom/server";
 import { StaticRouter } from "react-router-dom/server";
 import { loadNowPlaying } from "../../../public/scripts/loadMovies";
-import MainPage from "../../client/pages/MainPage";
-import { MovieModalProvider } from "../../client/hooks/useMovieModal";
-import MainPageWithModal from "../../client/pages/MainPageWithModal";
+import MainPage from "../../client/pages/MainPage/MainPage";
+import { MovieModalProvider } from "../../client/pages/MainPage/hooks/useMovieModal";
+import MainPageWithModal from "../../client/pages/MainPage/MainPageWithModal";
 
 const router = Router();
 

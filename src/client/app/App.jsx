@@ -1,8 +1,8 @@
 import React from "react";
-import MainPage from "../pages/MainPage";
+import MainPage from "../pages/MainPage/MainPage";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { MovieModalProvider } from "../hooks/useMovieModal";
-import MainPageWithModal from "../pages/MainPageWithModal";
+import { MovieModalProvider } from "../pages/MainPage/hooks/useMovieModal";
+import MainPageWithModal from "../pages/MainPage/MainPageWithModal";
 
 function App({ movies }) {
   return (

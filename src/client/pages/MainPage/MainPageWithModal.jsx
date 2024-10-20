@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
-import useMovieModal from "../hooks/useMovieModal";
-import MovieModal from "../components/base/MovieModal";
+import useMovieModal from "./hooks/useMovieModal";
+import MovieModal from "./components/MovieModal";
 import { useParams } from "react-router-dom";
 import MainPage from "./MainPage";
 

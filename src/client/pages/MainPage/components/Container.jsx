@@ -1,5 +1,5 @@
 import React from "react";
-import MovieItem from "./base/MovieItem";
+import MovieItem from "./MovieItem";
 import { Link } from "react-router-dom";
 import useMovieModal from "../hooks/useMovieModal";
 function Container({ movies }) {

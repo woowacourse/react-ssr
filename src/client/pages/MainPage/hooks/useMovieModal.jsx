@@ -1,5 +1,5 @@
-import { FETCH_OPTIONS, TMDB_MOVIE_DETAIL_URL, TMDB_ORIGINAL_URL } from "../shared/Constant";
-import { round } from "../shared/utils";
+import { FETCH_OPTIONS, TMDB_MOVIE_DETAIL_URL, TMDB_ORIGINAL_URL } from "../../../../../public/scripts/Constant";
+import { round } from "../../../shared/utils";
 import { createContext, useCallback, useContext, useState } from "react";
 import React from "react";
 
