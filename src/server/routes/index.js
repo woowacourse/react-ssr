@@ -5,7 +5,7 @@ import { Router } from "express";
 import React from "react";
 import { renderToString } from "react-dom/server";
 import { StaticRouter } from "react-router-dom/server";
-import { loadNowPlaying } from "../api/loadMovies";
+import { loadNowPlaying } from "../../../public/scripts/loadMovies";
 import MainPage from "../../client/pages/MainPage";
 import { MovieModalProvider } from "../../client/hooks/useMovieModal";
 import MainPageWithModal from "../../client/pages/MainPageWithModal";
@@ -14,7 +14,7 @@ const router = Router();
 
 router.use(async (req, res) => {
   const { id } = req.params;
-  
+
   const movies = await loadNowPlaying();
   const renderedApp = renderToString(
     <StaticRouter location={req.url}>
