@@ -12,6 +12,8 @@ export const API_MOVIE_ENDPOINTS = {
   upcoming: `${API_BASE_URL}/movie/upcoming`,
 };
 
+export const API_MOVIE_DETAIL_ENDPOINT = `${API_BASE_URL}/movie/`;
+
 export const FETCH_OPTIONS = {
   method: 'GET',
   headers: {
