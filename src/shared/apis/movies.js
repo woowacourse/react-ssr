@@ -1,9 +1,6 @@
-import isServer from '../isServer.js';
 import { TMDB_MOVIE_DETAIL_URL, TMDB_MOVIE_LISTS } from './constants.js';
 
-const TMDB_TOKEN = isServer()
-  ? process.env.TMDB_TOKEN
-  : process.env.REACT_APP_TMDB_TOKEN;
+const TMDB_TOKEN = process.env.TMDB_TOKEN;
 
 const FETCH_OPTIONS = {
   method: 'GET',
