@@ -4,7 +4,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import App from "./App";
 import ErrorPage from "./pages/ErrorPage";
-import MovieDetailModal from "./components/MovieDetailModal";
+import MovieDetail from "./pages/MovieDetail";
 
 const INITIAL_DATA = window ? window.__INITIAL_DATA__ || {} : {};
 
@@ -17,7 +17,10 @@ const router = createBrowserRouter([
       {
         path: "detail/:id",
         element: (
-          <MovieDetailModal movieDetail={INITIAL_DATA?.currentMovieDetail} />
+          <MovieDetail
+            movies={INITIAL_DATA?.movies}
+            movieDetail={INITIAL_DATA?.currentMovieDetail}
+          />
         ),
       },
     ],

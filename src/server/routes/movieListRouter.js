@@ -13,13 +13,13 @@ const movieListRouter = Router();
 movieListRouter.use("/", async (_, res) => {
   const nowPlayingMovies = await fetchNowPlayingMovieList();
 
-  const renderedHome = renderToString(<Home movies={nowPlayingMovies} />);
+  const renderedPage = renderToString(<Home movies={nowPlayingMovies} />);
 
   const templatePath = path.resolve(__dirname, "index.html");
   const template = fs.readFileSync(templatePath, "utf8");
 
   const responseHTML = template
-    .replace('<div id="wrap"></div>', `<div id="wrap">${renderedHome}</div>`)
+    .replace('<div id="wrap"></div>', `<div id="wrap">${renderedPage}</div>`)
     .replace(
       "<!--${INITIAL_DATA_AREA}-->",
       /*html*/ `
