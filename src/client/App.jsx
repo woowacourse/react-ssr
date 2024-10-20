@@ -1,22 +1,18 @@
 import React from "react";
-import Header from "./components/Header";
-import MovieList from "./components/MovieList";
+import { Routes, Route } from "react-router-dom";
+import MovieDetailModal from "./components/MovieDetailModal";
+import MainLayout from "./MainLayout";
 
-const App = ({ movies }) => {
+const App = ({ movies, movieDetail }) => {
   return (
-    <>
-      <Header movie={movies[0]} />
-      <div className="container">
-        <main>
-          <section>
-            <h2>지금 인기 있는 영화</h2>
-            <ul className="thumbnail-list">
-              <MovieList movies={movies} />
-            </ul>
-          </section>
-        </main>
-      </div>
-    </>
+    <Routes>
+      <Route path="/" element={<MainLayout movies={movies} />}>
+        <Route
+          path="detail/:id"
+          element={<MovieDetailModal movieDetail={movieDetail} />}
+        />
+      </Route>
+    </Routes>
   );
 };
 
