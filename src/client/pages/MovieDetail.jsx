@@ -6,21 +6,24 @@ import { TMDB_ORIGINAL_URL } from '../../server/constants/movies.js';
 import { fetchMovieDetail } from '../apis/movies.js';
 
 const MovieDetail = ({ detail }) => {
-  const [detailData, setDetailData] = useState(detail || {});
+  const [detailData, setDetailData] = useState(detail);
   const navigate = useNavigate();
 
-  const movieId = typeof window !== 'undefined' && window.location.pathname.split('/detail/')[1];
-
   const fetchDetail = async () => {
+    const movieId = window.location.pathname.split('/detail/')[1];
     const movieDetail = await fetchMovieDetail(movieId);
     setDetailData(movieDetail);
   };
 
-  useLayoutEffect(() => {
-    if (!detail || movieId !== detail.id) {
+  useEffect(() => {
+    if (!detailData) {
       fetchDetail();
     }
   }, []);
+
+  if (!detailData) {
+    return <div className='modal-background active'>Loading ...</div>;
+  }
 
   const bannerUrl = TMDB_ORIGINAL_URL + detailData.poster_path || '';
   const releaseYear = detailData.release_date?.split('-')[0] || '';
