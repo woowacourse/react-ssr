@@ -7,13 +7,20 @@ import { renderToString } from "react-dom/server";
 
 import Header from "../../client/components/Header";
 import MovieList from "../../client/components/MovieList";
-import { fetchNowPlayingMovieList } from "../apis/movies";
+import { fetchMovieDetailData, fetchNowPlayingMovieList } from "../apis/movies";
+import MovieDetailModal from "../../client/components/MovieDetailModal";
 
-const movieListRouter = Router();
+const movieDetailModalRouter = Router();
 
-movieListRouter.use("/", async (_, res) => {
+movieDetailModalRouter.use("/detail/:id", async (req, res) => {
+  const { id: movieId } = req.params;
+
   const nowPlayingMovies = await fetchNowPlayingMovieList();
+  const movieDetail = await fetchMovieDetailData({ movieId });
 
+  const renderedModal = renderToString(
+    <MovieDetailModal movieDetail={movieDetail} />
+  );
   const renderedHeader = renderToString(<Header movie={nowPlayingMovies[0]} />);
   const renderedMovieList = renderToString(
     <MovieList movies={nowPlayingMovies} />
@@ -31,13 +38,14 @@ movieListRouter.use("/", async (_, res) => {
       '<section id="movie-list" class="container"></section>',
       `<section id="movie-list" class="container">${renderedMovieList}</section>`
     )
+    .replace("<!--${MODAL_AREA}-->", renderedModal)
     .replace(
       "<!--${INITIAL_DATA_AREA}-->",
       /*html*/ `
       <script>
         window.__INITIAL_DATA__ = {
-          movies: ${JSON.stringify(nowPlayingMovies)},
-          currentMovieDetail: undefined,
+          movies: ${JSON.stringify(nowPlayingMovies)}
+          currentMovieDetail: ${JSON.stringify(movieDetail)}
         }
       </script>
     `
@@ -46,4 +54,4 @@ movieListRouter.use("/", async (_, res) => {
   res.send(responseHTML);
 });
 
-export default movieListRouter;
+export default movieDetailModalRouter;
