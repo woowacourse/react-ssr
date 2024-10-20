@@ -24,3 +24,25 @@ export async function fetchNowPlayingMovieList() {
     }
   );
 }
+
+async function fetchMovieDetail({ movieId }) {
+  const fetchURL = TMDB_API_URL.MOVIE_DETAIL(movieId);
+  const response = await fetch(fetchURL, FETCH_OPTIONS);
+
+  return await response.json();
+}
+
+export async function fetchMovieDetailData({ movieId }) {
+  const movieDetailData = await fetchMovieDetail({ movieId });
+  const { title, poster_path, release_date, genres, vote_average, overview } =
+    movieDetailData;
+
+  return {
+    title,
+    bannerUrl: poster_path,
+    releaseYear: release_date.substr(0, 4),
+    genres: genres.map(({ name }) => name),
+    rate: round(vote_average, 1),
+    description: overview,
+  };
+}
