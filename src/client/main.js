@@ -1,9 +1,6 @@
 import React from 'react';
 import { hydrateRoot } from 'react-dom/client';
-import App from './App';
-import { MOVIE_LIST_TYPE } from '../server/src/constants';
+import { RouterProvider } from 'react-router-dom';
+import router from './routes/router';
 
-hydrateRoot(
-  document.getElementById('root'),
-  <App movies={window.__INITIAL_DATA__.movies} movieListType={MOVIE_LIST_TYPE.default} />
-);
+hydrateRoot(document.getElementById('root'), <RouterProvider router={router} />);

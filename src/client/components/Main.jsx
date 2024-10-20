@@ -1,21 +1,25 @@
 import React from 'react';
-import { MOVIE_LIST_TITLE } from '../../server/src/constants';
+import { MOVIE_LIST_TITLE, MOVIE_LIST_TYPE } from '../../server/src/constants';
 import MovieItem from './MovieItem';
+import Header from '../components/Header';
 
-const Main = ({ movies, movieListType }) => {
+const Main = ({ movies }) => {
   return (
-    <main className='container'>
-      <section>
-        <h2>{MOVIE_LIST_TITLE[movieListType]}</h2>
-        <ul className='thumbnail-list'>
-          {movies.map((movie) => (
-            <li key={movie.id}>
-              <MovieItem movie={movie} />
-            </li>
-          ))}
-        </ul>
-      </section>
-    </main>
+    <>
+      <Header movie={movies[0]} />
+      <main className='container'>
+        <section>
+          <h2>{MOVIE_LIST_TITLE[MOVIE_LIST_TYPE.default]}</h2>
+          <ul className='thumbnail-list'>
+            {movies.map((movie) => (
+              <li key={movie.id}>
+                <MovieItem movie={movie} />
+              </li>
+            ))}
+          </ul>
+        </section>
+      </main>
+    </>
   );
 };
 
