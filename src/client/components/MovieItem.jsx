@@ -1,7 +1,8 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
+
 import { TMDB_THUMBNAIL_URL } from "../../constant";
 import starEmptyImage from "@images/star_empty.png";
-import { useNavigate } from "react-router-dom";
 
 const MovieItem = ({ movie }) => {
   const navigate = useNavigate();
