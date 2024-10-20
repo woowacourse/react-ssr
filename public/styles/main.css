@@ -43,6 +43,16 @@ button.primary {
   border-radius: 4px;
 }
 
+a.primary {
+  border: 0;
+  padding: 8px 16px;
+  cursor: pointer;
+  color: var(--color-white);
+  font-weight: bold;
+  background-color: var(--color-lightblue-90);
+  border-radius: 4px;
+}
+
 #root {
   min-width: 1440px;
   background-color: var(--color-bluegray-100);
