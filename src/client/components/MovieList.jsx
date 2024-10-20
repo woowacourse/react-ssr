@@ -3,22 +3,24 @@ import StarEmptyImage from "@images/star_empty.png";
 
 export default function MovieList({ movies }) {
   return (
-    <>
-      <h2>지금 인기 있는 영화</h2>
-      <ul className="thumbnail-list">
-        {movies.map((movie) => {
-          const { id, rate, title, posterPath } = movie;
-          return (
-            <MovieItem
-              key={id}
-              rate={rate}
-              title={title}
-              posterPath={posterPath}
-            />
-          );
-        })}
-      </ul>
-    </>
+    <main>
+      <section id="movie-list" className="container">
+        <h2>지금 인기 있는 영화</h2>
+        <ul className="thumbnail-list">
+          {movies.map((movie) => {
+            const { id, rate, title, posterPath } = movie;
+            return (
+              <MovieItem
+                key={id}
+                rate={rate}
+                title={title}
+                posterPath={posterPath}
+              />
+            );
+          })}
+        </ul>
+      </section>
+    </main>
   );
 }
 
