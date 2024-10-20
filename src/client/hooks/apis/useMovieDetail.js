@@ -14,12 +14,14 @@ const DtoToMovieDetail = (dto) => ({
 });
 
 export default function useMovieDetail({ initialMovieDetail, id }) {
-  const [isLoading, setIsLoading] = useState(false);
-  const [movieDetail, setMovieDetail] = useState(
-    DtoToMovieDetail(initialMovieDetail)
+  const [isLoading, setIsLoading] = useState(true);
+  const [movieDetail, setMovieDetail] = useState(() =>
+    initialMovieDetail ? DtoToMovieDetail(initialMovieDetail) : null
   );
 
   useEffect(() => {
+    const isClient = initialMovieDetail?.id !== id;
+
     const fetchMovieDetail = async () => {
       try {
         setIsLoading(true);
@@ -30,10 +32,10 @@ export default function useMovieDetail({ initialMovieDetail, id }) {
       }
     };
 
-    if (id) {
+    if (isClient || id) {
       fetchMovieDetail();
     }
   }, [id]);
 
-  return { movieDetail, isLoading };
+  return { movieDetail: movieDetail ?? {}, isLoading };
 }
