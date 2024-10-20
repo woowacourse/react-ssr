@@ -1,7 +1,7 @@
 import React from "react";
 import MovieItem from "./components/MovieItem";
 import { TMDB_BACKGROUND_THUMBNAIL } from "./constants";
-import { Link } from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
 
 function App({ movies }) {
   const bestMovie = movies[0];

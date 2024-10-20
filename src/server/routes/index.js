@@ -1,4 +1,3 @@
-import App from "../../client/AppPage";
 import fs from "fs";
 import path from "path";
 
@@ -6,11 +5,14 @@ import React from "react";
 import { Router } from "express";
 import { renderToString } from "react-dom/server";
 import { TMDB_MOVIE_LISTS, FETCH_OPTIONS } from "../constants";
-import { StaticRouter } from "react-router-dom/server";
+import { StaticRouterProvider } from "react-router-dom/server";
 import { createStaticRouter, RouterProvider } from "react-router-dom";
-import { AppRouter } from "../../client/main";
+import AppRouter from "../../client/AppRouter";
+import createFetchRequest from "../createFetchRequest";
 
 const router = Router();
+
+let handler = createStaticHandler(AppRouter);
 
 router.use("/", async (_, res) => {
   const movies = (
@@ -19,26 +21,13 @@ router.use("/", async (_, res) => {
     )
   ).results;
 
-  // 2. 서버 측에서 사용하는 StaticRouter를 설정
-  const router = createStaticRouter(
-    [
-      {
-        path: "/",
-        element: <AppPage movies={movies} />,
-      },
-      {
-        path: "/detail:id",
-        element: <AppPage movies={movies} />,
-      },
-    ],
-    { location: req.url }
-  );
+  let fetchRequest = createFetchRequest(req, res);
+  let context = await handler.query(fetchRequest);
 
-  // 3. 서버에서 React를 HTML로 렌더링
+  let router = createStaticRouter(handler.dataRoutes, context);
+
   const appHtml = renderToString(
-    <StaticRouter location={req.url}>
-      <RouterProvider router={router} />
-    </StaticRouter>
+    <StaticRouterProvider router={router} context={context} />
   );
 
   // const renderedApp = renderToString(<App movies={movies} />);
