@@ -2,30 +2,38 @@ import CloseButton from "@images/modal_button_close.png";
 import StarEmpty from "@images/star_empty.png";
 import React, { useEffect, useState } from "react";
 import { useModal } from "../context/ModalContext";
-import { fetchMovieDetail, getMovieDetail } from "../apis/fetch";
 import { useNavigate, useParams } from "react-router-dom";
+import { getMovieDetail } from "../../server/routes/movieList";
 
 const MovieDetailModal = ({ detailMovie }) => {
   const { id } = useParams();
-  const { closeModal, isModalOpen } = useModal();
-
+  const { closeModal } = useModal();
   const [detailMovieData, setDetailMovieData] = useState(detailMovie);
-  const { title, thumbnail, releaseYear, description, genres, rate } =
-    detailMovieData;
+
   const navigate = useNavigate();
 
   useEffect(() => {
-    console.log("id", id);
-    if (!detailMovie) {
-      const data = getMovieDetail(id);
-      setDetailMovieData(data);
-    }
-  }, [detailMovie, id, isModalOpen]);
+    const fetchMovieDetail = async () => {
+      if (detailMovie?.id !== id || !detailMovieData) {
+        const data = await getMovieDetail(id);
+        setDetailMovieData(data);
+      }
+    };
+    fetchMovieDetail();
+  }, [id]);
 
   const handleMoveHome = () => {
     closeModal();
+    setDetailMovieData(null);
     navigate("/");
   };
+
+  if (!detailMovieData) {
+    return <div>Loading...</div>;
+  }
+
+  const { title, thumbnail, releaseYear, description, genres, rate } =
+    detailMovieData;
 
   return (
     <div className="modal-background active" id="modalBackground">
