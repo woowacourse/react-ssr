@@ -1,4 +1,4 @@
-import { TMDB_MOVIE_DETAIL_URL } from '../constants/constant';
+import { TMDB_MOVIE_DETAIL_URL } from '../../constants/constant';
 
 export const fetchMovieDetail = async (movieId) => {
   const url = `${TMDB_MOVIE_DETAIL_URL}${movieId}?language=ko-KR`;

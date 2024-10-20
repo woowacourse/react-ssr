@@ -6,7 +6,7 @@ import React from 'react';
 import { Router } from 'express';
 import { renderToString } from 'react-dom/server';
 import { fetchMovieDetail, fetchMovies } from '../api/movie.js';
-import { TMDB_MOVIE_LISTS } from '../constants/constant.js';
+import { TMDB_MOVIE_LISTS } from '../../constants/constant.js';
 import { StaticRouter } from 'react-router-dom/server';
 
 const router = Router();
