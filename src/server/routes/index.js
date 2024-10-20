@@ -1,3 +1,4 @@
+
 import Home from '../../client/components/Home';
 import React from 'react';
 import { Router } from 'express';
@@ -12,6 +13,7 @@ const router = Router();
 
 const templatePath = path.resolve(__dirname, 'index.html');
 const template = fs.readFileSync(templatePath, 'utf8');
+
 
 router.use('/details/:movieId', async (req, res) => {
   const id = req.params.movieId;
@@ -67,6 +69,7 @@ router.use('*', async (req, res) => {
     .replace('<div id="root"></div>', `<div id="root">${renderedApp}</div>`);
 
   res.send(result);
+
 });
 
 export default router;

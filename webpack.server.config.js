@@ -1,3 +1,4 @@
+
 const path = require("path");
 const nodeExternals = require("webpack-node-externals");
 
@@ -12,6 +13,7 @@ module.exports = {
       "@images": path.resolve(__dirname, "public/images"),
       "@styles": path.resolve(__dirname, "public/styles"),
     },
+
   },
   module: {
     rules: [
@@ -19,9 +21,9 @@ module.exports = {
         test: /\.(jsx?)$/,
         exclude: /node_modules/,
         use: {
-          loader: "babel-loader",
+          loader: 'babel-loader',
           options: {
-            presets: ["@babel/preset-env", "@babel/preset-react"],
+            presets: ['@babel/preset-env', '@babel/preset-react'],
           },
         },
       },
@@ -34,6 +36,7 @@ module.exports = {
         type: "asset/resource",
         generator: {
           filename: "images/[name][ext]",
+
         },
       },
     ],
@@ -42,5 +45,6 @@ module.exports = {
     filename: "server.js",
     path: path.resolve(__dirname, "dist"),
     publicPath: "/static/",
+
   },
 };

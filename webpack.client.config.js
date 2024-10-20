@@ -1,6 +1,7 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
+
 const webpack = require('webpack');
 const dotenv = require('dotenv');
 dotenv.config();
@@ -13,6 +14,7 @@ module.exports = {
     filename: 'bundle.js',
     clean: true,
     publicPath: '/static/',
+
   },
   module: {
     rules: [
@@ -28,6 +30,7 @@ module.exports = {
       },
       {
         test: /\.css$/,
+
         use: ['style-loader', 'css-loader'],
       },
       {
@@ -35,6 +38,7 @@ module.exports = {
         type: 'asset/resource',
         generator: {
           filename: 'images/[name][ext]',
+
         },
       },
     ],
@@ -49,6 +53,7 @@ module.exports = {
       patterns: [
         { from: 'public/images', to: 'images' },
         { from: 'public/styles', to: 'styles' },
+
       ],
     }),
     new webpack.DefinePlugin({
