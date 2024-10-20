@@ -1,8 +1,7 @@
 import React from "react";
 import MovieItem from "./MovieItem";
-import MovieDetailModal from "./MovieDetailModal";
 
-const MovieList = ({ movieList, detailMovie }) => {
+const MovieList = ({ movieList }) => {
   return (
     <div className="container">
       <main>
@@ -15,7 +14,6 @@ const MovieList = ({ movieList, detailMovie }) => {
           </ul>
         </section>
       </main>
-      {/* {detailMovie && <MovieDetailModal detailMovie={detailMovie} />} */}
     </div>
   );
 };
