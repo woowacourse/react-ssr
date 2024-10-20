@@ -3,13 +3,13 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 
 module.exports = {
-  module: 'development',
+  mode: 'development',
   entry: './src/client/main.js',
   output: {
-    path: path.resolve('dist/client'),
+    path: path.resolve('dist'),
     filename: 'bundle.js',
     clean: true,
-    publicPath: '/',
+    publicPath: '/static/',
   },
   module: {
     rules: [
@@ -28,22 +28,32 @@ module.exports = {
         use: ['style-loader', 'css-loader'],
       },
       {
-        test: /\.(png|jpg|gif|svg)$/i, // 이미지 파일 형식 지정
-        type: 'asset/resource', // Webpack 5에서는 file-loader가 통합된 기능을 사용 가능
+        test: /\.(png|jpe?g|gif|svg)$/i,
+        type: 'asset/resource',
+        generator: {
+          filename: 'images/[name][ext]',
+        },
       },
     ],
   },
   plugins: [
     new HtmlWebpackPlugin({
       template: './views/index.html',
+      filename: 'index.html',
+      inject: 'body',
     }),
     new CopyPlugin({
       patterns: [
-        { from: 'public/images', to: 'images' }, // public 폴더의 이미지를 dist로 복사
+        { from: 'public/images', to: 'images' },
+        { from: 'public/styles', to: 'styles' },
       ],
     }),
   ],
   resolve: {
+    alias: {
+      '@images': path.resolve(__dirname, 'public/images'),
+      '@styles': path.resolve(__dirname, 'public/styles'),
+    },
     extensions: ['.js', '.jsx'],
   },
 };
