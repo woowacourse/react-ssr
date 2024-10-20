@@ -1,7 +1,8 @@
-import { Router } from "express";
+import App from "../../client/App";
 import fs from "fs";
 import path from "path";
 import React from "react";
+import { Router } from "express";
 import { renderToString } from "react-dom/server";
 import { StaticRouter } from "react-router-dom/server";
 
