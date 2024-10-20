@@ -30,4 +30,4 @@ function MovieItem({ rate, title, thumbnailUrl, onClick }) {
   );
 }
 
-export default MovieItem;
+export default React.memo(MovieItem);

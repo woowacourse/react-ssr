@@ -2,6 +2,7 @@ import React from "react";
 import { TMDB_BANNER_URL } from "../../../../../public/scripts/Constant";
 import { Logo, StarEmpty } from "../../../shared/ImageResources";
 import { round } from "../../../shared/utils";
+import { Link } from "react-router-dom";
 
 function Header({ movie }) {
   const { id, title, vote_average, backdrop_path } = movie;
@@ -34,9 +35,9 @@ function Header({ movie }) {
               <span className="rate-value">{round(vote_average, 1)}</span>
             </div>
             <div className="title">{title}</div>
-            {/* <a href={`/detail/${id}`}> */}
-            <button className="primary detail">자세히 보기</button>
-            {/* </a> */}
+            <Link to={`/detail/${id}`}>
+              <button className="primary detail">자세히 보기</button>
+            </Link>
           </div>
         </div>
       </div>
