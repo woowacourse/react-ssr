@@ -4,7 +4,7 @@ import { Routes, Route } from 'react-router-dom';
 import Header from './components/Header.jsx';
 import Container from './components/Container.jsx';
 import Footer from './components/Footer.jsx';
-import Modal from './components/Modal.jsx';
+import MovieDetailModal from './components/MovieDetailModal.jsx';
 
 function App({ movies, movieDetail }) {
   const bestMovieItem = movies[0];
@@ -26,7 +26,7 @@ function App({ movies, movieDetail }) {
           element={
             <>
               <Container movieItems={movies} />
-              {movieDetail && <Modal movieDetail={movieDetail} />}
+              {movieDetail && <MovieDetailModal movieDetail={movieDetail} />}
             </>
           }
         />
