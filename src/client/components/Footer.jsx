@@ -1,11 +1,12 @@
 import React from 'react';
+import WoowacourseLogoImage from '@images/woowacourse_logo.png';
 
 function Footer() {
   return (
     <footer className='footer'>
       <p>&copy; 우아한테크코스 All Rights Reserved.</p>
       <p>
-        <img src='../assets/images/woowacourse_logo.png' width='180' />
+        <img src={WoowacourseLogoImage} width='180' />
       </p>
     </footer>
   );
