@@ -3,6 +3,7 @@ import { Route, Routes } from "react-router-dom";
 
 import Home from "./pages/Home";
 import MovieDetail from "./pages/MovieDetail";
+import ErrorPage from "./pages/ErrorPage";
 
 export default function App({ movies, movieDetail }) {
   return (
@@ -12,6 +13,7 @@ export default function App({ movies, movieDetail }) {
         path="/detail/:id"
         element={<MovieDetail movies={movies} movieDetail={movieDetail} />}
       />
+      <Route path="*" element={<ErrorPage />} />
     </Routes>
   );
 }
