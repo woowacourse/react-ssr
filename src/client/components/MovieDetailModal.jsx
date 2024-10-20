@@ -2,7 +2,7 @@ import React from 'react';
 import ModalButtonClose from '@images/modal_button_close.png';
 import StarFilled from '@images/star_filled.png';
 
-const Modal = ({ movieDetail }) => {
+const MovieDetailModal = ({ movieDetail }) => {
   return (
     <div className='modal-background active' id='modalBackground'>
       <div className='modal'>
@@ -31,4 +31,4 @@ const Modal = ({ movieDetail }) => {
   );
 };
 
-export default Modal;
+export default MovieDetailModal;
