@@ -1,15 +1,40 @@
 import CloseButton from "@images/modal_button_close.png";
 import StarEmpty from "@images/star_empty.png";
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useModal } from "../context/ModalContext";
+import { fetchMovieDetail, getMovieDetail } from "../apis/fetch";
+import { useNavigate, useParams } from "react-router-dom";
 
 const MovieDetailModal = ({ detailMovie }) => {
+  const { id } = useParams();
+  const { closeModal, isModalOpen } = useModal();
+
+  const [detailMovieData, setDetailMovieData] = useState(detailMovie);
   const { title, thumbnail, releaseYear, description, genres, rate } =
-    detailMovie;
+    detailMovieData;
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    console.log("id", id);
+    if (!detailMovie) {
+      const data = getMovieDetail(id);
+      setDetailMovieData(data);
+    }
+  }, [detailMovie, id, isModalOpen]);
+
+  const handleMoveHome = () => {
+    closeModal();
+    navigate("/");
+  };
 
   return (
     <div className="modal-background active" id="modalBackground">
       <div className="modal">
-        <button className="close-modal" id="closeModal" onClick={() => {}}>
+        <button
+          className="close-modal"
+          id="closeModal"
+          onClick={handleMoveHome}
+        >
           <img src={CloseButton} />
         </button>
         <div className="modal-container">
