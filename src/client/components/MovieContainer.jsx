@@ -13,7 +13,7 @@ export default function MovieContainer({ movies, movieClickHandler }) {
                 <MovieThumbnail
                   key={movie.id}
                   movie={movie}
-                  clickHandler={movieClickHandler}
+                  onClick={() => movieClickHandler(movie.id)}
                 />
               );
             })}

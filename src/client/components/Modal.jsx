@@ -46,29 +46,30 @@ import starFilledPng from '@images/star_filled.png';
  */
 export function Modal({ movieDetail, onClose }) {
   return (
-    <div class='modal-background active' id='modalBackground'>
-      <div class='modal'>
-        <button class='close-modal' id='closeModal' onClick={onClose}>
+    <div className='modal-background active' id='modalBackground'>
+      <div className='modal'>
+        <button className='close-modal' id='closeModal' onClick={onClose}>
           <img src={modalButtonClosePng} />
         </button>
-        <div class='modal-container'>
-          <div class='modal-image'>
+        <div className='modal-container'>
+          <div className='modal-image'>
             <img src={`${TMDB_ORIGINAL_URL}${movieDetail.poster_path}`} />
           </div>
-          <div class='modal-description'>
+          <div className='modal-description'>
             <h2>{movieDetail.title}</h2>
-            <p class='category'>
-              {movieDetail.title}
+            <p className='category'>
               {`${movieDetail.release_date.slice(0, 4)} · ${movieDetail.genres
                 .map(genre => genre.name)
                 .join(',')}`}
             </p>
-            <p class='rate'>
-              <img src={starFilledPng} class='star' />
+            <p className='rate'>
+              <img src={starFilledPng} className='star' />
               <span>{movieDetail.vote_average.toFixed(1)}</span>
             </p>
             <hr />
-            <p class='detail'>{movieDetail.overview}</p>
+            <p className='detail'>
+              {movieDetail.overview || '설명이 존재하지 않습니다.'}
+            </p>
           </div>
         </div>
       </div>

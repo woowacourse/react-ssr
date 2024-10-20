@@ -25,7 +25,10 @@ export default function Header({ movie, onButtonClick }) {
               </span>
             </div>
             <div className='title'>{movie.title}</div>
-            <button className='primary detail' onClick={onButtonClick}>
+            <button
+              className='primary detail'
+              onClick={() => onButtonClick(movie.id)}
+            >
               자세히 보기
             </button>
           </div>

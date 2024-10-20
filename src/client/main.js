@@ -9,13 +9,12 @@ const { movies, movieDetail } = window.__INITIAL_DATA__;
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <Home movies={movies} />,
-    children: [
-      {
-        path: ':moiveId',
-        element: <Home movies={movies} movieDetail={movieDetail} />,
-      },
-    ],
+    element: <Home movies={movies} key='home' />,
+  },
+
+  {
+    path: '/details/:movieId',
+    element: <Home movies={movies} movieDetail={movieDetail} key='home' />,
   },
 ]);
 
