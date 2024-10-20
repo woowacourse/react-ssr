@@ -1,14 +1,13 @@
 import React from "react";
-import Container from "./components/Container";
-import Footer from "./components/Footer";
-import Header from "./components/Header";
+import Main from "./components/Main";
+import { MovieModalProvider } from "./hooks/useMovieModal";
 
 function App({ movies }) {
   return (
     <>
-      <Header movie={movies[0]} />
-      <Container movies={movies} />
-      <Footer />
+      <MovieModalProvider>
+        <Main movies={movies} />
+      </MovieModalProvider>
     </>
   );
 }

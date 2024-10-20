@@ -10,7 +10,11 @@ function Container({ movies }) {
             {movies.map(({ id, title, vote_average, poster_path }) => (
               <li key={id}>
                 {/* <a href={`/detail/${id}`}> */}
-                <MovieItem rate={vote_average} title={title} thumbnailUrl={poster_path} />
+                <MovieItem
+                  rate={vote_average}
+                  title={title}
+                  thumbnailUrl={poster_path}
+                />
                 {/* </a> */}
               </li>
             ))}
