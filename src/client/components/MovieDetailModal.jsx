@@ -5,7 +5,6 @@ import React from "react";
 const MovieDetailModal = ({ detailMovie }) => {
   const { title, thumbnail, releaseYear, description, genres, rate } =
     detailMovie;
-  const formattedGenres = genres?.join(", ");
 
   return (
     <div className="modal-background active" id="modalBackground">
@@ -22,7 +21,7 @@ const MovieDetailModal = ({ detailMovie }) => {
           <div className="modal-description">
             <h2>{title}</h2>
             <p className="category">
-              {releaseYear} · {formattedGenres}
+              {releaseYear} · {genres?.join(", ")}
             </p>
             <p className="rate">
               <img src={StarEmpty} className="star" />

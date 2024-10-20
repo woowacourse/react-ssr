@@ -1,6 +1,5 @@
 import React from "react";
 import Header from "./components/Header";
-import MovieList from "./components/MovieList";
 import Footer from "./components/Footer";
 import { Route, Routes } from "react-router-dom";
 import HomePage from "./pages/Home";
