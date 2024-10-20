@@ -6,6 +6,7 @@ import React from "react";
 import { renderToString } from "react-dom/server";
 
 import { getMovieList } from "./movieList";
+import { getMovieDetail } from "./detail";
 
 const router = Router();
 
@@ -13,6 +14,8 @@ router.use("/", async (_, res) => {
   try {
     //1. 데이터 패칭
     const popularMovies = await getMovieList();
+    const detailMovie = await getMovieDetail(1184918);
+    console.log("detailMovie", detailMovie);
 
     //2. 템플릿 생성
     const templatePath = path.resolve(__dirname, "index.html");
@@ -23,14 +26,17 @@ router.use("/", async (_, res) => {
       /*html*/ `
               <script>
                 window.__INITIAL_DATA__ = {
-                  movies: ${JSON.stringify(popularMovies)}
+                  movies: ${JSON.stringify(popularMovies)},
+                  detailMovie: ${JSON.stringify(detailMovie)},
                 }
               </script>
             `
     );
 
     //3. 클라이언트의 뼈대 코드를 가져옴.
-    const renderedApp = renderToString(<App popularMovies={popularMovies} />);
+    const renderedApp = renderToString(
+      <App popularMovies={popularMovies} detailMovie={detailMovie} />
+    );
 
     //4. 클라이언트의 코드에 데이터를 삽입
     const renderedHTML = template.replace(

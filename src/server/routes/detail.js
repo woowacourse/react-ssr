@@ -3,7 +3,7 @@ import { parseMovieDetail } from "../src/parseUtils";
 import { Router } from "express";
 const router = Router();
 
-const getMovieDetail = async (movieId) => {
+export const getMovieDetail = async (movieId) => {
   const movieDetailData = await fetchMovieDetail(movieId);
   return parseMovieDetail(movieDetailData);
 };
