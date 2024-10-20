@@ -9,9 +9,9 @@ import Header from "../../client/components/Header";
 import MovieList from "../../client/components/MovieList";
 import { fetchNowPlayingMovieList } from "../apis/movies";
 
-const router = Router();
+const movieListRouter = Router();
 
-router.use("/", async (_, res) => {
+movieListRouter.use("/", async (_, res) => {
   const nowPlayingMovies = await fetchNowPlayingMovieList();
 
   const renderedHeader = renderToString(<Header movie={nowPlayingMovies[0]} />);
@@ -22,27 +22,27 @@ router.use("/", async (_, res) => {
   const templatePath = path.resolve(__dirname, "index.html");
   const template = fs.readFileSync(templatePath, "utf8");
 
-  res.send(
-    template
-      .replace(
-        '<header id="header"></header>',
-        `<header id="header">${renderedHeader}</header>`
-      )
-      .replace(
-        '<section id="movie-list" class="container"></section>',
-        `<section id="movie-list" class="container">${renderedMovieList}</section>`
-      )
-      .replace(
-        "<!--${INITIAL_DATA_AREA}-->",
-        /*html*/ `
-          <script>
-            window.__INITIAL_DATA__ = {
-              movies: ${JSON.stringify(nowPlayingMovies)}
-            }
-          </script>
-        `
-      )
-  );
+  const responseHTML = template
+    .replace(
+      '<header id="header"></header>',
+      `<header id="header">${renderedHeader}</header>`
+    )
+    .replace(
+      '<section id="movie-list" class="container"></section>',
+      `<section id="movie-list" class="container">${renderedMovieList}</section>`
+    )
+    .replace(
+      "<!--${INITIAL_DATA_AREA}-->",
+      /*html*/ `
+      <script>
+        window.__INITIAL_DATA__ = {
+          movies: ${JSON.stringify(nowPlayingMovies)}
+        }
+      </script>
+    `
+    );
+
+  res.send(responseHTML);
 });
 
 export default router;
