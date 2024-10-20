@@ -1,9 +1,9 @@
 import React from "react";
 import MovieItem from "./components/MovieItem";
 import { TMDB_BACKGROUND_THUMBNAIL } from "./constants";
-import { Link, useLoaderData } from "react-router-dom";
+import { Link } from "react-router-dom";
 
-function App({ movies }) {
+function HomePage({ movies }) {
   const bestMovie = movies[0];
 
   return (
@@ -64,4 +64,4 @@ function App({ movies }) {
   );
 }
 
-export default App;
+export default HomePage;

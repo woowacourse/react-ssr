@@ -1,9 +1,10 @@
 import React from "react";
 import { hydrateRoot } from "react-dom/client";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import AppRouter from "./AppRouter";
+import { BrowserRouter } from "react-router-dom";
 
-// hydrateRoot(
-//   document.getElementById("root"),
-//   <RouterProvider router={AppRouter} />
-// );
+hydrateRoot(
+  <BrowserRouter>
+    <App movies={window.__INITIAL_DATA__.movies} />
+  </BrowserRouter>,
+  document.getElementById("root")
+);
