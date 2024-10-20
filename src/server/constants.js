@@ -14,3 +14,5 @@ export const TMDB_MOVIE_LISTS = {
   topRated: BASE_URL + "/top_rated?language=ko-KR&page=1",
   upcoming: BASE_URL + "/upcoming?language=ko-KR&page=1",
 };
+
+export const TMDB_MOVIE_DETAIL_URL = "https://api.themoviedb.org/3/movie/";
