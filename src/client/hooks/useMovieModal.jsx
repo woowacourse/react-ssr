@@ -1,5 +1,5 @@
-import { FETCH_OPTIONS, TMDB_MOVIE_DETAIL_URL, TMDB_ORIGINAL_URL } from "../Constant";
-import { round } from "../utils";
+import { FETCH_OPTIONS, TMDB_MOVIE_DETAIL_URL, TMDB_ORIGINAL_URL } from "../shared/Constant";
+import { round } from "../shared/utils";
 import { createContext, useCallback, useContext, useState } from "react";
 import React from "react";
 
@@ -22,11 +22,18 @@ export const MovieModalProvider = ({ children }) => {
   return <movieModalContext.Provider value={{ context, setContext }}>{children}</movieModalContext.Provider>;
 };
 
+export const useMovieModalContext = () => {
+  const value = useContext(movieModalContext);
+  if (value === undefined) {
+    throw new Error("useMovieModalContext는 Provider 내에서 사용해야합니다.");
+  }
+  return value;
+};
+
 const useMovieModal = () => {
-  const { context, setContext } = useContext(movieModalContext);
+  const { context, setContext } = useMovieModalContext();
   const { isOpen, movieId, movieDetail } = context;
 
-  const toggleModal = useCallback(() => setModalActivated((isOpen) => !isOpen), []);
   const setIsOpen = useCallback((isOpen) => setContext((context) => ({ ...context, isOpen })), []);
   const openModal = useCallback(() => setIsOpen(true), []);
   const closeModal = useCallback(() => setIsOpen(false), []);
@@ -50,6 +57,7 @@ const useMovieModal = () => {
     async (id) => {
       const movieDetail = await loadMovieDetail(id);
 
+      setMovieId(id);
       setMovieDetail({
         title: movieDetail.title,
         bannerUrl: TMDB_ORIGINAL_URL + movieDetail.poster_path,
@@ -59,17 +67,15 @@ const useMovieModal = () => {
         rate: round(movieDetail.vote_average, 1),
       });
     },
-    [loadMovieDetail, updateMovieDetail]
+    [loadMovieDetail, setMovieDetail, setMovieId]
   );
 
   return {
     isOpen,
-    movieId,
-    movieDetail,
     openModal,
     closeModal,
-    toggleModal,
-    setMovieId,
+    movieId,
+    movieDetail,
     updateMovieDetail,
   };
 };

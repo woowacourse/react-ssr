@@ -1,7 +1,7 @@
 import React from "react";
-import { TMDB_BANNER_URL } from "../Constant";
-import { Logo, StarEmpty } from "../ImageResources";
-import { round } from "../utils";
+import { TMDB_BANNER_URL } from "../shared/Constant";
+import { Logo, StarEmpty } from "../shared/ImageResources";
+import { round } from "../shared/utils";
 
 function Header({ movie }) {
   const { id, title, vote_average, backdrop_path } = movie;
@@ -10,15 +10,28 @@ function Header({ movie }) {
 
   return (
     <header>
-      <div className="background-container" style={{ backgroundImage: `url('${bannerUrl}')` }}>
-        <div className="overlay" aria-hidden="true"></div>
+      <div
+        className="background-container"
+        style={{ backgroundImage: `url('${bannerUrl}')` }}
+      >
+        <div
+          className="overlay"
+          aria-hidden="true"
+        ></div>
         <div className="top-rated-container">
           <h1 className="logo">
-            <img src={Logo} alt="MovieList" />
+            <img
+              src={Logo}
+              alt="MovieList"
+            />
           </h1>
           <div className="top-rated-movie">
             <div className="rate">
-              <img src={StarEmpty} className="star" /> <span className="rate-value">{round(vote_average, 1)}</span>
+              <img
+                src={StarEmpty}
+                className="star"
+              />{" "}
+              <span className="rate-value">{round(vote_average, 1)}</span>
             </div>
             <div className="title">{title}</div>
             {/* <a href={`/detail/${id}`}> */}

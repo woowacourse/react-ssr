@@ -1,18 +1,14 @@
-import { CloseButton, StarEmpty } from "../../ImageResources";
-import { round } from "../../utils";
+import { CloseButton, StarEmpty } from "../../shared/ImageResources";
+import { round } from "../../shared/utils";
 import useMovieModal from "../../hooks/useMovieModal";
 import React, { useEffect } from "react";
 
 function MovieModal() {
-  const { movieId, movieDetail, updateMovieDetail, closeModal } = useMovieModal();
+  const { movieDetail, closeModal } = useMovieModal();
 
   const { title, bannerUrl, releaseYear, description } = movieDetail;
   const genres = movieDetail?.genres?.join(", ");
   const rate = round(movieDetail?.rate, 1);
-
-  useEffect(() => {
-    updateMovieDetail(movieId);
-  }, [movieId]);
 
   return (
     <div
