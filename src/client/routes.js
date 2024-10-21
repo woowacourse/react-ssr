@@ -13,7 +13,12 @@ const routes = [
   },
   {
     path: '/detail/:id',
-    element: <Detail movieDetail={movieDetail} />,
+    element: (
+      <>
+        <App movieList={movieList} />
+        <Detail movieDetail={movieDetail} />,
+      </>
+    ),
   },
 ];
 

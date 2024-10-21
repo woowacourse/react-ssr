@@ -1,9 +1,24 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { TMDB_BANNER_URL } from '../../api/constants';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { fetchMovieDetail } from '../../api/movieRequests';
 
-export default function Detail({ movieDetail }) {
-  if (!movieDetail) {
+export default function Detail({ movieDetail: initMovieDetail }) {
+  const { pathname } = useLocation();
+  const [movieDetail, setMovieDetail] = useState(initMovieDetail ?? null);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const getMovieDetail = async () => {
+      const data = await fetchMovieDetail(pathname.split('/detail/')[1]);
+      setMovieDetail(data);
+    };
+    if (!movieDetail) {
+      getMovieDetail();
+    }
+  }, []);
+
+  if (!movieDetail || movieDetail.length === 0) {
     return (
       <div className="modal-background active" id="modalBackground">
         <div className="modal">
@@ -13,18 +28,10 @@ export default function Detail({ movieDetail }) {
     );
   }
 
-  const {
-    title,
-    release_date,
-    genreNames,
-    vote_average,
-    overview,
-    poster_path,
-  } = movieDetail;
+  const { title, release_date, genres, vote_average, overview, poster_path } =
+    movieDetail;
 
-  const navigate = useNavigate();
   const handleModalClose = () => {
-    console.log('실행==========================================');
     navigate('/');
   };
 
@@ -45,7 +52,7 @@ export default function Detail({ movieDetail }) {
           <div className="modal-description">
             <h2>{title}</h2>
             <p className="category">
-              {release_date} · {genreNames}
+              {release_date} · {genres.map((genre) => genre.name).join(', ')}
             </p>
             <p className="rate">
               <img src={'/assets/images/star_empty.png'} className="star" />
