@@ -6,7 +6,6 @@ import { TMDB_MOVIE_DETAIL_URL, FETCH_OPTIONS } from '../constants';
 
 function MovieDetail({ movies, initialMovieDetail }) {
   const { id } = useParams();
-
   const [movieDetail, setMovieDetail] = useState(initialMovieDetail || null);
 
   useEffect(() => {
@@ -20,7 +19,7 @@ function MovieDetail({ movies, initialMovieDetail }) {
     };
 
     getMovieDetail();
-  }, []);
+  }, [id]);
 
   return (
     <>

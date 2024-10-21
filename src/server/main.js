@@ -19,7 +19,6 @@ app.use('/', movieRouter);
 
 // 그 외 모든 경로에 대한 404 처리
 app.use((req, res) => {
-  console.log(req.url);
   res.status(404).send('Page not found');
 });
 
