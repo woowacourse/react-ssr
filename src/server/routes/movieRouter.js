@@ -27,10 +27,10 @@ movieRouter.use("/", async (req, res) => {
 
   const renderedApp = generateApp(popularMovieList);
 
-  const renderedIniData = generateInitData(popularMovieList);
+  const renderedInitData = generateInitData(popularMovieList);
 
   const htmlInjectionArray = [
-    ["<!--${INIT_DATA_AREA}-->", renderedIniData],
+    ["<!--${INIT_DATA_AREA}-->", renderedInitData],
     ["<!--${ROOT_AREA}-->", renderedApp],
   ];
 

@@ -18,10 +18,10 @@ movieDetailModalRouter.use("/detail/:id", async (req, res) => {
   const movieDetailInfo = transformMovieDetailData(movieDetailData);
 
   const renderedApp = generateApp(popularMovieList, movieDetailInfo);
-  const renderedIniData = generateInitData(popularMovieList, movieDetailInfo);
+  const renderedInitData = generateInitData(popularMovieList, movieDetailInfo);
 
   const htmlInjectionArray = [
-    ["<!--${INIT_DATA_AREA}-->", renderedIniData],
+    ["<!--${INIT_DATA_AREA}-->", renderedInitData],
     ["<!--${ROOT_AREA}-->", renderedApp],
   ];
 
