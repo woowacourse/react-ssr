@@ -1,7 +1,7 @@
 import MovieItem from "./MovieItem";
 import React from "react";
 
-function Container({ movies }) {
+function Container({ movies, onMovieClick }) {
   return (
     <div className="container">
       <main>
@@ -10,7 +10,13 @@ function Container({ movies }) {
           <ul className="thumbnail-list">
             {movies.map(({ id, title, vote_average, poster_path }) => (
               <li key={id}>
-                <MovieItem rate={vote_average} title={title} thumbnailUrl={poster_path} />
+                <MovieItem
+                  id={id}
+                  rate={vote_average}
+                  title={title}
+                  thumbnailUrl={poster_path}
+                  onClick={onMovieClick}
+                />
               </li>
             ))}
           </ul>
