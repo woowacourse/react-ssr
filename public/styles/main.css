@@ -36,7 +36,7 @@ button {
   cursor: pointer;
 }
 
-button.primary {
+.primary {
   color: var(--color-white);
   font-weight: bold;
   background-color: var(--color-lightblue-90);
