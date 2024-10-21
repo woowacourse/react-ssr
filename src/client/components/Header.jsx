@@ -23,6 +23,7 @@ function Header({ movie, onMovieClick }) {
           </h1>
           <div className="top-rated-movie">
             <div className="rate">
+
               <img src={starEmptyImg} className="star" alt="Star rating" />
               <span className="rate-value">{round(vote_average, 1)}</span>
             </div>

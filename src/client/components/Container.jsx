@@ -1,6 +1,7 @@
 import MovieItem from "./MovieItem";
 import React from "react";
 
+
 function Container({ movies, onMovieClick }) {
   return (
     <div className="container">
