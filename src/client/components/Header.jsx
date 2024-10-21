@@ -4,8 +4,10 @@ import { TMDB_BANNER_URL } from '../../server/apis/url';
 import starEmptyImage from '@images/star_empty.png';
 
 import { round } from '../utils/round';
+import { useNavigate } from 'react-router-dom';
 
 const Header = ({ movie }) => {
+  const navigate = useNavigate();
   const { title, vote_average, backdrop_path } = movie;
   const bannerUrl = TMDB_BANNER_URL + backdrop_path;
 

@@ -13,5 +13,5 @@ export const fetchMovieDetail = async (id) => {
   });
   const response = await fetch(url + '?' + params, FETCH_OPTIONS);
   const data = await response.json();
-  return data.results;
+  return data;
 };
