@@ -1,14 +1,11 @@
 import './config.js';
 import express from 'express';
 import path from 'path';
-import { fileURLToPath } from 'url';
 
 import movieRouter from './routes/index.js';
 
 const app = express();
 const PORT = 3000;
-
-app.use('/dist/client', express.static(path.join(__dirname, '../../dist/client')));
 
 // 정적 파일 제공
 app.use('/static', express.static(path.join(__dirname)));
@@ -19,7 +16,7 @@ app.use('/static', (req, res) => {
 });
 
 // 메인 페이지 라우트 (React 앱 렌더링)
-app.get('/', movieRouter);
+app.use(movieRouter);
 
 // 그 외 모든 경로에 대한 404 처리
 app.use((req, res) => {
