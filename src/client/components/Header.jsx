@@ -1,8 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
-import { TMDB_THUMBNAIL_URL } from "../constants";
-
 import logoImage from "@images/logo.png";
 import starEmptyImage from "@images/star_empty.png";
 
@@ -13,14 +11,14 @@ export default function Header({ bestMovie }) {
     return null;
   }
 
-  const { id, poster_path, vote_average, title } = bestMovie;
+  const { id, backdrop_path, vote_average, title } = bestMovie;
 
   return (
     <header>
       <div
         className="background-container"
         style={{
-          backgroundImage: `url('${TMDB_THUMBNAIL_URL}/${poster_path}')`,
+          backgroundImage: `url(https://image.tmdb.org/t/p/w1920_and_h800_multi_faces${backdrop_path})`,
         }}
       >
         <div className="overlay" aria-hidden="true"></div>
