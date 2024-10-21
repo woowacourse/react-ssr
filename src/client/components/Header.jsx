@@ -1,9 +1,13 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
+
 import { TMDB_BANNER_URL } from "../../constant";
 import logoImage from "@images/logo.png";
 import starEmptyImage from "@images/star_empty.png";
 
 const Header = ({ bestMovie }) => {
+  const navigate = useNavigate();
+
   return (
     <header>
       <div
@@ -30,7 +34,12 @@ const Header = ({ bestMovie }) => {
               <span className="rate-value">{Number(bestMovie.vote_average).toFixed(1)}</span>
             </div>
             <div className="title">{bestMovie.title}</div>
-            <button className="primary detail">자세히 보기</button>
+            <button
+              className="primary detail"
+              onClick={() => navigate(`/detail/${bestMovie.id}`)}
+            >
+              자세히 보기
+            </button>
           </div>
         </div>
       </div>

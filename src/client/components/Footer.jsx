@@ -1,5 +1,4 @@
 import React from "react";
-
 import woowacourseLogoImage from "@images/woowacourse_logo.png";
 
 const Footer = () => {
