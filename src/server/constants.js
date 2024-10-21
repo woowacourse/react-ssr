@@ -16,3 +16,4 @@ export const TMDB_MOVIE_LISTS = {
 };
 
 export const TMDB_MOVIE_DETAIL_URL = "https://api.themoviedb.org/3/movie/";
+

@@ -19,6 +19,7 @@ const MovieItem = ({ id, posterUrl, title, voteAverage }) => {
         <strong>{title}</strong>
       </div>
     </a>
+
   );
 };
 

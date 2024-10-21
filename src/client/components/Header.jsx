@@ -4,6 +4,7 @@ import starEmptyImage from "@images/star_empty.png";
 import logoImage from "@images/logo.png";
 import round from "../util/round.js";
 
+
 const Header = ({ movie }) => {
   return (
     <header id="header">

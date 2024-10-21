@@ -33,5 +33,6 @@
     "webpack-node-externals": "^3.0.0",
     "react-dom": "^18.3.1",
     "react-router-dom": "^6.27.0"
+
   }
 }
