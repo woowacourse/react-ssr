@@ -1,19 +1,18 @@
 import React from "react";
-import Container from "./components/Container";
-import Footer from "./components/Footer";
-import Header from "./components/Header";
-import Home from "./components/Home";
 
-function App({ movies }) {
-  const popularMovie = movies[0];
+import Home from "./pages/Home";
+import { Route, Routes } from "react-router-dom";
+import MovieDetail from "./pages/MovieDetails";
+
+function App({ movies, movieDetail }) {
   return (
-    <div id="wrap">
-      <Header movie={popularMovie} />
-      <Container>
-        <Home movies={movies} />
-      </Container>
-      <Footer />
-    </div>
+    <Routes>
+      <Route path="/" element={<Home movies={movies} />} />
+      <Route
+        path="/detail/:id"
+        element={<MovieDetail movies={movies} movieDetail={movieDetail} />}
+      />
+    </Routes>
   );
 }
 
