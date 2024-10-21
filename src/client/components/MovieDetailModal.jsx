@@ -1,13 +1,13 @@
 import React from 'react';
 import { parseMovieDetail } from '../utils/parseMovieDetail';
 
-function MovieDetailModal({ movieDetail, onCloseModal }) {
+function MovieDetailModal({ movieDetail, onClose }) {
   const movie = parseMovieDetail(movieDetail);
 
   return (
     <div className="modal-background active" id="modalBackground">
       <div className="modal">
-        <button className="close-modal" id="closeModal" onClick={onCloseModal}>
+        <button className="close-modal" id="closeModal" onClick={onClose}>
           <img src="../assets/images/modal_button_close.png" />
         </button>
         <div className="modal-container">
@@ -17,7 +17,7 @@ function MovieDetailModal({ movieDetail, onCloseModal }) {
           <div className="modal-description">
             <h2>{movie.title}</h2>
             <p className="category">
-              {movie.releaseYear} · {movie?.genres?.join(', ')}
+              {movie.releaseYear} · {movie.genres.join(', ')}
             </p>
             <p className="rate">
               <img src="../assets/images/star_filled.png" className="star" />

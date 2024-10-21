@@ -1,7 +1,7 @@
-import { FETCH_OPTIONS, TMDB_MOVIE_DETAIL_URL } from './url';
+import { FETCH_OPTIONS, TMDB_MOVIE_DETAIL_URL, TMDB_MOVIE_LISTS } from './url';
 
-export const fetchMovies = async (type) => {
-  const response = await fetch(type, FETCH_OPTIONS);
+export const fetchMovies = async () => {
+  const response = await fetch(TMDB_MOVIE_LISTS.POPULAR, FETCH_OPTIONS);
   const data = await response.json();
   return data.results;
 };

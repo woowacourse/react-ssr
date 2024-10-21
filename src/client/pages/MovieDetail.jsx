@@ -1,17 +1,18 @@
 import React, { useState } from 'react';
 import MovieDetailModal from '../components/MovieDetailModal';
-// import { useNavigate } from 'react-router-dom';
 import MovieList from '../components/MovieList';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import { ROUTE_PATH } from '../constants/routePath';
+import { useNavigate } from 'react-router-dom';
 
 function MovieDetail({ movies, movieDetail, showModal }) {
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(showModal);
 
   const handleClick = () => {
     setIsOpen(false);
-    alert('?');
+    navigate(ROUTE_PATH.home);
   };
 
   return (
@@ -21,10 +22,7 @@ function MovieDetail({ movies, movieDetail, showModal }) {
       <Footer />
 
       {isOpen && (
-        <MovieDetailModal
-          movieDetail={movieDetail}
-          onCloseModal={handleClick}
-        />
+        <MovieDetailModal movieDetail={movieDetail} onClose={handleClick} />
       )}
     </>
   );

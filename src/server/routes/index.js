@@ -16,7 +16,7 @@ const router = Router();
 
 router.get('/', async (_, res) => {
   let handler = createStaticHandler(routes);
-  let context = await handler.query(new Request('https://localhost:3000'));
+  let context = await handler.query(new Request('http://localhost:3000/'));
   let router = createStaticRouter(handler.dataRoutes, context);
   let html = renderToString(
     <StaticRouterProvider router={router} context={context} />
@@ -34,7 +34,7 @@ router.get('/detail/:id', async (req, res) => {
   const { id } = req.params;
   let handler = createStaticHandler(routes);
   let context = await handler.query(
-    new Request(`https://localhost:3000/detail/${id}`)
+    new Request(`http://localhost:3000/detail/${id}`)
   );
   let router = createStaticRouter(handler.dataRoutes, context);
   let html = renderToString(

@@ -1,5 +1,5 @@
-import { TMDB_ORIGINAL_URL } from '../../server/apis/url.js';
-import { round } from './round.js';
+import { TMDB_ORIGINAL_URL } from '../../server/apis/url';
+import { round } from './round';
 
 export const parseMovieDetail = (movieDetail) => {
   return {
