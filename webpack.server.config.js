@@ -5,7 +5,11 @@ module.exports = {
   mode: "development",
   target: "node",
   entry: path.resolve(__dirname, "src/server/main.js"),
-  externals: [nodeExternals()],
+  externals: [
+    nodeExternals({
+      allowlist: [/^react-router-dom/],
+    }),
+  ],
   resolve: {
     extensions: [".js", ".jsx"],
     alias: {
