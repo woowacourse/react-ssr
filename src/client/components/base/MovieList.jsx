@@ -1,7 +1,10 @@
-import MovieItem from "./base/MovieItem";
+import MovieItem from "./MovieItem";
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
-function Home({ movies }) {
+function MovieList({ movies }) {
+  const navigate = useNavigate();
+
   return (
     <>
       {movies.length > 0 ? (
@@ -9,7 +12,7 @@ function Home({ movies }) {
           {movies.map(({ id, title, vote_average, poster_path }) => (
             <li key={id}>
               <MovieItem
-                onClick={() => alert("하이드레이션 확인")}
+                onClick={() => navigate(`/detail/${id}`)}
                 rate={vote_average}
                 title={title}
                 thumbnailUrl={poster_path}
@@ -24,4 +27,4 @@ function Home({ movies }) {
   );
 }
 
-export default Home;
+export default MovieList;
