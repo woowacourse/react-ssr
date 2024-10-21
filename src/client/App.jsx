@@ -1,12 +1,9 @@
 import React from 'react';
-import Layout from './Router.jsx';
-import { Route, Routes, useLocation } from 'react-router-dom';
+import Layout from './Layout.jsx';
+import { Route, Routes } from 'react-router-dom';
 import MovieDetailModal from './components/MovieDetailModal.jsx';
 
 function App({ movieList, movieDetail }) {
-  const location = useLocation();
-  const isModal = location.pathname.includes('/detail');
-
   return (
     <>
       <Routes>
