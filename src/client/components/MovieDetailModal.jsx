@@ -5,10 +5,10 @@ import { round } from "../utils";
 import { Link } from "react-router-dom";
 
 function MovieDetailModal({ movieDetail }) {
-  const genres = movieDetail?.genres?.join(", ");
-  const rate = round(movieDetail?.rate, 1);
-
   if (!movieDetail) return "";
+
+  const genres = movieDetail.genres?.join(", ");
+  const rate = round(movieDetail.rate, 1);
 
   const { title, bannerUrl, releaseYear, description } = movieDetail;
 
