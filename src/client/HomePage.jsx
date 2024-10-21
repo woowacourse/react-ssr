@@ -2,6 +2,7 @@ import React from "react";
 import MovieItem from "./components/MovieItem";
 import { TMDB_BACKGROUND_THUMBNAIL } from "./constants";
 import { Link } from "react-router-dom";
+import starEmpty from "@images/star_empty.png";
 
 function HomePage({ movies }) {
   const bestMovie = movies[0];
@@ -22,7 +23,7 @@ function HomePage({ movies }) {
             </h1>
             <div className="top-rated-movie">
               <div className="rate">
-                <img src="static/images/star_empty.png" className="star" />
+                <img src={starEmpty} className="star" />
                 <span className="rate-value">
                   {Math.round(bestMovie.vote_average * 10) / 10}
                 </span>

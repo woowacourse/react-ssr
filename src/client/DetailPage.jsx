@@ -1,17 +1,33 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import MovieItem from "./components/MovieItem";
 import { TMDB_BACKGROUND_THUMBNAIL } from "./constants";
 import { Link } from "react-router-dom";
 import Modal from "./components/Modal";
+import logo from "@images/logo.png";
+import starEmpty from "@images/star_empty.png";
+import woowacourseLogo from "@images/woowacourse_logo.png";
+import { getMovieDetail } from "../server/api/movie";
+import { useParams } from "react-router-dom";
 
 const DetailPage = ({ movieDetail, movies }) => {
   const bestMovie = movies[0];
+  const [clientMovieDetail, setClientMovieDetail] = useState();
 
-  console.log(movieDetail);
+  const { id } = useParams();
+
+  useEffect(() => {
+    getMovieDetail(id).then((movieDetail) => {
+      setClientMovieDetail(movieDetail);
+    });
+  }, []);
 
   return (
     <div id="wrap">
-      {movieDetail && <Modal movieDetail={movieDetail} />}
+      {movieDetail ? (
+        <Modal movieDetail={movieDetail} />
+      ) : (
+        <Modal movieDetail={clientMovieDetail} />
+      )}
       <header>
         <div
           className="background-container"
@@ -22,11 +38,11 @@ const DetailPage = ({ movieDetail, movies }) => {
           <div className="overlay" aria-hidden="true"></div>
           <div className="top-rated-container">
             <h1 className="logo">
-              <img src="static/images/logo.png" alt="MovieList" />
+              <img src={logo} alt="MovieList" />
             </h1>
             <div className="top-rated-movie">
               <div className="rate">
-                <img src="static/images/star_empty.png" className="star" />
+                <img src={starEmpty} className="star" />
                 <span className="rate-value">
                   {Math.round(bestMovie.vote_average * 10) / 10}
                 </span>
@@ -61,7 +77,7 @@ const DetailPage = ({ movieDetail, movies }) => {
       <footer className="footer">
         <p>&copy; 우아한테크코스 All Rights Reserved.</p>
         <p>
-          <img src="static/images/woowacourse_logo.png" width="180" />
+          <img src={woowacourseLogo} width="180" />
         </p>
       </footer>
     </div>
