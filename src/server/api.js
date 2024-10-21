@@ -7,7 +7,7 @@ export const fetchMovies = async (url) => {
 };
 
 export const fetchMovieDetail = async (movieId) => {
-  const response = await fetch(TMDB_MOVIE_DETAIL_URL + movieId, FETCH_OPTIONS);
+  const response = await fetch(TMDB_MOVIE_DETAIL_URL(movieId), FETCH_OPTIONS);
 
   return await response.json();
 };

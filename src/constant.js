@@ -9,7 +9,7 @@ export const TMDB_MOVIE_LISTS = {
   TOP_RATED: BASE_URL + "/top_rated?language=ko-KR&page=1",
   UPCOMING: BASE_URL + "/upcoming?language=ko-KR&page=1",
 };
-export const TMDB_MOVIE_DETAIL_URL = "https://api.themoviedb.org/3/movie/";
+export const TMDB_MOVIE_DETAIL_URL = (movieId) => `https://api.themoviedb.org/3/movie/${movieId}?language=ko-KR`;
 
 export const FETCH_OPTIONS = {
   method: "GET",
