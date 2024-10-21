@@ -11,13 +11,14 @@ import { loadMovieDetail, loadMovies } from "../fetch";
 
 import Movies from "../../client/components/movies";
 import HeaderContent from "../../client/components/HeaderContent";
+import ServerModal from "../../client/components/ServerModal";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const router = Router();
 
-const rootHandler = async (_, res) => {
+router.get("/", async (req, res) => {
   const templatePath = path.join(__dirname, "../../../views", "index.html");
 
   const nowPlayingMovies = await loadMovies(TMDB_MOVIE_LISTS.nowPlaying);
@@ -44,10 +45,40 @@ const rootHandler = async (_, res) => {
     );
 
   res.send(renderedHTML);
-};
+});
 
-router.get("/", rootHandler);
-router.get("/detail/:id", rootHandler);
+router.get("/detail/:id", async (req, res) => {
+  const templatePath = path.join(__dirname, "../../../views", "index.html");
+
+  const nowPlayingMovies = await loadMovies(TMDB_MOVIE_LISTS.nowPlaying);
+  const movie = await loadMovieDetail(req.params.id);
+  const renderedHeaderContent = renderToString(<HeaderContent movie={nowPlayingMovies[0]} />);
+  const renderedMovies = renderToString(<Movies movies={nowPlayingMovies} />);
+  const renderedModal = renderToString(<ServerModal movie={movie} />);
+
+  const template = fs.readFileSync(templatePath, "utf-8");
+  const renderedHTML = template
+    .replace(`<header id="HEADER"></header>`, `<header id="HEADER">${renderedHeaderContent}</header>`)
+    .replace(
+      `<ul id="MOVIE_ITEMS" class="thumbnail-list"></ul>`,
+      `<ul id="MOVIE_ITEMS" class="thumbnail-list">` + renderedMovies + `</ul>`
+    )
+    .replace(`<div id="MODAL_AREA"></div>`, `<div id="MODAL_AREA">${renderedModal}</div>`)
+    .replace(
+      "<!--${INIT_DATA_AREA}-->",
+      /*html*/ `
+    <script>
+      window.__INITIAL_DATA__ = {
+        movies: ${JSON.stringify(nowPlayingMovies)},
+        movie: ${JSON.stringify(movie)},
+      }
+    </script>
+    <script type='module' src="/scripts"></script>
+  `
+    );
+
+  res.send(renderedHTML);
+});
 
 router.get("/api/getMovie/:id", async (req, res) => {
   const { id } = req.params;
