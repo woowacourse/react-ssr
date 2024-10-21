@@ -1,12 +1,8 @@
-<<<<<<< HEAD
 import {
   FETCH_OPTIONS,
   TMDB_MOVIE_DETAIL_URL,
   TMDB_MOVIE_LISTS,
 } from "../constant/url";
-=======
-import { FETCH_OPTIONS, TMDB_MOVIE_LISTS } from "../constant/url";
->>>>>>> 48d3dafaa7fb79f14c3db81fb622953458eba609
 
 export const fetchNowPlayingMovieItems = async () => {
   const response = await fetch(TMDB_MOVIE_LISTS.NOW_PLAYING, FETCH_OPTIONS);
