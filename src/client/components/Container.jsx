@@ -1,5 +1,6 @@
 import React from 'react';
 import MovieItem from './MovieItem';
+import { Link } from 'react-router-dom';
 
 function Container({ movies }) {
 	return (
@@ -10,9 +11,7 @@ function Container({ movies }) {
 					<ul className="thumbnail-list">
 						{movies.map(({ id, title, vote_average, poster_path }) => (
 							<li key={id}>
-								{/* <a href={`/detail/${id}`}> */}
-								<MovieItem rate={vote_average} title={title} thumbnailUrl={poster_path} />
-								{/* </a> */}
+								<MovieItem rate={vote_average} title={title} thumbnailUrl={poster_path} movieId={id} />
 							</li>
 						))}
 					</ul>

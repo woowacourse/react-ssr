@@ -1,4 +1,4 @@
-import { FETCH_OPTIONS } from '../client/constants';
+import { FETCH_OPTIONS, TMDB_MOVIE_DETAIL_URL } from '../client/constants';
 
 export const loadMovies = async (url) => {
 	const response = await fetch(url, FETCH_OPTIONS);
