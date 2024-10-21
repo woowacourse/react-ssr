@@ -4,11 +4,12 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>영화 리뷰</title>
-    <link rel="stylesheet" href="./static/styles/index.css" />
+    <link rel="stylesheet" href="/static/styles/index.css" />
   </head>
   <body>
     <div id="root"></div>
-    <!--${MODAL_AREA}-->
-    <!-- <script type="module" src="../dist/client/bundle.js"></script> -->
+    <!-- <script type="module" src="/static/bundle.js"></script> -->
+    <!-- 여기에 "./"인 상대 경로를 넣으면 요청이 들어오는 path + 경로 가되어 정확한 경로로 파일을 요청하지 못하는 현상이 발생한다. -->
   </body>
+  <!--${INIT_DATA_AREA}-->
 </html>
