@@ -2,6 +2,7 @@ import "./config.js";
 import express from "express";
 import path from "path";
 import movieRouter from "./routes/index.js";
+import { fetchNowPlayingMovieItems } from "../apis/fetchMovies.js";
 
 const app = express();
 const PORT = 3000;
