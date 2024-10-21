@@ -4,7 +4,6 @@ import path from "path";
 import React from "react";
 import { Router } from "express";
 import { renderToString } from "react-dom/server";
-import { TMDB_MOVIE_LISTS, FETCH_OPTIONS } from "../constants";
 import { StaticRouter } from "react-router-dom/server";
 import App from "../../client/App";
 import { getMovies, getMovieDetail } from "../api/movie";
@@ -44,11 +43,10 @@ router.get("/", async (req, res) => {
 router.get("/detail/:id", async (req, res) => {
   const movies = await getMovies();
   const movieDetail = await getMovieDetail(req.params.id);
-  console.log(movieDetail);
 
   const renderedApp = renderToString(
     <StaticRouter location={req.url}>
-      <App movies={movies} />
+      <App movies={movies} movieDetail={movieDetail} />
     </StaticRouter>
   );
 
@@ -60,6 +58,7 @@ router.get("/detail/:id", async (req, res) => {
     <script>
       window.__INITIAL_DATA__ = {
         movies: ${JSON.stringify(movies)}
+        movieDetail: ${JSON.stringify(movieDetail)}
       }
     </script>
   `
