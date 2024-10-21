@@ -6,3 +6,9 @@ export const fetchMovieList = async (url) => {
 
   return data.results;
 };
+
+export const fetchMovieDetail = async (url) => {
+  const URL = url + '?language=ko-KR';
+  const data = await fetch(URL, FETCH_OPTIONS);
+  return data.json();
+};
