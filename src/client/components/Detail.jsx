@@ -16,7 +16,7 @@ export default function Detail({ movieDetail: initMovieDetail }) {
     if (!movieDetail) {
       getMovieDetail();
     }
-  }, []);
+  }, [movieDetail]);
 
   if (!movieDetail || movieDetail.length === 0) {
     return (
