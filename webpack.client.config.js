@@ -1,6 +1,17 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const CopyPlugin = require("copy-webpack-plugin");
+const webpack = require("webpack");
+const dotenv = require("dotenv");
+
+// .env 파일에서 환경 변수 로드
+const env = dotenv.config().parsed;
+
+// 환경 변수를 객체로 변환
+const envKeys = Object.keys(env || {}).reduce((prev, next) => {
+  prev[`process.env.${next}`] = JSON.stringify(env[next]);
+  return prev;
+}, {});
 
 module.exports = {
   mode: "development",
@@ -48,6 +59,7 @@ module.exports = {
         { from: "public/styles", to: "styles" },
       ],
     }),
+    new webpack.DefinePlugin(envKeys), // 환경 변수를 전역 변수로 정의
   ],
   resolve: {
     alias: {
