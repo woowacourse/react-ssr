@@ -11,7 +11,7 @@ hydrateRoot(
   <BrowserRouter>
     <App
       movies={INITIAL_DATA?.movies}
-      movieDetail={INITIAL_DATA?.movieDetail}
+      initialMovieDetail={INITIAL_DATA?.initialMovieDetail}
     />
   </BrowserRouter>
 );

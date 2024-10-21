@@ -1,10 +1,9 @@
 import React from "react";
-import { Link } from "react-router-dom";
 
 import ModalCloseButton from "@images/modal_button_close.png";
 import StarEmptyIcon from "@images/star_empty.png";
 
-export default function MovieDetailModal({ movieDetail }) {
+export default function MovieDetailModal({ movieDetail, onClose }) {
   if (!movieDetail) return null;
 
   const { title, bannerUrl, releaseYear, genres, rate, description } =
@@ -13,9 +12,14 @@ export default function MovieDetailModal({ movieDetail }) {
   return (
     <div id="modalBackground" className="modal-background active">
       <div className="modal">
-        <Link to={"/"} id="closeModal" className="close-modal">
+        <button
+          type="button"
+          id="closeModal"
+          className="close-modal"
+          onClick={onClose}
+        >
           <img alt="영화 정보 모달 닫기 버튼" src={ModalCloseButton} />
-        </Link>
+        </button>
 
         <div className="modal-container">
           <div className="modal-image">

@@ -34,7 +34,7 @@ export async function renderHomePage() {
         <script>
           window.__INITIAL_DATA__ = {
             movies: ${JSON.stringify(nowPlayingMovies)},
-            currentMovieDetail: undefined,
+            initialMovieDetail: undefined,
           }
         </script>
       `
@@ -46,11 +46,11 @@ export async function renderHomePage() {
 export async function renderMovieDetailPage({ movieId }) {
   const template = getTemplate();
   const nowPlayingMovies = await fetchNowPlayingMovieList();
-  const currentMovieDetail = await fetchMovieDetailData({ movieId });
+  const initialMovieDetail = await fetchMovieDetailData({ movieId });
 
   const renderedPage = renderToString(
     <StaticRouter location={`/detail/${movieId}`}>
-      <MovieDetail movies={nowPlayingMovies} movieDetail={currentMovieDetail} />
+      <MovieDetail movies={nowPlayingMovies} movieDetail={initialMovieDetail} />
     </StaticRouter>
   );
 
@@ -62,7 +62,7 @@ export async function renderMovieDetailPage({ movieId }) {
         <script>
           window.__INITIAL_DATA__ = {
             movies: ${JSON.stringify(nowPlayingMovies)},
-            currentMovieDetail: ${JSON.stringify(currentMovieDetail)},
+            initialMovieDetail: ${JSON.stringify(initialMovieDetail)},
           }
         </script>
       `
