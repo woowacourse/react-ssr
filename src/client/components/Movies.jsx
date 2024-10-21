@@ -1,10 +1,13 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function Movies({ movies }) {
+  const navigate = useNavigate();
+
   return (
     <ul className="thumbnail-list">
       {movies.map(({ id, title, rate, thumbnail }) => (
-        <li key={id}>
+        <li key={id} onClick={() => navigate(`/detail/${id}`)}>
           <div className="item">
             <img
               className="thumbnail"

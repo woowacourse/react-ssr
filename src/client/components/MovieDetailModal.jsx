@@ -1,37 +1,48 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import { getMovieDetail } from "../../server/api";
+import useFetch from "../hooks/useFetch";
 
 export default function MovieDetailModal({ movie }) {
-  const { title, thumbnail, releaseYear, genres, rate, description } = movie;
+  const navigate = useNavigate();
+  const location = useLocation();
+  const movieId = location.pathname.split("/").at(-1);
+
+  const { data: movieDetail, isPending, isError } = useFetch(movie, () => getMovieDetail(movieId));
+
+  const renderModalContent = () => {
+    if (movieDetail)
+      return (
+        <>
+          <div className="modal-image">
+            <img src={`https://image.tmdb.org/t/p/original${movieDetail.thumbnail}`} />
+          </div>
+          <div className="modal-description">
+            <h2>{movieDetail.title}</h2>
+            <p className="category">
+              {movieDetail.releaseYear} · {movieDetail.genres.join(", ")}
+            </p>
+            <p className="rate">
+              <img src="/static/images/star_empty.png" className="star" />
+              <span>{movieDetail.rate}</span>
+            </p>
+            <hr />
+            <p className="detail">{movieDetail.description}</p>
+          </div>
+        </>
+      );
+
+    if (isPending) return <span>Loading...</span>;
+    if (isError) return <span>잘못된 영화 정보입니다.</span>;
+  };
 
   return (
     <div className="modal-background active">
       <div className="modal">
-        <button className="close-modal">
+        <button className="close-modal" onClick={() => navigate("/")}>
           <img src="/static/images/modal_button_close.png" />
         </button>
-        <div className="modal-container">
-          {movie ? (
-            <>
-              <div className="modal-image">
-                <img src={`https://image.tmdb.org/t/p/original${thumbnail}`} />
-              </div>
-              <div className="modal-description">
-                <h2>{title}</h2>
-                <p className="category">
-                  {releaseYear} · {genres.join(", ")}
-                </p>
-                <p className="rate">
-                  <img src="/static/images/star_empty.png" className="star" />
-                  <span>{rate}</span>
-                </p>
-                <hr />
-                <p className="detail">{description}</p>
-              </div>
-            </>
-          ) : (
-            "영화 정보를 찾을 수 없습니다."
-          )}
-        </div>
+        <div className="modal-container">{renderModalContent()}</div>
       </div>
     </div>
   );

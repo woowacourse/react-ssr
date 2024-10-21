@@ -1,6 +1,9 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function Header({ bestMovie }) {
+  const navigate = useNavigate();
+
   return (
     <header>
       <div
@@ -20,7 +23,9 @@ export default function Header({ bestMovie }) {
               <span className="rate-value">{bestMovie.rate}</span>
             </div>
             <div className="title">{bestMovie.title}</div>
-            <button className="primary detail">자세히 보기</button>
+            <button className="primary detail" onClick={() => navigate(`/detail/${bestMovie.id}`)}>
+              자세히 보기
+            </button>
           </div>
         </div>
       </div>
