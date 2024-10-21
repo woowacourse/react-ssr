@@ -2,7 +2,7 @@ import { TMDB_ORIGINAL_URL } from "../constants";
 
 export const parseMovieDetail = (movieDetail) => {
   return {
-    ...movieDetail,
+    movieId: movieDetail.id,
     title: movieDetail.title,
     bannerUrl: TMDB_ORIGINAL_URL + movieDetail.poster_path,
     releaseYear: movieDetail.release_date?.split("-")[0],

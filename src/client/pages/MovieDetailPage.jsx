@@ -2,8 +2,12 @@ import React, { useEffect, useState } from "react";
 import HomePage from "./HomePage";
 import MovieDetailModal from "../components/MovieDetailModal";
 import { useParams } from "react-router-dom";
-import { fetchMovieDetail } from "../../server/apis/movie";
-import { parseMovieDetail } from "../../server/models/parseMovieDetail";
+
+const fetchMovieDetail = async (movieId) => {
+  const response = await fetch(`/${movieId}`);
+
+  return await response.json();
+};
 
 const MovieDetailPage = ({ popularMovies, bestMovieItem, movieInfo }) => {
   const { movieId } = useParams();
@@ -15,8 +19,7 @@ const MovieDetailPage = ({ popularMovies, bestMovieItem, movieInfo }) => {
 
   useEffect(() => {
     const fetchMovie = async (movieId) => {
-      const data = await fetchMovieDetail(movieId);
-      const movieItem = parseMovieDetail(data);
+      const movieItem = await fetchMovieDetail(movieId);
       setMovieDetail(movieItem);
     };
 
