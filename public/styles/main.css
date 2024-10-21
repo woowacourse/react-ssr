@@ -132,3 +132,18 @@ footer.footer {
 footer.footer p:not(:last-child) {
   margin-bottom: 8px;
 }
+
+.not-fond-page {
+  width: 100%;
+  height: 100lvh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.not-fond-page .contents {
+  height: calc(100vh - 180px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
