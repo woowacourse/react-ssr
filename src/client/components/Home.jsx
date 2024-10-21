@@ -1,38 +1,26 @@
 import React from "react";
+import MovieList from "./MovieList";
+import MovieBanner from "./MovieBanner";
+import Footer from "./Footer";
+import { Outlet, useLoaderData } from "react-router-dom";
 
-export const round = (value, decimals = 0) => {
-  const factor = 10 ** decimals;
+export default function Home() {
+  const movies = useLoaderData();
 
-  return Math.round(value * factor) / factor;
-};
+  const popularMovie = movies[0];
 
-function Home({ movies }) {
   return (
-    <div>
-      <ul className="thumbnail-list">
-        {movies.map((movie, index) => {
-          const thumbnailUrl = `https://image.tmdb.org/t/p/w200${movie.poster_path}`;
-          const roundedRate = round(movie.vote_average, 1);
-          return (
-            <li className="movie-item" key={index}>
-              {/*
-            <a href={`/detail/${movie}`} class="item">
-                          </a>
-            */}
-              <img className="thumbnail" src={thumbnailUrl} alt={movie.title} />
-              <div className="movie-info">
-                <p className="rate">
-                  <img src="../assets/images/star_empty.png" className="star" />
-                  <span>{roundedRate}</span>
-                </p>
-                <strong>{movie.title}</strong>
-              </div>
-            </li>
-          );
-        })}
-      </ul>
+    <div id="wrap">
+      <header>
+        <MovieBanner popularMovie={popularMovie} />
+      </header>
+      <div className="container">
+        <main>
+          <MovieList movies={movies} />
+        </main>
+      </div>
+      <Footer />
+      <Outlet />
     </div>
   );
 }
-
-export default Home;
