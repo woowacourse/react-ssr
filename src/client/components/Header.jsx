@@ -2,9 +2,10 @@ import React from "react";
 
 import LogoImage from "@images/logo.png";
 import StarEmptyImage from "@images/star_empty.png";
+import { Link } from "react-router-dom";
 
 export default function Header({ movie }) {
-  const { backdropPath, rate, title } = movie;
+  const { id, backdropPath, rate, title } = movie;
 
   return (
     <header id="header">
@@ -23,9 +24,11 @@ export default function Header({ movie }) {
               <span className="rate-value">{rate}</span>
             </div>
             <div className="title">{title}</div>
-            <button type="button" className="primary detail">
-              자세히 보기
-            </button>
+            <Link to={`/detail/${id}`}>
+              <button type="button" className="primary detail">
+                자세히 보기
+              </button>
+            </Link>
           </div>
         </div>
       </div>
