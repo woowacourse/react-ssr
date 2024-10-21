@@ -8,9 +8,9 @@ const MovieList = ({ movieList }) => {
         <section>
           <h2>지금 인기 있는 영화</h2>
           <ul className='thumbnail-list'>
-            {movieList.map(({ id, ...rest }) => (
-              <li key={id}>
-                <MovieItem {...rest} />
+            {movieList.map((movie) => (
+              <li key={movie.id}>
+                <MovieItem {...movie} />
               </li>
             ))}
           </ul>
