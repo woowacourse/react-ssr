@@ -53,9 +53,7 @@ module.exports = {
       ],
     }),
     new Webpack.DefinePlugin({
-      'process.env.TMDB_TOKEN': JSON.stringify(
-        process.env.REACT_APP_TMDB_TOKEN
-      ),
+      'process.env': JSON.stringify(process.env),
     }),
   ],
   resolve: {
