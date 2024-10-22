@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 
 const useFetch = (initialData, fetchCallback) => {
   const [data, setData] = useState(initialData);
@@ -19,7 +19,7 @@ const useFetch = (initialData, fetchCallback) => {
       }
     };
 
-    if (typeof window !== "undefined" && !window.__INITIAL_DATA__) {
+    if (typeof window !== 'undefined' && !window.__INITIAL_DATA__.movieDetail) {
       getData();
     }
   }, []);
