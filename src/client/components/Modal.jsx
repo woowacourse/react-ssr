@@ -4,6 +4,7 @@ import fetchMovies from "../../server/apis/movies";
 import { TMDB_ORIGINAL_URL } from "../../server/apis/constants";
 import StarFilled from "@images/star_filled.png";
 import modalCloseIcon from "@images/modal_button_close.png";
+import Fallback from "./Fallback";
 
 function Modal({ initialData }) {
   const navigate = useNavigate();
@@ -32,7 +33,7 @@ function Modal({ initialData }) {
     }
   }, [movieId]);
   if (!movieDetailInfo) {
-    return <div>Loading...</div>;
+    return <Fallback />;
   }
 
   const { title, genres, vote_average, release_date, overview, poster_path } =
