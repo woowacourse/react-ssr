@@ -2,10 +2,15 @@ import React from "react";
 import { StaticRouter } from "react-router-dom/server";
 import App from "../../client/App";
 
-const StaticLayout = ({ children, movieList, location, context = {} }) => {
+const StaticLayout = ({
+  children,
+  initialMovieList,
+  location,
+  context = {},
+}) => {
   return (
     <StaticRouter location={location} context={context}>
-      <App movieList={movieList} />
+      <App initialMovieList={initialMovieList} />
       {children}
     </StaticRouter>
   );

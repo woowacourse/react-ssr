@@ -1,29 +1,23 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Header from "./components/Header";
 import Container from "./components/Container";
 import Footer from "./components/Footer";
-import { Outlet, useLocation } from "react-router-dom";
-import { SESSION_STORAGE_KEY } from "./constants";
+import { Outlet } from "react-router-dom";
 
-function App({ movieList }) {
-  const location = useLocation();
-  const savePathname = () => {
-    const { pathname } = location;
-    sessionStorage.setItem(SESSION_STORAGE_KEY.previousPathname, pathname);
+function App({ initialMovieList }) {
+  const [movieList, setMovieList] = useState(initialMovieList);
+
+  const updateMovieList = async () => {
+    const data = await fetchPopularMovieList();
+
+    setMovieList(data);
   };
-  const reloadPage = () => {
-    const previousPathname = sessionStorage.getItem(
-      SESSION_STORAGE_KEY.previousPathname
-    );
-    if (!previousPathname) return;
-    if (location.pathname !== previousPathname) {
-      window.location.reload();
-    }
-  };
+
   useEffect(() => {
-    reloadPage();
-    savePathname();
-  }, [location]);
+    if (!initialMovieList) {
+      updateMovieList();
+    }
+  }, []);
 
   return (
     <>

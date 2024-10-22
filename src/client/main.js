@@ -10,18 +10,19 @@ const initialData = window.__INITIAL_DATA__;
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App movieList={initialData?.movieList} />,
+    element: <App initialMovieList={initialData.movieList} />,
     errorElement: <NotFondPage />,
     children: [
       {
         path: "detail/:id",
         element: (
-          <MovieDetailModal movieDetail={initialData?.movieDetailInfo} />
+          <MovieDetailModal initialMovieDetailData={initialData.movieDetail} />
         ),
       },
     ],
   },
 ]);
+
 hydrateRoot(
   document.getElementById("root"),
   <RouterProvider router={router} />

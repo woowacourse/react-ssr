@@ -1,6 +1,7 @@
 import { Router } from "express";
-import { fetchMovieDetail, fetchPopularMovieList } from "../apis/handler";
-import transformMovieDetailData from "../utils/transformMovieDetailData";
+import { fetchMovieDetail, fetchPopularMovieList } from "../../apis/handler";
+import transformMovieDetailData from "../../apis/transformMovieDetailData";
+
 import {
   generateApp,
   generateHTML,
@@ -11,7 +12,6 @@ const movieDetailModalRouter = Router();
 
 movieDetailModalRouter.use("/detail/:id", async (req, res) => {
   const { id } = req.params;
-
   const popularMovieList = await fetchPopularMovieList();
   const movieDetailData = await fetchMovieDetail(id);
 

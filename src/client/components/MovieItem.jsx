@@ -7,8 +7,12 @@ import { Link } from "react-router-dom";
 function MovieItem({ id, rate, title, thumbnailUrl }) {
   const thumbnailFullUrl = TMDB_THUMBNAIL_URL + "/" + thumbnailUrl;
 
+  const handleLinkClick = () => {
+    sessionStorage.setItem(SESSION_STORAGE_KEY.isNavigated, "true");
+  };
+
   return (
-    <Link to={`/detail/${id}`} className="item">
+    <Link to={`/detail/${id}`} onClick={handleLinkClick} className="item">
       <img className="thumbnail" src={thumbnailFullUrl} alt={title} />
       <div className="item-desc">
         <p className="rate">

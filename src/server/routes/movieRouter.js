@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { fetchPopularMovieList } from "../apis/handler";
+
 import {
   generateApp,
   generateHTML,
@@ -9,6 +9,7 @@ import {
   loadMovieDataFromFile,
   saveMovieDataToFile,
 } from "../data/movieDataManager";
+import { fetchPopularMovieList } from "../../apis/handler";
 
 const movieRouter = Router();
 

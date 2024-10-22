@@ -1,5 +1,5 @@
-import { round } from "@client/utils";
-import { TMDB_ORIGINAL_URL } from "../apis/endpoints";
+import { round } from "../client/utils";
+import { TMDB_ORIGINAL_URL } from "./endpoints";
 
 const transformMovieDetailData = data => ({
   title: data.title,
