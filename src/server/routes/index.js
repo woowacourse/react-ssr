@@ -19,21 +19,20 @@ router.get("/", async (req, res) => {
       </StaticRouter>
     );
 
-    let template = fs.readFileSync(templatePath, "utf-8");
-    template = template.replace(
-      "<!--${INIT_DATA_AREA}-->",
-      /*html*/ `
-    <script>
-      window.__INITIAL_DATA__ = {
-        movies: ${JSON.stringify(initialData.movies)}
-      }
-    </script>
-  `
-    );
+    const template = fs.readFileSync(templatePath, "utf-8");
+
+    const initData = /*html*/ `
+      <script>
+        window.__INITIAL_DATA__ = {
+          movies: ${JSON.stringify(initialData.movies)}
+        }
+      </script>
+    `;
+
     res.send(
       template.replace(
         '<div id="root"></div>',
-        `<div id="root">${renderedApp}</div>`
+        `<div id="root">${renderedApp}</div>${initData}`
       )
     );
   } catch (error) {
@@ -48,25 +47,25 @@ router.get("/detail/:id", async (req, res) => {
     const movies = await fetchMovies.popular();
     const movieDetail = await fetchMovies.detail(movieId);
     const initialData = { movies: movies, movieDetail: movieDetail };
-    const renderedDetail = renderToString(
+    const renderedApp = renderToString(
       <StaticRouter location={req.url}>
         <App initialData={initialData} />
       </StaticRouter>
     );
-    let template = fs.readFileSync(templatePath, "utf-8");
-    template = template.replace(
-      "<!--${INIT_DATA_AREA}-->",
-      `<script>
-        window.__INITIAL_DATA__ = { movies: ${JSON.stringify(
-          initialData.movies
-        )}, movieDetail: ${JSON.stringify(initialData.movieDetail)}};
-      </script>`
-    );
+    const template = fs.readFileSync(templatePath, "utf-8");
+    const initData = /*html*/ `
+      <script>
+        window.__INITIAL_DATA__ = {
+          movies: ${JSON.stringify(initialData.movies)},
+          movieDetail: ${JSON.stringify(initialData.movieDetail)}
+        }
+      </script>
+    `;
 
     res.send(
       template.replace(
         '<div id="root"></div>',
-        `<div id="root">${renderedDetail}</div>`
+        `<div id="root">${renderedApp}</div>${initData}`
       )
     );
   } catch (error) {
