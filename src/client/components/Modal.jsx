@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import fetchMovies from "../../server/apis/movies";
 import { TMDB_ORIGINAL_URL } from "../../server/apis/constants";
 import StarFilled from "@images/star_filled.png";
@@ -7,24 +7,29 @@ import modalCloseIcon from "@images/modal_button_close.png";
 
 function Modal({ initialData }) {
   const navigate = useNavigate();
-  const movieId = window.location.pathname.split("/detail/")[1];
+  const movieId =
+    typeof window !== "undefined"
+      ? window.location.pathname.split("/detail/")[1]
+      : null;
   const [movieDetailInfo, setMovieDetailInfo] = useState(
     initialData.movieDetail || null
   );
 
   useEffect(() => {
-    const fetchDetail = async () => {
-      if (!movieDetailInfo || movieDetailInfo.id !== movieId) {
-        try {
-          const detail = await fetchMovies.detail(movieId);
-          setMovieDetailInfo(detail);
-        } catch (error) {
-          console.error("Failed to fetch movie details:", error);
+    if (movieId) {
+      const fetchDetail = async () => {
+        if (!movieDetailInfo || movieDetailInfo.id !== movieId) {
+          try {
+            const detail = await fetchMovies.detail(movieId);
+            setMovieDetailInfo(detail);
+          } catch (error) {
+            console.error("Failed to fetch movie details:", error);
+          }
         }
-      }
-    };
+      };
 
-    fetchDetail();
+      fetchDetail();
+    }
   }, [movieId]);
   if (!movieDetailInfo) {
     return <div>Loading...</div>;
