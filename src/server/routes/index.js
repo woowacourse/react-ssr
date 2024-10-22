@@ -4,35 +4,41 @@ import path from "path";
 
 import React from "react";
 import { renderToString } from "react-dom/server";
+import { fetchMovieItemDetail, fetchPopularMovies } from "../movies";
+import { StaticRouter } from "react-router-dom/server";
 import App from "../../client/App";
-import { fetchPopularMovies } from "../movies.js";
 
 const router = Router();
 
-router.get("/", async (_, res) => {
+router.get("*", async (req, res) => {
   const templatePath = path.resolve(__dirname, "index.html");
   let template = fs.readFileSync(templatePath, "utf-8");
 
   const fetchedMovies = await fetchPopularMovies();
   const movies = fetchedMovies.results;
 
-  const renderedApp = renderToString(<App movies={movies} />);
+  const id = req.params[0].split("/")[2];
+  const movie = id ? await fetchMovieItemDetail(id) : null;
 
-  template = template.replace(
-    `<div id="root"></div>`,
-    `<div id="root">${renderedApp}</div>`
+  const renderedApp = renderToString(
+    <StaticRouter location={req.url}>
+      <App initialMovies={movies} initialMovie={movie} />
+    </StaticRouter>
   );
 
-  template = template.replace(
-    "<!--${INIT_DATA_AREA}-->",
-    /*html*/ `
-  <script>
-    window.__INITIAL_DATA__ = {
-      movies: ${JSON.stringify(movies)}
-    }
-  </script>
-  `
-  );
+  template = template
+    .replace(`<div id="root"></div>`, `<div id="root">${renderedApp}</div>`)
+    .replace(
+      "<!--${INIT_DATA_AREA}-->",
+      /*html*/ `
+<script>
+  window.__INITIAL_DATA__ = {
+    movies: ${JSON.stringify(movies)},
+    movie: ${JSON.stringify(movie)}
+  };
+</script>
+`
+    );
 
   res.send(template);
 });
