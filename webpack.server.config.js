@@ -11,6 +11,7 @@ module.exports = {
     alias: {
       '@images': path.resolve(__dirname, 'public/images'),
       '@styles': path.resolve(__dirname, 'public/styles'),
+      '@shared': path.resolve(__dirname, 'src/shared'),
     },
   },
   module: {

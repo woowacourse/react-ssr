@@ -3,11 +3,13 @@ import StarEmpty from '@images/star_empty.png';
 import Logo from '@images/logo.png';
 
 import { round } from '../utils/round';
+import { useNavigate } from 'react-router-dom';
+import ROUTES from '../router/routes';
 
 const TMDB_BANNER_URL =
   'https://image.tmdb.org/t/p/w1920_and_h800_multi_faces/';
 
-function Header({ bannerMovie }) {
+export default function Header({ bannerMovie }) {
   const movie = bannerMovie ?? {
     id: -1,
     title: '',
@@ -16,8 +18,12 @@ function Header({ bannerMovie }) {
   };
 
   const { id, title, vote_average: rate, backdrop_path: bannerImgUrl } = movie;
-
   const bannerUrl = TMDB_BANNER_URL + bannerImgUrl;
+
+  const navigate = useNavigate();
+  const moveToDetail = () => {
+    navigate(ROUTES.movieDetail(id));
+  };
 
   return (
     <header>
@@ -36,12 +42,12 @@ function Header({ bannerMovie }) {
               <span className="rate-value">{round(rate, 1)}</span>
             </div>
             <div className="title">{title}</div>
-            <button className="primary detail">자세히 보기</button>
+            <button className="primary detail" onClick={moveToDetail}>
+              자세히 보기
+            </button>
           </div>
         </div>
       </div>
     </header>
   );
 }
-
-export default Header;

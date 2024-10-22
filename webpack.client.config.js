@@ -1,6 +1,10 @@
 const path = require('path');
+const Webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
+
+const dotenv = require('dotenv');
+const env = dotenv.config().parsed;
 
 module.exports = {
   mode: 'development',
@@ -48,11 +52,15 @@ module.exports = {
         { from: 'public/styles', to: 'styles' },
       ],
     }),
+    new Webpack.DefinePlugin({
+      'process.env': JSON.stringify(process.env),
+    }),
   ],
   resolve: {
     alias: {
       '@images': path.resolve(__dirname, 'public/images'),
       '@styles': path.resolve(__dirname, 'public/styles'),
+      '@shared': path.resolve(__dirname, 'src/shared'),
     },
     extensions: ['.js', '.jsx'],
   },

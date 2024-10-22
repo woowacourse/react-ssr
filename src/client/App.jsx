@@ -1,13 +1,19 @@
 import React from 'react';
-import Home from './components/Home';
-import Footer from './components/Footer';
+import PATH from '@shared/paths';
+import { Route, Routes } from 'react-router-dom';
 
-function App({ movies }) {
+import Layout from './layouts/Layout';
+import Home from './pages/Home';
+import MovieDetail from './pages/MovieDetail';
+
+function App({ movies, movieDetail }) {
   return (
-    <>
-      <Home movies={movies} />
-      <Footer />
-    </>
+    <Routes>
+      <Route element={<Layout movies={movies} movieDetail={movieDetail} />}>
+        <Route path={PATH.home} element={<Home />} />
+        <Route path={PATH.movieDetail} element={<MovieDetail />} />
+      </Route>
+    </Routes>
   );
 }
 
