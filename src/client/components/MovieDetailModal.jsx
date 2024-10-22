@@ -1,12 +1,11 @@
-import React, { useEffect, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
-import { getMovieDetail } from "../../server/api";
-import useFetch from "../hooks/useFetch";
+import React from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import { getMovieDetail } from '../../server/api';
+import useFetch from '../hooks/useFetch';
 
 export default function MovieDetailModal({ movie }) {
   const navigate = useNavigate();
-  const location = useLocation();
-  const movieId = location.pathname.split("/").at(-1);
+  const { id: movieId } = useParams();
 
   const { data: movieDetail, isPending, isError } = useFetch(movie, () => getMovieDetail(movieId));
 
@@ -14,20 +13,20 @@ export default function MovieDetailModal({ movie }) {
     if (movieDetail)
       return (
         <>
-          <div className="modal-image">
+          <div className='modal-image'>
             <img src={`https://image.tmdb.org/t/p/original${movieDetail.thumbnail}`} />
           </div>
-          <div className="modal-description">
+          <div className='modal-description'>
             <h2>{movieDetail.title}</h2>
-            <p className="category">
-              {movieDetail.releaseYear} · {movieDetail.genres.join(", ")}
+            <p className='category'>
+              {movieDetail.releaseYear} · {movieDetail.genres.join(', ')}
             </p>
-            <p className="rate">
-              <img src="/static/images/star_empty.png" className="star" />
+            <p className='rate'>
+              <img src='/static/images/star_empty.png' className='star' />
               <span>{movieDetail.rate}</span>
             </p>
             <hr />
-            <p className="detail">{movieDetail.description}</p>
+            <p className='detail'>{movieDetail.description}</p>
           </div>
         </>
       );
@@ -37,12 +36,12 @@ export default function MovieDetailModal({ movie }) {
   };
 
   return (
-    <div className="modal-background active">
-      <div className="modal">
-        <button className="close-modal" onClick={() => navigate("/")}>
-          <img src="/static/images/modal_button_close.png" />
+    <div className='modal-background active'>
+      <div className='modal'>
+        <button className='close-modal' onClick={() => navigate('/')}>
+          <img src='/static/images/modal_button_close.png' />
         </button>
-        <div className="modal-container">{renderModalContent()}</div>
+        <div className='modal-container'>{renderModalContent()}</div>
       </div>
     </div>
   );
