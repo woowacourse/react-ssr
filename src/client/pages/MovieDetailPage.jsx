@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import HomePage from "./HomePage";
 import MovieDetailModal from "../components/MovieDetailModal";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 const fetchMovieDetail = async (movieId) => {
   const response = await fetch(`/${movieId}`);
@@ -11,10 +11,11 @@ const fetchMovieDetail = async (movieId) => {
 
 const MovieDetailPage = ({ popularMovies, bestMovieItem, movieInfo }) => {
   const { movieId } = useParams();
+  const navigate = useNavigate();
   const [movieDetail, setMovieDetail] = useState();
 
   const handleClickClose = () => {
-    setMovieDetail(null);
+    navigate("/");
   };
 
   useEffect(() => {
