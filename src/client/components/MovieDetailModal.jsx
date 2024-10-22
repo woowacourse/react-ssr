@@ -22,6 +22,10 @@ function MovieDetailModal({ initialMovieDetailData }) {
       const movieId = window.location.pathname.split("/detail/")[1];
       updateMovieData(movieId);
     }
+
+    return () => {
+      sessionStorage.removeItem(SESSION_STORAGE_KEY.isNavigated);
+    };
   }, []);
 
   if (!movieDetail) return "";
