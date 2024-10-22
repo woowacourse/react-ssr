@@ -2,9 +2,7 @@ import React from "react";
 import StarEmpty from "@images/star_empty.png";
 import Logo from "@images/logo.png";
 import { useNavigate } from "react-router-dom";
-
-const TMDB_BANNER_URL =
-  "https://image.tmdb.org/t/p/w1920_and_h800_multi_faces/";
+import { TMDB_BANNER_URL } from "../../apis/constants";
 
 function Header({ bannerMovie }) {
   const bannerUrl = TMDB_BANNER_URL + bannerMovie.backdrop_path;
