@@ -40,7 +40,7 @@ export async function fetchMovieDetailData({ movieId }) {
   return {
     title,
     bannerUrl: `${TMDB_RESOURCE.IMAGE.THUMBNAIL_URL}${poster_path}`,
-    releaseYear: release_date.substr(0, 4),
+    releaseYear: release_date.substring(0, 4),
     genres: genres.map(({ name }) => name),
     rate: round(vote_average, 1),
     description: overview,
