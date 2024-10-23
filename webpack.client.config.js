@@ -1,15 +1,16 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const CopyPlugin = require("copy-webpack-plugin");
+const Dotenv = require("dotenv-webpack");
 
 module.exports = {
-  module: "development",
+  mode: "development",
   entry: "./src/client/main.js",
   output: {
-    path: path.resolve("dist/client"),
+    path: path.resolve("public"),
     filename: "bundle.js",
     clean: true,
-    publicPath: "/",
+    publicPath: "/static/",
   },
   module: {
     rules: [
@@ -27,19 +28,34 @@ module.exports = {
         test: /\.css$/,
         use: ["style-loader", "css-loader"],
       },
+      {
+        test: /\.(png|jpe?g|gif|svg)$/i,
+        type: "asset/resource",
+        generator: {
+          filename: "images/[name][ext]",
+        },
+      },
     ],
   },
   plugins: [
     new HtmlWebpackPlugin({
       template: "./views/index.html",
+      filename: "index.html",
+      inject: "body",
     }),
     new CopyPlugin({
       patterns: [
-        { from: "public/images", to: "images" }, // public 폴더의 이미지를 dist로 복사
+        { from: "public/images", to: "images" },
+        { from: "public/styles", to: "styles" },
       ],
     }),
+    new Dotenv(),
   ],
   resolve: {
+    alias: {
+      "@images": path.resolve(__dirname, "public/images"),
+      "@styles": path.resolve(__dirname, "public/styles"),
+    },
     extensions: [".js", ".jsx"],
   },
 };
