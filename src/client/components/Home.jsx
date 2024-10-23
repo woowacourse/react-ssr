@@ -1,7 +1,7 @@
 import React from 'react';
 import MovieItem from './MovieItem';
 
-function Home({ movieList, toggleModal }) {
+function Home({ movieList }) {
   return (
     <div className='container'>
       <main>
@@ -15,7 +15,6 @@ function Home({ movieList, toggleModal }) {
                   title={title}
                   thumbnailUrl={poster_path}
                   rate={vote_average}
-                  onClick={toggleModal}
                 />
               </li>
             ))}
