@@ -16,9 +16,11 @@ const DetailPage = ({ movieDetail, movies }) => {
   const { id } = useParams();
 
   useEffect(() => {
-    getMovieDetail(id).then((movieDetail) => {
-      setClientMovieDetail(movieDetail);
-    });
+    if (!movieDetail) {
+      getMovieDetail(id).then((movieDetail) => {
+        setClientMovieDetail(movieDetail);
+      });
+    }
   }, []);
 
   const handleClick = () => {

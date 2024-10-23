@@ -3,11 +3,12 @@ import { TMDB_ORIGINAL_URL } from "../constants";
 import { Link } from "react-router-dom";
 
 function Modal({ movieDetail }) {
-  const { title } = movieDetail;
-  const releaseYear = movieDetail.release_date.split("-")[0];
-  const bannerUrl = TMDB_ORIGINAL_URL + movieDetail.poster_path;
-  const description = movieDetail.overview;
-  const genres = movieDetail.genres.map(({ name }) => name).join(", ");
+  const title = movieDetail?.title || "";
+  const releaseYear = movieDetail?.release_date.split("-")[0] || "";
+  const bannerUrl = TMDB_ORIGINAL_URL + movieDetail?.poster_path;
+  const description = movieDetail?.overview || "";
+  const genres = movieDetail?.genres.map(({ name }) => name).join(", ") || "";
+  const vote_average = movieDetail?.vote_average || 0;
 
   return (
     <div className="modal-background active" id="modalBackground">
@@ -25,7 +26,7 @@ function Modal({ movieDetail }) {
               {releaseYear} · {genres}
             </p>
             <p className="rate">
-              <span>{Math.round(movieDetail.vote_average * 10) / 10}</span>
+              <span>{Math.round(vote_average * 10) / 10}</span>
             </p>
             <hr />
             <p className="detail">{description}</p>

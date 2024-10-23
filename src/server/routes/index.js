@@ -13,12 +13,6 @@ const router = Router();
 router.get("/", async (req, res) => {
   const movies = await getMovies();
 
-  const renderedApp = renderToString(
-    <StaticRouter location={req.url}>
-      <App movies={movies} />
-    </StaticRouter>
-  );
-
   const templatePath = path.resolve(__dirname, "index.html");
   const template = fs.readFileSync(templatePath, "utf8");
   const initHTML = template.replace(
@@ -32,6 +26,12 @@ router.get("/", async (req, res) => {
   `
   );
 
+  const renderedApp = renderToString(
+    <StaticRouter location={req.url}>
+      <App movies={movies} movieDetail={null} />
+    </StaticRouter>
+  );
+
   res.send(
     initHTML.replace(
       '<div id="root"></div>',
@@ -41,15 +41,9 @@ router.get("/", async (req, res) => {
 });
 
 router.get("/detail/:id", async (req, res) => {
-  console.log("detail");
   const movies = await getMovies();
   const movieDetail = await getMovieDetail(req.params.id);
-
-  const renderedApp = renderToString(
-    <StaticRouter location={req.url}>
-      <App movies={movies} movieDetail={movieDetail} />
-    </StaticRouter>
-  );
+  console.log(movieDetail);
 
   const templatePath = path.resolve(__dirname, "index.html");
   const template = fs.readFileSync(templatePath, "utf8");
@@ -63,6 +57,12 @@ router.get("/detail/:id", async (req, res) => {
       }
     </script>
   `
+  );
+
+  const renderedApp = renderToString(
+    <StaticRouter location={req.url}>
+      <App movies={movies} movieDetail={movieDetail} />
+    </StaticRouter>
   );
 
   res.send(
