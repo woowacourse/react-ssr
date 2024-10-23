@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useCallback } from "react";
 
 import ModalCloseButton from "@images/modal_button_close.png";
 import StarEmptyIcon from "@images/star_empty.png";
@@ -9,8 +9,23 @@ export default function MovieDetailModal({ movieDetail, onClose }) {
   const { title, bannerUrl, releaseYear, genres, rate, description } =
     movieDetail;
 
+  const handleESCKeyDown = useCallback((event) => {
+    if (event.key === "Escape") {
+      onClose();
+    }
+  });
+
+  useEffect(() => {
+    document.addEventListener("keydown", handleESCKeyDown);
+    return () => document.removeEventListener("keydown", handleESCKeyDown);
+  });
+
   return (
-    <div id="modalBackground" className="modal-background active">
+    <div
+      id="modalBackground"
+      className="modal-background active"
+      onClick={onClose}
+    >
       <div className="modal">
         <button
           type="button"
