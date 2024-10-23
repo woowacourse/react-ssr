@@ -50,7 +50,10 @@ export async function renderMovieDetailPage({ movieId }) {
 
   const renderedPage = renderToString(
     <StaticRouter location={`/detail/${movieId}`}>
-      <MovieDetail movies={nowPlayingMovies} movieDetail={initialMovieDetail} />
+      <MovieDetail
+        movies={nowPlayingMovies}
+        initialMovieDetail={initialMovieDetail}
+      />
     </StaticRouter>
   );
 
