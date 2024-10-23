@@ -4,35 +4,30 @@ import path from "path";
 import { Router } from "express";
 import React from "react";
 import { renderToString } from "react-dom/server";
-import { StaticRouter } from "react-router-dom/server";
-import { loadNowPlaying } from "../../../public/scripts/loadMovies";
-import App from "../../client/app/App";
-import { MovieModalProvider } from "../../client/pages/MainPage/hooks/useMovieModal";
+import { createStaticHandler, createStaticRouter, StaticRouterProvider } from "react-router-dom/server";
+import routes from "../../client/app/routes";
 
 const router = Router();
 
 router.use(async (req, res) => {
-  const { id } = req.params;
+  const { query, dataRoutes } = createStaticHandler(routes);
+  const fetchRequest = new Request("http://localhost:3000" + req.url, {
+    method: req.method,
+  });
 
-  const movies = await loadNowPlaying();
+  const context = await query(fetchRequest);
+  const router = createStaticRouter(dataRoutes, context);
+
   const renderedApp = renderToString(
-    <StaticRouter location={req.url}>
-      <MovieModalProvider>{<App movies={movies} />}</MovieModalProvider>
-    </StaticRouter>
+    <StaticRouterProvider
+      router={router}
+      context={context}
+    />
   );
   const templatePath = path.resolve(__dirname, "index.html");
   const template = fs.readFileSync(templatePath, "utf8");
-  const initData = template.replace(
-    "<!--${INIT_DATA_AREA}-->",
-    /*html*/ `
-    <script>
-      window.__INITIAL_DATA__ = {
-        movies: ${JSON.stringify(movies)}
-      }
-    </script>
-  `
-  );
-  res.send(initData.replace('<div id="root"></div>', `<div id="root">${renderedApp}</div>`));
+
+  res.send(template.replace('<div id="root"></div>', `<div id="root">${renderedApp}</div>`));
 });
 
 export default router;

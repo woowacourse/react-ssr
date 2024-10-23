@@ -1,11 +1,8 @@
 import { CloseButton, StarEmpty } from "../../../shared/ImageResources";
 import { round } from "../../../shared/utils";
-import useMovieModal from "../hooks/useMovieModal";
-import React, { useEffect } from "react";
+import React from "react";
 
-function MovieModal() {
-  const { movieDetail, closeModal } = useMovieModal();
-
+function MovieModal({ movieDetail }) {
   const { title, bannerUrl, releaseYear, description } = movieDetail;
   const genres = movieDetail?.genres?.join(", ");
   const rate = round(movieDetail?.rate, 1);
@@ -19,7 +16,7 @@ function MovieModal() {
         <button
           className="close-modal"
           id="closeModal"
-          onClick={closeModal}
+          onClick={() => {}}
         >
           <img src={CloseButton} />
         </button>
