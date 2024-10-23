@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { CloseButton, StarEmpty } from "../../../shared/ImageResources";
 import { round } from "../../../shared/utils";
 import React from "react";
@@ -13,13 +14,13 @@ function MovieModal({ movieDetail }) {
       id="modalBackground"
     >
       <div className="modal">
-        <button
+        <Link
           className="close-modal"
           id="closeModal"
-          onClick={() => {}}
+          to="/"
         >
           <img src={CloseButton} />
-        </button>
+        </Link>
         <div className="modal-container">
           <div className="modal-image">
             <img src={bannerUrl} />
