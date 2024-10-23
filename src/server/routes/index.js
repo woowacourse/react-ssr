@@ -6,9 +6,8 @@ import React from "react";
 import { renderToString } from "react-dom/server";
 import { StaticRouter } from "react-router-dom/server";
 import { loadNowPlaying } from "../../../public/scripts/loadMovies";
-import MainPage from "../../client/pages/MainPage/MainPage";
+import App from "../../client/app/App";
 import { MovieModalProvider } from "../../client/pages/MainPage/hooks/useMovieModal";
-import MainPageWithModal from "../../client/pages/MainPage/MainPageWithModal";
 
 const router = Router();
 
@@ -18,9 +17,7 @@ router.use(async (req, res) => {
   const movies = await loadNowPlaying();
   const renderedApp = renderToString(
     <StaticRouter location={req.url}>
-      <MovieModalProvider>
-        {id ? <MainPageWithModal movies={movies} /> : <MainPage movies={movies} />}
-      </MovieModalProvider>
+      <MovieModalProvider>{<App movies={movies} />}</MovieModalProvider>
     </StaticRouter>
   );
   const templatePath = path.resolve(__dirname, "index.html");
