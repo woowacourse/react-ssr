@@ -9,7 +9,7 @@ export const fetchPopularMovies = async () => {
   return await response.json();
 };
 
-export const fetchMovieDetail = async () => {
-  const response = await fetch(TMDB_MOVIE_DETAIL_URL, FETCH_OPTIONS);
+export const fetchMovieDetail = async (id) => {
+  const response = await fetch(TMDB_MOVIE_DETAIL_URL(id), FETCH_OPTIONS);
   return await response.json();
 };

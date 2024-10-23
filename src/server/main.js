@@ -3,6 +3,7 @@ import express from "express";
 import path from "path";
 
 import movieRouter from "./routes/index.js";
+import movieDetailRouter from "./routes/detail.js";
 
 const app = express();
 const PORT = 3000;
@@ -16,6 +17,7 @@ app.use("/static", (req, res) => {
 
 // 메인 페이지 라우트 (React 앱 렌더링)
 app.get("/", movieRouter);
+app.get("/detail/:id", movieDetailRouter);
 
 // 그 외 모든 경로에 대한 404 처리
 app.use((req, res) => {
