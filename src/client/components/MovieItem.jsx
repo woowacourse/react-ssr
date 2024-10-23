@@ -1,15 +1,12 @@
-import React, { useState } from "react";
+import React from "react";
 import starEmptyImage from "@images/star_empty.png";
-import { useModal } from "../context/ModalContext";
 import { useNavigate } from "react-router-dom";
 
 const MovieItem = ({ movie }) => {
   const { thumbnail, rate, title, id } = movie;
-  const { openModal } = useModal();
   const navigate = useNavigate();
 
   const handleOpenDetailModal = () => {
-    openModal();
     navigate(`/detail/${id}`);
   };
 

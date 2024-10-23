@@ -1,13 +1,11 @@
 import CloseButton from "@images/modal_button_close.png";
 import StarEmpty from "@images/star_empty.png";
 import React, { useEffect, useState } from "react";
-import { useModal } from "../context/ModalContext";
 import { useNavigate, useParams } from "react-router-dom";
 import { getMovieDetail } from "../../server/routes/movieList";
 
 const MovieDetailModal = ({ detailMovie }) => {
   const { id } = useParams();
-  const { closeModal } = useModal();
   const [detailMovieData, setDetailMovieData] = useState(detailMovie);
 
   const navigate = useNavigate();
@@ -23,7 +21,6 @@ const MovieDetailModal = ({ detailMovie }) => {
   }, [id]);
 
   const handleMoveHome = () => {
-    closeModal();
     setDetailMovieData(null);
     navigate("/");
   };
