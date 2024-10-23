@@ -1,14 +1,23 @@
 import React from 'react';
-import Header from './components/Header.jsx';
-import Footer from './components/Footer.jsx';
-import MovieList from './components/MovieList.jsx';
+import Layout from './Layout.jsx';
+import { Route, Routes } from 'react-router-dom';
+import MovieDetailModal from './components/MovieDetailModal.jsx';
 
-function App({ movieList }) {
+function App({ movieList, movieDetail }) {
   return (
     <>
-      <Header movie={movieList[0]} />
-      <MovieList movieList={movieList} />
-      <Footer />
+      <Routes>
+        <Route path='/' element={<Layout movieList={movieList} />} />
+        <Route
+          path='/detail/:id'
+          element={
+            <Layout movieList={movieList}>
+              <MovieDetailModal movie={movieDetail} />
+            </Layout>
+          }
+        />
+        <Route path='*' element={<div>에러에요 ㅎㅎ</div>} />
+      </Routes>
     </>
   );
 }

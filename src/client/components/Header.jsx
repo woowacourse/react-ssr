@@ -1,6 +1,8 @@
 import { TMDB_BANNER_URL } from '../constants.js';
 import { round } from '../utils';
-import React from 'react'; // 왜 react import 없으면 안되는거지?
+import React from 'react';
+import LogoImage from '@images/logo.png';
+import StarEmptyImage from '@images/star_empty.png';
 
 function Header({ movie }) {
   const { title, rate, background } = movie;
@@ -13,11 +15,11 @@ function Header({ movie }) {
         <div className='overlay' aria-hidden='true'></div>
         <div className='top-rated-container'>
           <h1 className='logo'>
-            <img src='../assets/images/logo.png' alt='MovieList' />
+            <img src={LogoImage} alt='MovieList' />
           </h1>
           <div className='top-rated-movie'>
             <div className='rate'>
-              <img src='../assets/images/star_empty.png' className='star' />
+              <img src={StarEmptyImage} className='star' />
               <span className='rate-value'>{round(rate, 1)}</span>
             </div>
             <div className='title'>{title}</div>
