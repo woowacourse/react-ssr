@@ -12,12 +12,10 @@ export default function MovieDetail({ movies, initialMovieDetail }) {
   const [isModalOpen, setIsModalOpen] = useState(true);
 
   const { id: movieId } = useParams();
-  const { movieDetailData } = useMovieDetailData({
+  const { isLoading, movieDetailData } = useMovieDetailData({
     initialMovieDetail,
     movieId,
   });
-
-  const currentMovieDetail = movieDetailData ?? initialMovieDetail;
 
   const navigate = useNavigate();
 
@@ -31,9 +29,9 @@ export default function MovieDetail({ movies, initialMovieDetail }) {
       <Header movie={movies[0]} />
       <MovieList movies={movies} />
       <Footer />
-      {isModalOpen && currentMovieDetail && (
+      {isModalOpen && movieDetailData && !isLoading && (
         <MovieDetailModal
-          movieDetail={currentMovieDetail}
+          movieDetail={movieDetailData}
           onClose={handleModalClose}
         />
       )}

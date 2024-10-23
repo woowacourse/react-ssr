@@ -38,6 +38,7 @@ export async function fetchMovieDetailData({ movieId }) {
     movieDetailData;
 
   return {
+    id: movieId,
     title,
     bannerUrl: `${TMDB_RESOURCE.IMAGE.THUMBNAIL_URL}${poster_path}`,
     releaseYear: release_date.substring(0, 4),
