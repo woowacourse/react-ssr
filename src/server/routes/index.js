@@ -4,13 +4,12 @@ import path from "path";
 import { Router } from "express";
 import React from "react";
 import { renderToString } from "react-dom/server";
-
 import { getMovieList } from "./movieList";
 import { StaticRouter } from "react-router-dom/server";
 
 const router = Router();
 
-router.use("/", async (req, res) => {
+router.use("/", async (_, res) => {
   try {
     //1. 데이터 패칭
     const popularMovies = await getMovieList();
@@ -24,18 +23,19 @@ router.use("/", async (req, res) => {
       /*html*/ `
               <script>
                 window.__INITIAL_DATA__ = {
-                  movies: ${JSON.stringify(popularMovies)},
+                  movies: ${JSON.stringify(popularMovies)}
                 }
               </script>
             `
     );
 
     //3. 클라이언트의 뼈대 코드를 가져옴.
-    const renderedApp = renderToString(
+ const renderedApp = renderToString(
       <StaticRouter location={req}>
         <App popularMovies={popularMovies} detailMovie={null} />
       </StaticRouter>
     );
+
 
     //4. 클라이언트의 코드에 데이터를 삽입
     const renderedHTML = template.replace(
