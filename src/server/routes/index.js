@@ -1,59 +1,64 @@
-import { Router } from "express";
-import fs from "fs";
-import path from "path";
-import { fileURLToPath } from "url";
-
 import React from "react";
+import { Router } from "express";
+import { loadMovieDetail, loadPopularMovies } from "../apis/movie";
 import { renderToString } from "react-dom/server";
-import App from "../../client/App";
-import { FETCH_OPTIONS } from "../../constants/fetch";
-import { TMDB_MOVIE_LISTS } from "../../constants/tmdb";
-import TopRatedMovieView from "../../client/components/topRatedMovie/TopRatedMovieView";
-import MovieItem from "../../client/components/MovieItem";
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+import { StaticRouter } from "react-router-dom/server";
+import Home from "../../client/pages/Home";
+import Footer from "../../client/components/Footer";
+import renderPage from "../utils/renderPage";
+import MovieDetail from "../../client/pages/MovieDetail";
 
 const router = Router();
 
-const loadMovies = async (url) => {
-  const response = await fetch(url, FETCH_OPTIONS);
-  const data = await response.json();
+// main page
+router.get("/", async (req, res) => {
+  const popularMovies = await loadPopularMovies();
 
-  return data.results;
-};
+  const initData = /*html*/ `
+    <script>
+      window.__INITIAL_DATA__ = {
+        movies: ${JSON.stringify(popularMovies)}
+      }
+    </script>
+  `;
 
-const getTopRateMovie = (movies) => {
-  const topRateMovie = movies.reduce((highest, movie) => {
-    return movie.vote_average > highest.vote_average ? movie : highest;
-  }, movies[0]);
-
-  return topRateMovie;
-};
-
-router.get("/", async (_, res) => {
-  const templatePath = path.join(__dirname, "../../../views", "index.html");
-  const template = fs.readFileSync(templatePath, "utf-8");
-
-  const popularMovies = await loadMovies(TMDB_MOVIE_LISTS.popular);
-
-  const topRatedMovie = getTopRateMovie(popularMovies);
-
-  const topRatedMovieHTML = renderToString(<TopRatedMovieView movie={topRatedMovie} />);
-
-  const movieListHTML = renderToString(
-    <>
-      {popularMovies.map((movie) => (
-        <MovieItem key={movie.id} movie={movie} />
-      ))}
-    </>
+  const renderedApp = renderToString(
+    <StaticRouter location={req.url}>
+      <div id="wrap">
+        <Home movieItems={popularMovies} />
+        <Footer />
+      </div>
+    </StaticRouter>
   );
 
-  const renderedHTML = template
-    .replace("<!--${TOP_RATED_MOVIE_PLACEHOLDER}-->", topRatedMovieHTML)
-    .replace("<!--${MOVIE_ITEMS_PLACEHOLDER}-->", movieListHTML);
+  const templateHtml = renderPage(renderedApp, initData);
+  res.send(templateHtml);
+});
 
-  res.send(renderedHTML);
+router.get("/detail/:id", async (req, res) => {
+  const popularMovies = await loadPopularMovies();
+  const movieDetail = await loadMovieDetail(req.params.id);
+
+  const initData = /*html*/ `
+    <script>
+      window.__INITIAL_DATA__ = {
+        movies: ${JSON.stringify(popularMovies)},
+        movieDetail: ${JSON.stringify(movieDetail)}
+      }
+    </script>
+  `;
+
+  const renderedApp = renderToString(
+    <StaticRouter location={req.url}>
+      <div id="wrap">
+        <MovieDetail movieItems={popularMovies} serverMovieDetail={movieDetail} />
+        <Footer />
+      </div>
+    </StaticRouter>
+  );
+
+  const templateHtml = renderPage(renderedApp, initData);
+  res.send(templateHtml);
 });
 
 export default router;

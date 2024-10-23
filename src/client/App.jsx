@@ -1,10 +1,12 @@
 import React from "react";
-import Home from "./components/Home";
+import { Outlet } from "react-router-dom";
+import Footer from "./components/Footer";
 
 function App() {
   return (
-    <div>
-      <Home />
+    <div id="wrap">
+      <Outlet />
+      <Footer />
     </div>
   );
 }
