@@ -1,8 +1,9 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { TMDB_BANNER_URL } from '../constants';
 
 function Header({ bestMovie }) {
-  const { title, backdrop_path, vote_average } = bestMovie;
+  const { id, title, backdrop_path, vote_average } = bestMovie;
 
   return (
     <header>
@@ -21,7 +22,9 @@ function Header({ bestMovie }) {
               <span className="rate-value">{vote_average.toFixed(1)}</span>
             </div>
             <div className="title">{title}</div>
-            <button className="primary detail">자세히 보기</button>
+            <Link to={`/detail/${id}`}>
+              <button className="primary detail">자세히 보기</button>
+            </Link>
           </div>
         </div>
       </div>
