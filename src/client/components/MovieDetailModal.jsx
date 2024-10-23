@@ -29,6 +29,8 @@ const MovieDetailModal = ({ movie }) => {
       setMovieData(parseMovieDetail(data));
     };
 
+    if (movie) return;
+
     fetchMovieDetail(id);
   }, [id]);
 
