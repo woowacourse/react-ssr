@@ -10,8 +10,7 @@ import Header from '../../client/components/Header';
 import Home from '../../client/pages/Home';
 import MovieDetail from '../../client/pages/MovieDetail';
 
-import { getMovies, getMovieDetail } from '../apis/movie.js';
-import { TMDB_MOVIE_LISTS, TMDB_MOVIE_DETAIL_URL } from '../constants/index.js';
+import { HOST_URL } from '../constants/index.js';
 
 const router = Router();
 
@@ -19,7 +18,8 @@ router.get('/', async (_, res) => {
   const templatePath = path.resolve(__dirname, 'index.html');
   const template = fs.readFileSync(templatePath, 'utf8');
 
-  const movies = await getMovies(TMDB_MOVIE_LISTS.nowPlaying);
+  const response = await fetch(`${HOST_URL}/api/movies`);
+  const movies = await response.json();
 
   const renderedApp = renderToString(
     <StaticRouter location="/">
@@ -44,10 +44,11 @@ router.get('/detail/:id', async (req, res) => {
   const templatePath = path.resolve(__dirname, 'index.html');
   const template = fs.readFileSync(templatePath, 'utf8');
 
-  const movies = await getMovies(TMDB_MOVIE_LISTS.nowPlaying);
-  const movieDetail = await getMovieDetail(
-    TMDB_MOVIE_DETAIL_URL + req.params.id + '?language=ko-KR'
-  );
+  const moviesResponse = await fetch(`${HOST_URL}/api/movies`);
+  const movies = await moviesResponse.json();
+
+  const movieDetailResponse = await fetch(`${HOST_URL}/api/movie/${req.params.id}`);
+  const movieDetail = await movieDetailResponse.json();
 
   const renderedApp = renderToString(
     <StaticRouter location={req.url}>

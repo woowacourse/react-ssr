@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import Home from './Home';
 import Modal from '../components/Modal';
-import { TMDB_MOVIE_DETAIL_URL, FETCH_OPTIONS } from '../constants';
+import { HOST_URL } from '../constants';
 
 function MovieDetail({ movies, initialMovieDetail }) {
   const { id } = useParams();
@@ -12,7 +12,7 @@ function MovieDetail({ movies, initialMovieDetail }) {
     if (initialMovieDetail) return;
 
     const getMovieDetail = async () => {
-      const response = await fetch(TMDB_MOVIE_DETAIL_URL + id + '?language=ko-KR', FETCH_OPTIONS);
+      const response = await fetch(`${HOST_URL}/movie/${id}`);
       const data = await response.json();
 
       setMovieDetail(data);
