@@ -1,21 +1,23 @@
-import React, { useState } from "react";
-import MovieItem from "./components/MovieItem";
+import React from "react";
+import { Route, Routes, useLocation } from "react-router-dom";
+import Home from "./pages/Home";
+import Modal from "./components/Modal";
 
 function App({ initialData }) {
-  const [movies, setMovies] = useState(initialData || []);
+  const location = useLocation();
+  const state = location.state?.backgroundLocation || { pathname: "/" };
+
+  const isDetailPage = location.pathname.startsWith("/detail/");
 
   return (
-    <ul className="thumbnail-list">
-      {movies?.map(({ id, title, vote_average, poster_path }) => (
-        <li key={id}>
-          <MovieItem
-            vote_average={vote_average.toFixed(1)}
-            title={title}
-            poster_path={poster_path}
-          />
-        </li>
-      ))}
-    </ul>
+    <>
+      <Routes location={isDetailPage ? state : location}>
+        <Route path="/" element={<Home initialData={initialData} />} />
+        <Route path="*" element={<p>404 - Page Not Found</p>} />
+      </Routes>
+
+      {isDetailPage && <Modal initialData={initialData} />}
+    </>
   );
 }
 

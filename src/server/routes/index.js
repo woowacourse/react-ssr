@@ -1,48 +1,75 @@
-import { Router } from "express";
 import fs from "fs";
 import path from "path";
-import { fileURLToPath } from "url";
-
 import React from "react";
+import { Router } from "express";
 import { renderToString } from "react-dom/server";
-import App from "../../client/App";
-
-import { TMDB_THUMBNAIL_URL } from "../../apis/constants";
-import { fetchPopularMovieItems } from "../../apis/movies";
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
+import fetchMovies from "../apis/movies.js";
+import App from "../../client/App.jsx";
+import { StaticRouter } from "react-router-dom/server";
 const router = Router();
 
-router.get("/", async (_, res) => {
+router.get("/", async (req, res) => {
+  const templatePath = path.resolve(__dirname, "index.html");
   try {
-    const popularMovies = await fetchPopularMovieItems();
-    const bestMovie = popularMovies[0];
-
-    const templatePath = path.join(__dirname, "../../../views", "index.html");
-    const renderedApp = renderToString(<App initialData={popularMovies} />);
+    const movies = await fetchMovies.popular();
+    const initialData = { movies: movies };
+    const renderedApp = renderToString(
+      <StaticRouter location={req.url}>
+        <App initialData={initialData} />
+      </StaticRouter>
+    );
 
     const template = fs.readFileSync(templatePath, "utf-8");
 
-    const renderedHTML = template
-      .replace("<!--${MOVIE_ITEMS_PLACEHOLDER}-->", renderedApp)
-      .replace("${bestMovie.rate}", bestMovie.vote_average.toFixed(1))
-      .replace("${bestMovie.title}", bestMovie.title)
-      .replace(
-        "${background-container}",
-        TMDB_THUMBNAIL_URL + bestMovie.backdrop_path
-      )
-      .replace(
-        "<!--${INIT_DATA_AREA}-->",
-        `<script>window.__INITIAL_DATA__ = ${JSON.stringify(
-          popularMovies
-        )}</script>`
-      );
+    const initData = /*html*/ `
+      <script>
+        window.__INITIAL_DATA__ = {
+          movies: ${JSON.stringify(initialData.movies)}
+        }
+      </script>
+    `;
 
-    res.send(renderedHTML);
+    res.send(
+      template.replace(
+        '<div id="root"></div>',
+        `<div id="root">${renderedApp}</div>${initData}`
+      )
+    );
   } catch (error) {
-    console.log(error);
+    res.status(500).send(error.message);
+  }
+});
+
+router.get("/detail/:id", async (req, res) => {
+  const movieId = req.params.id;
+  const templatePath = path.resolve(__dirname, "index.html");
+  try {
+    const movies = await fetchMovies.popular();
+    const movieDetail = await fetchMovies.detail(movieId);
+    const initialData = { movies: movies, movieDetail: movieDetail };
+    const renderedApp = renderToString(
+      <StaticRouter location={req.url}>
+        <App initialData={initialData} />
+      </StaticRouter>
+    );
+    const template = fs.readFileSync(templatePath, "utf-8");
+    const initData = /*html*/ `
+      <script>
+        window.__INITIAL_DATA__ = {
+          movies: ${JSON.stringify(initialData.movies)},
+          movieDetail: ${JSON.stringify(initialData.movieDetail)}
+        }
+      </script>
+    `;
+
+    res.send(
+      template.replace(
+        '<div id="root"></div>',
+        `<div id="root">${renderedApp}</div>${initData}`
+      )
+    );
+  } catch (error) {
+    res.status(500).send(error.message);
   }
 });
 
