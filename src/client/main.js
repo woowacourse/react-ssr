@@ -1,11 +1,9 @@
 import React from 'react';
 import { hydrateRoot } from 'react-dom/client';
-import App from './App.jsx';
-
-// 서버에서 전달된 초기 데이터 가져오기
-const initialData = window.__INITIAL_DATA__ || [];
+import { RouterProvider } from 'react-router-dom';
+import router from './routes.js';
 
 hydrateRoot(
   document.getElementById('root'),
-  <App movieList={initialData.length > 0 ? initialData : []} />
+  <RouterProvider router={router} />
 );
