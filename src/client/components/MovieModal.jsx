@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 import { TMDB_ORIGINAL_URL } from "../../constant";
 import { fetchMovieDetail } from "../../server/api";
@@ -8,10 +8,11 @@ import filledStar from "@images/star_filled.png";
 
 const MovieModal = ({ movieDetailItem }) => {
   const navigate = useNavigate();
+  const location = useLocation();
   const [detailItem, setDetailItem] = useState(movieDetailItem);
 
   const fetchDetail = async () => {
-    const movieId = window.location.pathname.split("/detail/")[1];
+    const movieId = location.pathname.split("/detail/")[1];
     const movieDetail = await fetchMovieDetail(movieId);
     setDetailItem(movieDetail);
   };
