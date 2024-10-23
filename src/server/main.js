@@ -1,22 +1,16 @@
-import './config.js';
+import "./config.js";
 
-import express from 'express';
-import { fileURLToPath } from 'url';
-import movieRouter from './routes/index.js';
-import path from 'path';
+import express from "express";
+import movieRouter from "./routes/index.js";
+import path from "path";
+
 
 const app = express();
 const PORT = 3000;
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+app.use("/static", express.static(path.join(__dirname)));
+app.use("/", movieRouter);
 
-app.use(
-  '/assets',
-  express.static(path.join(__dirname, '../../dist/server/assets'))
-);
-
-app.use('/', movieRouter);
 
 // Start server
 app.listen(PORT, () => {
