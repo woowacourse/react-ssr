@@ -12,10 +12,9 @@ import { routes } from './routes';
 
 const router = Router();
 
-router.get('/', async (req, res) => {
+router.get('/', async (_, res) => {
   const { query, dataRoutes } = createStaticHandler(routes);
-  // const fetchRequest = createFetchRequest(req, res);
-  const context = await query(new Request('http://localhost:3000'));
+  const context = await query(new Request(`http://localhost:3000`));
   const router = createStaticRouter(dataRoutes, context);
 
   const renderedApp = renderToString(
