@@ -13,7 +13,20 @@ const fetchWithHeader = async (url) => {
 };
 
 export const getPopularMovies = async () => {
-  const data = await fetchWithHeader(`${BASE_URL}/popular`);
+  const data = await fetchWithHeader(`${BASE_URL}/popular?language=ko-KR&page=1`);
 
   return data.results;
+};
+
+export const getMovieDetail = async (movieId) => {
+  const data = await fetchWithHeader(`${BASE_URL}/${movieId}?language=ko-KR`);
+
+  return {
+    title: data.title,
+    thumbnail: data.poster_path,
+    releaseYear: data.release_date.split("-")[0],
+    genres: data.genres.map(({ name }) => name),
+    rate: data.vote_average.toFixed(1),
+    description: data.overview,
+  };
 };
