@@ -1,6 +1,7 @@
 import React from "react";
+import { Link } from "react-router-dom";
+
 import StarEmptyImage from "@images/star_empty.png";
-import { useNavigate } from "react-router-dom";
 
 export default function MovieList({ movies }) {
   return (
@@ -27,18 +28,18 @@ export default function MovieList({ movies }) {
 }
 
 function MovieItem({ id, rate, title, posterPath }) {
-  const navigate = useNavigate();
-
   return (
-    <li className="item" onClick={() => navigate(`/detail/${id}`)}>
-      <img className="thumbnail" src={posterPath} alt={title} />
-      <div className="item-desc">
-        <p className="rate">
-          <img src={StarEmptyImage} alt="별점 아이콘" className="star" />
-          <span>{rate}</span>
-        </p>
-        <strong>{title}</strong>
-      </div>
+    <li className="item">
+      <Link to={`/detail/${id}`}>
+        <img className="thumbnail" src={posterPath} alt={title} />
+        <div className="item-desc">
+          <p className="rate">
+            <img src={StarEmptyImage} alt="별점 아이콘" className="star" />
+            <span>{rate}</span>
+          </p>
+          <strong>{title}</strong>
+        </div>
+      </Link>
     </li>
   );
 }
