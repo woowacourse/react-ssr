@@ -7,17 +7,15 @@ import { fetchMovieDetails } from "../../apis/fetchMovies";
 function MovieDetail({ movies, movieDetail }) {
   const { id } = useParams();
   const [movieDetailState, setMovieDetailState] = useState(movieDetail);
-  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
+    if (movieDetail) return;
     const fetchData = async () => {
       try {
         const fetchedData = await fetchMovieDetails(id);
         setMovieDetailState(fetchedData);
       } catch (error) {
         console.error("Error fetching movie details:", error);
-      } finally {
-        setIsLoading(false);
       }
     };
 
