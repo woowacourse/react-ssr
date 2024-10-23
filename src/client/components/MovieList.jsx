@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 import { TMDB_THUMBNAIL_URL } from "../constants";
 
@@ -6,30 +7,27 @@ import starEmptyImage from "@images/star_empty.png";
 
 export default function MovieList({ movies }) {
   return (
-    <div className="container">
-      <main>
-        <section>
-          <h2>지금 인기 있는 영화</h2>
-          {movies && (
-            <ul className="thumbnail-list">
-              {movies.map((movie) => (
-                <li key={movie.id}>
-                  <MovieItem movie={movie} />
-                </li>
-              ))}
-            </ul>
-          )}
-        </section>
-      </main>
-    </div>
+    <>
+      {movies && (
+        <ul className="thumbnail-list">
+          {movies.map((movie) => (
+            <li key={movie.id}>
+              <MovieItem movie={movie} />
+            </li>
+          ))}
+        </ul>
+      )}
+    </>
   );
 }
 
 function MovieItem({ movie }) {
-  const { title, poster_path, vote_average } = movie;
+  const navigate = useNavigate();
+
+  const { id, title, poster_path, vote_average } = movie;
 
   return (
-    <div className="item">
+    <div className="item" onClick={() => navigate(`/detail/${id}`)}>
       <img
         className="thumbnail"
         src={`${TMDB_THUMBNAIL_URL}/${poster_path}`}
