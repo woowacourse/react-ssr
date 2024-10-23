@@ -10,6 +10,7 @@ module.exports = {
     alias: {
       "@images": path.resolve(__dirname, "public/images"),
       "@styles": path.resolve(__dirname, "public/styles"),
+      "@client": path.resolve(__dirname, "src/client"),
     },
   },
   module: {

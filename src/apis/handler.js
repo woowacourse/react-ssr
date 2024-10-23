@@ -1,4 +1,4 @@
-import { TMDB_MOVIE_LISTS } from "./endpoints";
+import { TMDB_MOVIE_DETAIL_URL, TMDB_MOVIE_LISTS } from "./endpoints";
 
 export const FETCH_OPTIONS = {
   method: "GET",
@@ -13,4 +13,14 @@ export const fetchPopularMovieList = async () => {
   const data = await response.json();
 
   return data.results;
+};
+
+export const fetchMovieDetail = async id => {
+  const url = TMDB_MOVIE_DETAIL_URL + id;
+  const params = new URLSearchParams({
+    language: "ko-KR",
+  });
+  const response = await fetch(url + "?" + params, FETCH_OPTIONS);
+
+  return await response.json();
 };
