@@ -5,8 +5,8 @@ import { round } from '../utils.js';
 import StarEmptyImage from '@images/star_empty.png';
 import { useNavigate } from 'react-router-dom';
 
-function MovieItem(movie) {
-  const thumbnailFullUrl = TMDB_THUMBNAIL_URL + '/' + movie.background;
+function MovieItem({ background, title, id, rate }) {
+  const thumbnailFullUrl = TMDB_THUMBNAIL_URL + '/' + background;
   const navigate = useNavigate();
 
   const handleMovieClick = (id) => {
@@ -15,13 +15,13 @@ function MovieItem(movie) {
 
   return (
     <div className='item'>
-      <img className='thumbnail' src={thumbnailFullUrl} alt={movie.title} onClick={() => handleMovieClick(movie.id)} />
+      <img className='thumbnail' src={thumbnailFullUrl} alt={title} onClick={() => handleMovieClick(id)} />
       <div className='item-desc'>
         <p className='rate'>
           <img src={StarEmptyImage} className='star' />
-          <span>{round(movie.rate, 1)}</span>
+          <span>{round(rate, 1)}</span>
         </p>
-        <strong>{movie.title}</strong>
+        <strong>{title}</strong>
       </div>
     </div>
   );
