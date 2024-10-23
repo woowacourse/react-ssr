@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import MovieItem from "./components/MovieItem";
 import { TMDB_BACKGROUND_THUMBNAIL } from "./constants";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Modal from "./components/Modal";
 import logo from "@images/logo.png";
 import starEmpty from "@images/star_empty.png";
@@ -12,7 +12,7 @@ import { useParams } from "react-router-dom";
 const DetailPage = ({ movieDetail, movies }) => {
   const bestMovie = movies[0];
   const [clientMovieDetail, setClientMovieDetail] = useState();
-
+  const navigate = useNavigate();
   const { id } = useParams();
 
   useEffect(() => {
@@ -20,6 +20,10 @@ const DetailPage = ({ movieDetail, movies }) => {
       setClientMovieDetail(movieDetail);
     });
   }, []);
+
+  const handleClick = () => {
+    navigate("/");
+  };
 
   return (
     <div id="wrap">
@@ -59,14 +63,12 @@ const DetailPage = ({ movieDetail, movies }) => {
             <h2>지금 인기 있는 영화</h2>
             <ul className="thumbnail-list">
               {movies.map(({ id, title, vote_average, poster_path }) => (
-                <li key={id}>
-                  <Link to={`/detail/${id}`}>
-                    <MovieItem
-                      rate={vote_average}
-                      title={title}
-                      thumbnailUrl={poster_path}
-                    />
-                  </Link>
+                <li key={id} onClick={handleClick}>
+                  <MovieItem
+                    rate={vote_average}
+                    title={title}
+                    thumbnailUrl={poster_path}
+                  />
                 </li>
               ))}
             </ul>

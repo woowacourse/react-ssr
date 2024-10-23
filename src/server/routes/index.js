@@ -41,6 +41,7 @@ router.get("/", async (req, res) => {
 });
 
 router.get("/detail/:id", async (req, res) => {
+  console.log("detail");
   const movies = await getMovies();
   const movieDetail = await getMovieDetail(req.params.id);
 
