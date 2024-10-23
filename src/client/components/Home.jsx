@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
@@ -32,6 +31,7 @@ function Home({ movies, movieDetail }) {
   };
 
   useEffect(() => {
+    if (movies) return;
     const updateMovie = async () => {
       const movies = await getMovies.nowPlaying();
       setMovies(movies);
@@ -40,6 +40,7 @@ function Home({ movies, movieDetail }) {
   }, [getMovies.nowPlaying]);
 
   useEffect(() => {
+    if (movies) return;
     if (movieId === undefined) {
       setMovieDetail(null);
       return;
@@ -60,7 +61,6 @@ function Home({ movies, movieDetail }) {
         <Modal movieDetail={movieDetailState} onClose={modalCloseHandler} />
       )}
     </>
-
   );
 }
 
