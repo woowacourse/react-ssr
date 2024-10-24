@@ -31,16 +31,12 @@ export const getPopularMovies = async () => {
 };
 
 export const getMovieDetail = async (movieId) => {
-  const response = await fetch(
-    getMovieDetailUrl(movieId),
-    FETCH_OPTIONS
-  );
+  const response = await fetch(getMovieDetailUrl(movieId), FETCH_OPTIONS);
 
   if (!response.ok) {
     console.error("Fetch failed:", response.status, response.statusText);
     throw new Error(`Fetch failed with status ${response.status}`);
   }
 
-  const movieDetailData = response.json();
-  return movieDetailData.results;
+  return await response.json();
 };
