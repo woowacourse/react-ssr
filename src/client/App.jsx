@@ -26,7 +26,9 @@ function App({ movies, movieDetail }) {
           element={
             <>
               <Container movieItems={movies} />
-              {movieDetail && <MovieDetailModal movieDetail={movieDetail} />}
+              {movieDetail && (
+                <MovieDetailModal movieDetailData={movieDetail} />
+              )}
             </>
           }
         />
