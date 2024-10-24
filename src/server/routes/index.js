@@ -1,42 +1,70 @@
-import App from "../../client/App";
 import fs from "fs";
 import path from "path";
 
 import React from "react";
 import { Router } from "express";
 import { renderToString } from "react-dom/server";
-import { TMDB_MOVIE_LISTS, FETCH_OPTIONS } from "../../constants";
+import { StaticRouter } from "react-router-dom/server";
+import App from "../../client/App";
+import { getMovies, getMovieDetail } from "../api/movie";
 
 const router = Router();
 
-router.use("/", async (_, res) => {
-  const movies = (
-    await fetch(TMDB_MOVIE_LISTS.popular, FETCH_OPTIONS).then((res) =>
-      res.json()
-    )
-  ).results;
+router.get("/", async (req, res) => {
+  const movies = await getMovies();
 
-  const bestMovie = movies[0];
-
-  const renderedApp = renderToString(
-    <App movies={movies} bestMovie={bestMovie} />
-  );
   const templatePath = path.resolve(__dirname, "index.html");
   const template = fs.readFileSync(templatePath, "utf8");
-  const initData = template.replace(
+  const initHTML = template.replace(
     "<!--${INIT_DATA_AREA}-->",
     /*html*/ `
     <script>
       window.__INITIAL_DATA__ = {
         movies: ${JSON.stringify(movies)}
-        bestMovie: ${JSON.stringify(bestMovie)}
       }
     </script>
   `
   );
 
+  const renderedApp = renderToString(
+    <StaticRouter location={req.url}>
+      <App movies={movies} movieDetail={null} />
+    </StaticRouter>
+  );
+
   res.send(
-    initData.replace(
+    initHTML.replace(
+      '<div id="root"></div>',
+      `<div id="root">${renderedApp}</div>`
+    )
+  );
+});
+
+router.get("/detail/:id", async (req, res) => {
+  const movies = await getMovies();
+  const movieDetail = await getMovieDetail(req.params.id);
+  const templatePath = path.resolve(__dirname, "index.html");
+  const template = fs.readFileSync(templatePath, "utf8");
+  const initHTML = template.replace(
+    "<!--${INIT_DATA_AREA}-->",
+    /*html*/ `
+    <script>
+      window.__INITIAL_DATA__ = {
+        movies: ${JSON.stringify(movies)},
+        movieDetail: ${JSON.stringify(movieDetail)}
+      }
+    </script>
+  `
+  );
+
+  const renderedApp = renderToString(
+    <StaticRouter location={req.url}>
+      <App movies={movies} movieDetail={movieDetail} />
+    </StaticRouter>
+  );
+
+  res.send(
+    initHTML.replace(
       '<div id="root"></div>',
       `<div id="root">${renderedApp}</div>`
     )

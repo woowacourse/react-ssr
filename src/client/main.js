@@ -1,10 +1,14 @@
 import React from "react";
 import { hydrateRoot } from "react-dom/client";
+import { BrowserRouter } from "react-router-dom";
 import App from "./App";
-
-const { movies, bestMovie } = window.__INITIAL_DATA__;
 
 hydrateRoot(
   document.getElementById("root"),
-  <App movies={movies} bestMovie={bestMovie} />
+  <BrowserRouter>
+    <App
+      movies={window.__INITIAL_DATA__.movies}
+      movieDetail={window.__INITIAL_DATA__.movieDetail}
+    />
+  </BrowserRouter>
 );
