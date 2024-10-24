@@ -1,6 +1,6 @@
 {
-  "watch": ["src/server", "src/client"],
-  "ext": "js jsx json",
-  "ignore": ["dist", "node_modules"],
-  "exec": "npm run build:client && npm run build:server && node dist/server/server.js"
+	"watch": ["src/server", "src/client"],
+	"ext": "js jsx json",
+	"ignore": ["dist", "node_modules"],
+	"exec": "npm run build:client && npm run build:server && node dist/server.js"
 }
