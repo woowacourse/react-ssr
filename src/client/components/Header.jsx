@@ -3,10 +3,10 @@ import logoImg from "@images/logo.png";
 import starEmptyImg from "@images/star_empty.png";
 import React from "react";
 import { round } from "../utils";
+import { Link } from "react-router-dom";
 
 function Header({ movie }) {
   const { id, title, vote_average, backdrop_path } = movie;
-
   const bannerUrl = TMDB_BANNER_URL + backdrop_path;
 
   return (
@@ -19,13 +19,13 @@ function Header({ movie }) {
           </h1>
           <div className="top-rated-movie">
             <div className="rate">
-              <img src={starEmptyImg} className="star" />
+              <img src={starEmptyImg} className="star" alt="Star rating" />
               <span className="rate-value">{round(vote_average, 1)}</span>
             </div>
             <div className="title">{title}</div>
-            <button className="primary detail" onClick={() => alert("Clicked")}>
-              자세히 보기
-            </button>
+            <Link to={`/detail/${id}`}>
+              <button className="primary detail">자세히 보기</button>
+            </Link>
           </div>
         </div>
       </div>

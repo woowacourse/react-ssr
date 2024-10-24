@@ -1,15 +1,17 @@
 import React from "react";
-import Header from "./components/Header";
-import Container from "./components/Container";
-import Footer from "./components/Footer";
+import { Route, Routes } from "react-router-dom";
+import MainPage from "../client/pages/MainPage";
+import DetailPage from "../client/pages/DetailPage";
 
-function App({ movies }) {
+function App({ movies, movieDetail }) {
   return (
-    <div id="wrap">
-      <Header movie={movies[0]} />
-      <Container movies={movies} />
-      <Footer />
-    </div>
+    <Routes>
+      <Route path="/" element={<MainPage movies={movies} />} />
+      <Route
+        path="/detail/:id"
+        element={<DetailPage movies={movies} movieDetail={movieDetail} />}
+      />
+    </Routes>
   );
 }
 
