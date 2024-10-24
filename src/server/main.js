@@ -1,22 +1,23 @@
 import "./config.js";
 import express from "express";
 import path from "path";
-import { fileURLToPath } from "url";
 
 import movieRouter from "./routes/index.js";
 
 const app = express();
 const PORT = 3000;
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+// 정적 파일 제공
+app.use("/static", express.static(path.join(__dirname)));
 
-app.use("/assets", express.static(path.join(__dirname, "../../public")));
-app.use("/client", express.static(path.join(__dirname, "../../dist/client")));
+// 존재하지 않는 정정 파일 404 처리
+app.use("/static", (req, res) => {
+  res.status(404).send("Resource not found");
+});
 
-app.use("/", movieRouter);
+// 메인 페이지 라우트 (리액트 앱 렌더링)
+app.get("*", movieRouter);
 
-// Start server
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
 });

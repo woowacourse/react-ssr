@@ -1,8 +1,11 @@
 import React from "react";
-import MovieList from "./components/MovieList";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import routes from "../common/routes";
 
-function App({ movies }) {
-  return <MovieList movies={movies} />;
+const router = createBrowserRouter(routes);
+
+function App() {
+  return <RouterProvider router={router} />;
 }
 
 export default App;

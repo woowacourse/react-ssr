@@ -1,15 +1,16 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const CopyPlugin = require("copy-webpack-plugin");
+const Dotenv = require("dotenv-webpack");
 
 module.exports = {
-  module: "development",
+  mode: "development",
   entry: "./src/client/main.js",
   output: {
-    path: path.resolve("dist/client"),
+    path: path.resolve("dist"),
     filename: "bundle.js",
     clean: true,
-    publicPath: "/client", // 페이지 요청과 bundle.js 요청을 구분하기 위함
+    publicPath: "/static/",
   },
   devtool: "source-map",
   module: {
@@ -28,24 +29,34 @@ module.exports = {
         test: /\.css$/,
         use: ["style-loader", "css-loader"],
       },
+      {
+        test: /\.(png|jpe?g|gif|svg)$/i,
+        type: "asset/resource",
+        generator: {
+          filename: "images/[name][ext]",
+        },
+      },
     ],
   },
   plugins: [
     new HtmlWebpackPlugin({
       template: "./views/index.html",
-      // 빌드 과정에서 template의 placeholder가 주석으로 인식되어 사라지는 문제 방지를 위함
-      minify: {
-        collapseWhitespace: true,
-        removeComments: false,
-      },
+      filename: "index.html",
+      inject: "body",
     }),
     new CopyPlugin({
       patterns: [
-        { from: "public/images", to: "images" }, // public 폴더의 이미지를 dist로 복사
+        { from: "public/images", to: "images" },
+        { from: "public/styles", to: "styles" },
       ],
     }),
+    new Dotenv(),
   ],
   resolve: {
+    alias: {
+      "@images": path.resolve(__dirname, "public/images"),
+      "@styles": path.resolve(__dirname, "public/styles"),
+    },
     extensions: [".js", ".jsx"],
   },
 };
