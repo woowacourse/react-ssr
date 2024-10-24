@@ -1,13 +1,14 @@
 import React from 'react';
-import Header from './components/Header';
-import HomePage from './components/Page';
+import {Route, Routes} from 'react-router-dom';
+import MainPage from './pages/MainPage';
+import DetailPage from './pages/DetailPage';
 
-function App({movies}) {
+function App({movies, movieDetail}) {
   return (
-    <div>
-      <Header movies={movies} />
-      <HomePage movies={movies} />
-    </div>
+    <Routes>
+      <Route path="/" element={<MainPage movies={movies} />} />
+      <Route path="/detail/:id" element={<DetailPage movies={movies} movieDetail={movieDetail} />} />
+    </Routes>
   );
 }
 
