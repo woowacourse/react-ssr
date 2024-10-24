@@ -28,7 +28,7 @@ export default function Movies({ movies }) {
             rate={vote_average}
             title={title}
             thumbnailUrl={poster_path}
-            onClick={() => console.log("hydrate")}
+            onClick={() => window.history.pushState({}, "", `/detail/${id}`)}
           />
         </li>
       ))}
