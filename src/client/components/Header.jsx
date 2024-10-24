@@ -1,10 +1,17 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 import logoImage from "@images/logo.png";
 import starEmptyImage from "@images/star_empty.png";
-import { TMDB_BANNER_URL } from "../constants/api";
+
+import { TMDB_BANNER_URL } from "../../common/constants/api";
+import { MOVIE_PAGE_PATH } from "../../common/constants/path";
 
 export default function Header({ bestMovie }) {
+  const navigate = useNavigate();
+  const routerToBestMovieDetailModal = () =>
+    navigate(MOVIE_PAGE_PATH.movieDetailById(bestMovie.id));
+
   return (
     <header>
       <div
@@ -28,7 +35,7 @@ export default function Header({ bestMovie }) {
             <div className="title">{bestMovie.title}</div>
             <button
               className="primary detail"
-              onClick={() => alert("Harry Mission Completed")}
+              onClick={routerToBestMovieDetailModal}
             >
               자세히 보기
             </button>

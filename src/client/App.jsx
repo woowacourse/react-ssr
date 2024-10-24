@@ -1,19 +1,11 @@
 import React from "react";
 
-import Header from "./components/Header";
-import MovieList from "./components/MovieList";
-import Footer from "./components/Footer";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
-function App({ movies }) {
-  const bestMovie = movies[0];
+import { routes } from "../common/router";
 
-  return (
-    <>
-      <Header bestMovie={bestMovie} />
-      <MovieList movies={movies} />
-      <Footer />
-    </>
-  );
+const router = createBrowserRouter(routes);
+
+export default function App() {
+  return <RouterProvider router={router} />;
 }
-
-export default App;
