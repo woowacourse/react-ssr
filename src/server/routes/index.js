@@ -1,40 +1,43 @@
 import { Router } from "express";
-import fs from "fs";
-import path from "path";
 
-import React from "react";
-import { renderToString } from "react-dom/server";
-import App from "../../client/App";
-import { fetchMoviesPopular } from "../apis/movie";
-import { parseMovieItems } from "../models/parseMovieItems";
+import { fetchMovieDetail, fetchMoviesPopular } from "../apis/movie";
+import renderMovieHome from "../render/renderMovieHome";
+import renderMovieDetail from "../render/renderMovieDetail";
+import { parseMovieDetail } from "../models/parseMovieDetail";
 
 const router = Router();
 
-router.get("/", async (_, res) => {
+router.get("/", async (req, res) => {
   const popularMovies = await fetchMoviesPopular();
-  const movieItems = parseMovieItems(popularMovies);
-  const bestMovieItem = movieItems[0];
 
-  const initData = /*html*/ `
-  <script>
-    window.__INITIAL_DATA__ = {
-      movies: ${JSON.stringify(movieItems)}
-    }
-  </script>
-  `;
+  const renderedHTML = renderMovieHome({ popularMovies, url: req.url });
+  res.send(renderedHTML);
+});
 
-  const renderedApp = renderToString(
-    <App popularMovies={movieItems} bestMovieItem={bestMovieItem} />
-  );
+router.get("/:movieId", async (req, res) => {
+  const movieId = req.params.movieId;
 
-  const templatePath = path.resolve(__dirname, "index.html");
-  const template = fs.readFileSync(templatePath, "utf-8");
+  const movieInfo = await fetchMovieDetail(movieId);
+  const movieDetail = parseMovieDetail(movieInfo);
 
-  res.send(
-    template
-      .replace('<div id="root"></div>', `<div id="root">${renderedApp}</div>`)
-      .replace("<!--${INIT_DATA_AREA}-->", initData)
-  );
+  res.send(movieDetail);
+});
+
+router.get("/detail/:movieId", async (req, res) => {
+  const movieId = req.params.movieId;
+
+  const popularMovies = await fetchMoviesPopular();
+  const movieInfo = await fetchMovieDetail(movieId);
+
+  const renderedHome = renderMovieHome({
+    popularMovies,
+    url: req.url,
+    movieInfo,
+  });
+
+  const renderedMovieDetail = renderMovieDetail(renderedHome, movieInfo);
+
+  res.send(renderedMovieDetail);
 });
 
 export default router;
