@@ -1,5 +1,5 @@
 import React from "react";
-import { TMDB_ORIGINAL_URL } from "../../server/api/endpoints.js";
+import { TMDB_ORIGINAL_URL } from "../../api/endpoints.js";
 import starFilledImage from "@images/star_filled.png";
 import modalButtonCloseImage from "@images/modal_button_close.png";
 

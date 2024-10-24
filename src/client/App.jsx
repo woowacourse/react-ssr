@@ -5,7 +5,7 @@ import Header from "./components/Header.jsx";
 import MovieList from "./components/MovieList.jsx";
 import Footer from "./components/Footer.jsx";
 import Modal from "./components/Modal.jsx";
-import { fetchMovieDetails } from "../server/api/movies.js";
+import { fetchMovieDetails } from "../api/movies.js";
 
 const App = ({ nowPlayingMovies, movieDetailItem }) => {
   const navigate = useNavigate();

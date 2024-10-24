@@ -1,5 +1,5 @@
 import React from "react";
-import { TMDB_THUMBNAIL_URL } from "../../server/api/endpoints";
+import { TMDB_THUMBNAIL_URL } from "../../api/endpoints";
 
 import starEmptyImage from "@images/star_empty.png";
 import { useNavigate } from "react-router-dom";

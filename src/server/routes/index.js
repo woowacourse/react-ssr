@@ -6,8 +6,8 @@ import { Router } from "express";
 import { renderToString } from "react-dom/server";
 import { StaticRouter } from "react-router-dom/server";
 
-import { TMDB_MOVIE_LISTS } from "../api/endpoints.js";
-import { fetchMovieDetails, fetchMovieList } from "../api/movies.js";
+import { TMDB_MOVIE_LISTS } from "../../api/endpoints.js";
+import { fetchMovieDetails, fetchMovieList } from "../../api/movies.js";
 
 import App from "../../client/App.jsx";
 
