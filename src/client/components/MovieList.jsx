@@ -1,7 +1,8 @@
 import React from 'react';
 import MovieItem from './MovieItem';
+import { Link } from 'react-router-dom';
 
-const Container = ({ movies }) => {
+const MovieList = ({ movies }) => {
   return (
     <div className="container">
       <main>
@@ -10,11 +11,13 @@ const Container = ({ movies }) => {
           <ul className="thumbnail-list">
             {movies.map(({ id, title, vote_average, poster_path }) => (
               <li key={id}>
-                <MovieItem
-                  rate={vote_average}
-                  title={title}
-                  thumbnailUrl={poster_path}
-                />
+                <Link to={`/detail/${id}`}>
+                  <MovieItem
+                    rate={vote_average}
+                    title={title}
+                    thumbnailUrl={poster_path}
+                  />
+                </Link>
               </li>
             ))}
           </ul>
@@ -24,4 +27,4 @@ const Container = ({ movies }) => {
   );
 };
 
-export default Container;
+export default MovieList;

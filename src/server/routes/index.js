@@ -1,37 +1,52 @@
-import App from '../../client/App';
+import React from 'react';
+import { Router } from 'express';
 import fs from 'fs';
 import path from 'path';
 
-import React from 'react';
-import { Router } from 'express';
 import { renderToString } from 'react-dom/server';
-import { fetchMovies } from '../apis/fetch';
-import { TMDB_MOVIE_LISTS } from '../apis/url';
+import {
+  createStaticHandler,
+  createStaticRouter,
+  StaticRouterProvider,
+} from 'react-router-dom/server';
+
+import { routes } from './routes';
 
 const router = Router();
 
-router.use('/', async (_, res) => {
-  const popularMovies = await fetchMovies(TMDB_MOVIE_LISTS.POPULAR);
-
-  const renderedApp = renderToString(<App movies={popularMovies} />);
+router.get('/', async (_, res) => {
+  let handler = createStaticHandler(routes);
+  let context = await handler.query(new Request('http://localhost:3000/'));
+  let router = createStaticRouter(handler.dataRoutes, context);
+  let html = renderToString(
+    <StaticRouterProvider router={router} context={context} />
+  );
 
   const templatePath = path.resolve(__dirname, 'index.html');
   const template = fs.readFileSync(templatePath, 'utf8');
 
-  const filledTemplate = template
-    .replace(
-      '<!--${INIT_DATA_AREA}-->',
-      /*html*/ `
-      <script>
-        window.__INITIAL_DATA__ = {
-          movies: ${JSON.stringify(popularMovies)}
-        };
-      </script>
-    `
-    )
-    .replace('<div id="root"></div>', `<div id="root">${renderedApp}</div>`);
+  res.send(
+    template.replace('<div id="root"></div>', `<div id="root">${html}</div>`)
+  );
+});
 
-  res.send(filledTemplate);
+router.get('/detail/:id', async (req, res) => {
+  const { id } = req.params;
+  let handler = createStaticHandler(routes);
+  let context = await handler.query(
+    new Request(`http://localhost:3000/detail/${id}`)
+  );
+  let router = createStaticRouter(handler.dataRoutes, context);
+  let html = renderToString(
+    <StaticRouterProvider router={router} context={context} />
+  );
+
+  const templatePath = path.resolve(__dirname, 'index.html');
+  const template = fs.readFileSync(templatePath, 'utf8');
+
+  res.send(
+    template.replace('<div id="root"></div>', `<div id="root">${html}</div>`)
+  );
 });
 
 export default router;
