@@ -8,7 +8,7 @@ export const fetchMovies = async () => {
 };
 
 export const fetchDetailMovie = async (id) => {
-  const url = TMDB_MOVIE_DETAIL_URL + id;
+  const url = `${TMDB_MOVIE_DETAIL_URL}${id}?language=ko-KR`;
   const response = await fetch(url, FETCH_OPTIONS);
   const data = await response.json();
 
