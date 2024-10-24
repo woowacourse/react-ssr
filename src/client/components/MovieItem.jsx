@@ -1,15 +1,24 @@
 import { TMDB_THUMBNAIL_URL } from "../../server/constants/constants";
 import React from "react";
+import round from "../utils/round.js";
+import { useNavigate, useLocation } from "react-router-dom";
 
-function MovieItem({ rate, title, thumbnailUrl }) {
+function MovieItem({ id, rate, title, thumbnailUrl }) {
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const handleMovieClick = (id) => {
+    navigate(`/detail/${id}`, { state: { background: location } }); // 모달 열기
+  };
+
   const thumbnailFullUrl = TMDB_THUMBNAIL_URL + "/" + thumbnailUrl;
 
   return (
-    <div className="item">
+    <div className="item" onClick={() => handleMovieClick(id)}>
       <img className="thumbnail" src={thumbnailFullUrl} alt={title} />
       <div className="item-desc">
         <p className="rate">
-          <img src="./static/images/star_empty.png" className="star" />
+          <img src="/static/images/star_empty.png" className="star" />
           <span>{round(rate, 1)}</span>
         </p>
         <strong>{title}</strong>
@@ -19,9 +28,3 @@ function MovieItem({ rate, title, thumbnailUrl }) {
 }
 
 export default MovieItem;
-
-export const round = (value, decimals = 0) => {
-  const factor = 10 ** decimals;
-
-  return Math.round(value * factor) / factor;
-};

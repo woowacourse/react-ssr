@@ -1,59 +1,75 @@
-import fs from "fs";
-import path from "path";
-import { fileURLToPath } from "url";
-
-import { FETCH_OPTIONS, TMDB_MOVIE_LISTS } from "../constants/constants";
 import React from "react";
-import { renderToString } from "react-dom/server";
 import App from "../../client/App";
+import { renderToString } from "react-dom/server";
+import { StaticRouter } from "react-router-dom/server";
+import { getPopularMovies, getMovieDetail } from "../../apis/movies";
+import { getInnerHTML } from "../../client/utils/template";
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
-const getBestMovie = (movies) => {
+const getBestMovieData = (movies) => {
   return movies.reduce(
     (best, movie) => (movie.vote_average > best.vote_average ? movie : best),
     movies[0]
   );
 };
 
-export const renderMoviesPage = async (_, res) => {
+const getBestMovie = async (moviesData) => {
+  const bestMovieData = getBestMovieData(moviesData);
+  const bestMovie = {
+    id: bestMovieData.id,
+    title: bestMovieData.title,
+    vote_average: bestMovieData.vote_average.toFixed(1),
+    backdrop_path: bestMovieData.backdrop_path,
+  };
+
+  return bestMovie;
+};
+
+export const renderMovieDetail = async (req, res) => {
+  const movieId = req.params.id;
+
   try {
-    const response = await fetch(
-      TMDB_MOVIE_LISTS["NOW_PLAYING"],
-      FETCH_OPTIONS
+    const popularMovies = await getPopularMovies();
+    const bestMovie = await getBestMovie(popularMovies);
+    const movieDetail = await getMovieDetail(movieId);
+
+    const renderedApp = renderToString(
+      <StaticRouter location={req.url}>
+        <App
+          movies={popularMovies}
+          bestMovie={bestMovie}
+          movieDetail={movieDetail}
+        />
+      </StaticRouter>
     );
 
-    const moviesData = await response.json();
-    const popularMovies = moviesData.results;
-  
-    const bestMovieData = getBestMovie(moviesData.results);
-    const bestMovie = {
-      id: bestMovieData.id,
-      title: bestMovieData.title,
-      vote_average: bestMovieData.vote_average.toFixed(1),
-      backdrop_path: bestMovieData.backdrop_path,
-    };
-  
+    const renderedHTML = getInnerHTML(renderedApp, [
+      { movies: popularMovies },
+      { bestMovie },
+      { movieDetail },
+    ]);
+
+    res.send(renderedHTML);
+  } catch (error) {
+    console.log(error.message);
+  }
+};
+
+export const renderMoviesPage = async (req, res) => {
+  try {
+    const popularMovies = await getPopularMovies();
+    const bestMovie = await getBestMovie(popularMovies);
+
     const renderedApp = renderToString(
-      <App movies={popularMovies} bestMovie={bestMovie} />
+      <StaticRouter location={req.url}>
+        <App movies={popularMovies} bestMovie={bestMovie} />
+      </StaticRouter>
     );
-    const templatePath = path.resolve(__dirname, "../../../views/index.html");
-    const template = fs.readFileSync(templatePath, "utf8");
-    const renderedHTML = template
-      .replace('<div id="root"></div>', `<div id="root">${renderedApp}</div>`)
-      .replace(
-        "<!--${INIT_DATA_AREA}-->",
-        /*html*/ `
-        <script>
-          window.__INITIAL_DATA__ = {
-            movies: ${JSON.stringify(popularMovies)},
-            bestMovie: ${JSON.stringify(bestMovie)}
-          }
-        </script>
-        `
-      );
-  
+
+    const renderedHTML = getInnerHTML(renderedApp, [
+      { movies: popularMovies },
+      { bestMovie },
+    ]);
+
     res.send(renderedHTML);
   } catch (error) {
     console.error("Error fetching movies:", error);

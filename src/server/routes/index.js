@@ -1,13 +1,17 @@
 import { Router } from "express";
 
-import { fileURLToPath } from "url";
-
-import { renderMoviesPage } from "../controllers/moviesController";
+import {
+  renderMoviesPage,
+  renderMovieDetail,
+} from "../controllers/moviesController";
 
 const router = Router();
 
 router.use("/", async (_, res) => {
-  renderMoviesPage(_, res);
+  await renderMoviesPage(_, res);
 });
 
+router.use("/detail/:id", async (req, res) => {
+  await renderMovieDetail(req, res);
+});
 export default router;
