@@ -1,17 +1,16 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
-import MovieDetailModal from "./components/MovieDetailModal";
-import MainLayout from "./MainLayout";
+import Home from "./Home";
+import Detail from "./components/Detail";
 
 const App = ({ movies, movieDetail }) => {
   return (
     <Routes>
-      <Route path="/" element={<MainLayout movies={movies} />}>
-        <Route
-          path="detail/:id"
-          element={<MovieDetailModal movieDetail={movieDetail} />}
-        />
-      </Route>
+      <Route path="/" element={<Home movies={movies} />} />
+      <Route
+        path="/detail/:id"
+        element={<Detail movies={movies} movieDetail={movieDetail} />}
+      />
     </Routes>
   );
 };
