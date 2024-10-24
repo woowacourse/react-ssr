@@ -11,4 +11,12 @@ export const loadPopular = async () => await (await loadMovies(TMDB_MOVIE_LISTS.
 export const loadTopRated = async () => await (await loadMovies(TMDB_MOVIE_LISTS.topRated)).results;
 export const loadUpcoming = async () => await (await loadMovies(TMDB_MOVIE_LISTS.upcoming)).results;
 
-export const loadMovieDetail = async (id) => await loadMovies(`${TMDB_MOVIE_DETAIL_URL}${id}`);
+export const loadMovieDetail = async (id) => {
+  const url = `${TMDB_MOVIE_DETAIL_URL}${id}`;
+  const params = new URLSearchParams({
+    language: "ko-KR",
+  });
+  const newUrl = url + "?" + params;
+
+  return await loadMovies(newUrl);
+};

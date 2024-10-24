@@ -1,9 +1,9 @@
-import React from "react";
+import React, { useEffect } from "react";
+import Header from "./components/Header";
 import Container from "./components/Container";
 import Footer from "./components/Footer";
-import Header from "./components/Header";
 
-function App({ movies }) {
+function MainPage({ movies }) {
   return (
     <>
       <Header movie={movies[0]} />
@@ -13,4 +13,4 @@ function App({ movies }) {
   );
 }
 
-export default App;
+export default MainPage;
