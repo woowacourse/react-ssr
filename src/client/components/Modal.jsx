@@ -1,6 +1,7 @@
 import * as React from "react";
 import { TMDB_ORIGINAL_URL } from "../constants";
 import { Link } from "react-router-dom";
+import starEmpty from "@images/star_empty.png";
 
 function Modal({ movieDetail }) {
   const title = movieDetail?.title || "";
@@ -26,6 +27,7 @@ function Modal({ movieDetail }) {
               {releaseYear} · {genres}
             </p>
             <p className="rate">
+              <img src={starEmpty} className="star" />
               <span>{Math.round(vote_average * 10) / 10}</span>
             </p>
             <hr />
