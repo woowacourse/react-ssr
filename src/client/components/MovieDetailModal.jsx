@@ -2,6 +2,8 @@ import React from "react";
 import { TMDB_THUMBNAIL_URL } from "../constants";
 import round from "../util/round";
 import { useNavigate } from "react-router-dom";
+import starEmptyImage from "@images/star_empty.png";
+import closeIcon from "@images/modal_button_close.png";
 
 const MovieDetailModal = ({ movieDetail }) => {
   const navigate = useNavigate();
@@ -13,7 +15,7 @@ const MovieDetailModal = ({ movieDetail }) => {
     <div className="modal-background active">
       <div className="modal">
         <button className="close-modal" onClick={handleClick}>
-          <img src="/static/images/modal_button_close.png" alt="닫기" />
+          <img src={closeIcon} alt="닫기" />
         </button>
         <div className="modal-container">
           <div className="modal-image">
@@ -29,11 +31,7 @@ const MovieDetailModal = ({ movieDetail }) => {
               {movieDetail.genres?.map((genre) => genre.name).join(", ")}
             </p>
             <p className="rate">
-              <img
-                src="/static/images/star_filled.png"
-                className="star"
-                alt=""
-              />
+              <img src={starEmptyImage} className="star" alt="평점" />
               <span>{round(movieDetail.vote_average)}</span>
             </p>
             <hr />
