@@ -1,14 +1,20 @@
 import React from "react";
 import { TMDB_THUMBNAIL_URL } from "../constants";
 import round from "../util/round";
+import { useNavigate } from "react-router-dom";
 
 const MovieDetailModal = ({ movieDetail }) => {
+  const navigate = useNavigate();
+  const handleClick = () => {
+    navigate("/");
+  };
+
   return (
     <div className="modal-background active">
       <div className="modal">
-        <a className="close-modal" href="/">
+        <button className="close-modal" onClick={handleClick}>
           <img src="/static/images/modal_button_close.png" alt="" />
-        </a>
+        </button>
         <div className="modal-container">
           <div className="modal-image">
             <img
