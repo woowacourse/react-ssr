@@ -1,33 +1,23 @@
 import React from 'react';
-import MovieListItem from './components/MovieListItem.jsx';
-import Header from './components/Header.jsx';
+import { Routes, Route } from 'react-router-dom';
 
-import woowacourseLogo from '@images/woowacourse_logo.png';
+import { ROUTE_PATHS } from '../constants/routePath';
 
-function App({ movies }) {
+import AppLayout from './components/AppLayout';
+
+import MainPage from './pages/MainPage';
+import MovieDetailPage from './pages/MovieDetailPage';
+
+export default function App({ initialMovieDetail, movies }) {
   return (
-    <>
-      <Header movie={movies[0]} />
-      <div className="container">
-        <main>
-          <section>
-            <h2>지금 인기 있는 영화</h2>
-            <ul className="thumbnail-list">
-              {movies.map((movie) => (
-                <MovieListItem key={movie.id} movie={movie} />
-              ))}
-            </ul>
-          </section>
-        </main>
-      </div>
-      <footer class="footer">
-        <p>&copy; 우아한테크코스 All Rights Reserved.</p>
-        <p>
-          <img src={woowacourseLogo} width="180" />
-        </p>
-      </footer>
-    </>
+    <Routes>
+      <Route element={<AppLayout movies={movies} />}>
+        <Route path={ROUTE_PATHS.root} element={<MainPage movies={movies} />} />
+        <Route
+          path={ROUTE_PATHS.movieDetail}
+          element={<MovieDetailPage initialMovieDetail={initialMovieDetail} movies={movies} />}
+        />
+      </Route>
+    </Routes>
   );
 }
-
-export default App;

@@ -101,6 +101,7 @@ h1.logo {
   display: flex;
   align-items: baseline;
   color: var(--color-yellow);
+  gap: 4px;
 }
 
 .rate > img {

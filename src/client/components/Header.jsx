@@ -2,8 +2,10 @@ import React from 'react';
 
 import logo from '@images/logo.png';
 import starEmptyImage from '@images/star_empty.png';
+import { useNavigate } from 'react-router-dom';
 
 export default function Header({ movie }) {
+  const navigate = useNavigate();
   return (
     <header>
       <div
@@ -21,7 +23,9 @@ export default function Header({ movie }) {
               <span className="rate-value">{movie.rate}</span>
             </div>
             <div className="title">{movie.title}</div>
-            <button className="primary detail">자세히 보기</button>
+            <button className="primary detail" onClick={() => navigate(`detail/${movie.id}`)}>
+              자세히 보기
+            </button>
           </div>
         </div>
       </div>
