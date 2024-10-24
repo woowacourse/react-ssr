@@ -43,8 +43,6 @@ router.get("/", async (req, res) => {
 router.get("/detail/:id", async (req, res) => {
   const movies = await getMovies();
   const movieDetail = await getMovieDetail(req.params.id);
-  console.log(movieDetail);
-
   const templatePath = path.resolve(__dirname, "index.html");
   const template = fs.readFileSync(templatePath, "utf8");
   const initHTML = template.replace(
