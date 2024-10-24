@@ -11,6 +11,7 @@ function Home({ movieList }) {
             {movieList.map(({ id, title, poster_path, vote_average }) => (
               <li key={id}>
                 <MovieItem
+                  id={id}
                   title={title}
                   thumbnailUrl={poster_path}
                   rate={vote_average}

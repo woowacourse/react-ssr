@@ -3,6 +3,7 @@ import logoImage from '@images/logo.png';
 import starEmptyImage from '@images/star_empty.png';
 import { TMDB_BANNER_URL } from '../src/constants';
 import { round } from '../../utils';
+import { Link } from 'react-router-dom';
 
 function Header({ bestMovie }) {
   return (
@@ -26,12 +27,9 @@ function Header({ bestMovie }) {
               </span>
             </div>
             <div className='title'>{bestMovie.title}</div>
-            <button
-              className='primary detail'
-              onClick={() => alert(bestMovie.title)}
-            >
-              자세히 보기
-            </button>
+            <Link to={`/detail/${bestMovie.id}`}>
+              <button className='primary detail'>자세히 보기</button>
+            </Link>
           </div>
         </div>
       </div>
