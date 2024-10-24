@@ -2,6 +2,8 @@ import React from "react";
 import { TMDB_BANNER_URL } from "../constants.js";
 import starEmptyImage from "@images/star_empty.png";
 import logoImage from "@images/logo.png";
+import round from "../util/round.js";
+import { Link } from "react-router-dom";
 
 const Header = ({ movie }) => {
   return (
@@ -20,15 +22,12 @@ const Header = ({ movie }) => {
           <div className="top-rated-movie">
             <div className="rate">
               <img src={starEmptyImage} className="star" />
-              <span className="rate-value">{movie.vote_average}</span>
+              <span className="rate-value">{round(movie.vote_average)}</span>
             </div>
             <div className="title">{movie.title}</div>
-            <button
-              className="primary detail"
-              onClick={() => console.log("hydrate")}
-            >
+            <Link className="primary detail" to={`/detail/${movie.id}`}>
               자세히 보기
-            </button>
+            </Link>
           </div>
         </div>
       </div>

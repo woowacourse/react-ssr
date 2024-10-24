@@ -1,10 +1,12 @@
 import React from "react";
 import { TMDB_THUMBNAIL_URL } from "../constants.js";
 import starEmptyImage from "@images/star_empty.png";
+import round from "../util/round.js";
+import { Link } from "react-router-dom";
 
-const MovieItem = ({ posterUrl, title, voteAverage, handleClick }) => {
+const MovieItem = ({ id, posterUrl, title, voteAverage }) => {
   return (
-    <div className="item" onClick={handleClick}>
+    <Link className="item" to={`/detail/${id}`}>
       <img
         className="thumbnail"
         src={`${TMDB_THUMBNAIL_URL}${posterUrl}`}
@@ -13,11 +15,11 @@ const MovieItem = ({ posterUrl, title, voteAverage, handleClick }) => {
       <div className="item-desc">
         <p className="rate">
           <img src={starEmptyImage} className="star" alt="" />
-          <span>{voteAverage}</span>
+          <span>{round(voteAverage)}</span>
         </p>
         <strong>{title}</strong>
       </div>
-    </div>
+    </Link>
   );
 };
 
