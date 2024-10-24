@@ -1,37 +1,68 @@
-import { Router } from "express";
 import fs from "fs";
 import path from "path";
-import { fileURLToPath } from "url";
-import { renderToString } from "react-dom/server";
 import React from "react";
-import { fetchNowPlayingMovies } from "../api";
-import App from "../../client/App";
+import { Router } from "express";
+import { renderToString } from "react-dom/server";
+import { StaticRouter } from "react-router-dom/server";
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+import { fetchMovieDetail, fetchMovies } from "../api";
+import { TMDB_MOVIE_LISTS } from "../../constant";
+import App from "../../client/App";
 
 const router = Router();
 
-router.use("/", async (_, res) => {
-  const movies = await fetchNowPlayingMovies();
+router.get("/", async (req, res) => {
+  const movies = await fetchMovies(TMDB_MOVIE_LISTS.NOW_PLAYING);
 
-  const templatePath = path.join(__dirname, "../../../views", "index.html");
+  const templatePath = path.resolve(__dirname, "index.html");
   const template = fs.readFileSync(templatePath, "utf-8");
 
-  const renderedApp = renderToString(<App movies={movies.results} />);
-
-  const initData = template.replace(
-    "<!--${INIT_DATA_AREA}-->",
-    /*html*/ `
+  const initData = /*html*/ `
     <script>
       window.__INITIAL_DATA__ = {
-        movies: ${JSON.stringify(movies)}
+        movies: ${JSON.stringify(movies.results)}
       }
     </script>
-  `
+  `;
+
+  const renderedApp = renderToString(
+    <StaticRouter location={req.url}>
+      <App
+        movies={movies.results}
+        movieDetailItem={null}
+      />
+    </StaticRouter>
   );
 
-  res.send(initData.replace('<div id="root"></div>', `<div id="root">${renderedApp}</div>`));
+  res.send(template.replace('<div id="root"></div>', `<div id="root">${renderedApp}</div>${initData}`));
+});
+
+router.get("/detail/:id", async (req, res) => {
+  const movies = await fetchMovies(TMDB_MOVIE_LISTS.NOW_PLAYING);
+  const movieId = req.params.id;
+  const movieDetailItem = await fetchMovieDetail(movieId);
+
+  const templatePath = path.resolve(__dirname, "index.html");
+  const template = fs.readFileSync(templatePath, "utf-8");
+
+  const initData = /*html*/ `
+    <script>
+      window.__INITIAL_DATA__ = {
+        movies: ${JSON.stringify(movies.results)},
+        movieDetailItem: ${JSON.stringify(movieDetailItem)}
+      }
+    </script>
+  `;
+
+  const renderedApp = renderToString(
+    <StaticRouter location={`/detail/${movieId}`}>
+      <App
+        movies={movies.results}
+        movieDetailItem={movieDetailItem}
+      />
+    </StaticRouter>
+  );
+  res.send(template.replace('<div id="root"></div>', `<div id="root">${renderedApp}</div>${initData}`));
 });
 
 export default router;
