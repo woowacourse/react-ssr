@@ -57,6 +57,8 @@ router.get("/detail/:id", async (req, res) => {
   `
   );
 
+  console.log("detail", initHTML);
+
   const renderedApp = renderToString(
     <StaticRouter location={req.url}>
       <App movies={movies} movieDetail={movieDetail} />

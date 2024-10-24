@@ -8,6 +8,7 @@ import starEmpty from "@images/star_empty.png";
 import woowacourseLogo from "@images/woowacourse_logo.png";
 import { getMovieDetail } from "../server/api/movie";
 import { useParams } from "react-router-dom";
+import HomePage from "./HomePage";
 
 const DetailPage = ({ movieDetail, movies }) => {
   const bestMovie = movies[0];
@@ -54,7 +55,9 @@ const DetailPage = ({ movieDetail, movies }) => {
                 </span>
               </div>
               <div className="title">{bestMovie.title}</div>
-              <button className="primary detail">자세히 보기</button>
+              <button className="primary detail">
+                <Link to={`/detail/${bestMovie.id}`}>자세히 보기</Link>
+              </button>
             </div>
           </div>
         </div>
@@ -66,11 +69,13 @@ const DetailPage = ({ movieDetail, movies }) => {
             <ul className="thumbnail-list">
               {movies.map(({ id, title, vote_average, poster_path }) => (
                 <li key={id} onClick={handleClick}>
-                  <MovieItem
-                    rate={vote_average}
-                    title={title}
-                    thumbnailUrl={poster_path}
-                  />
+                  <Link to={`/detail/${id}`}>
+                    <MovieItem
+                      rate={vote_average}
+                      title={title}
+                      thumbnailUrl={poster_path}
+                    />
+                  </Link>
                 </li>
               ))}
             </ul>

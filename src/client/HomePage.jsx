@@ -29,7 +29,9 @@ function HomePage({ movies }) {
                 </span>
               </div>
               <div className="title">{bestMovie.title}</div>
-              <button className="primary detail">자세히 보기</button>
+              <button className="primary detail">
+                <Link to={`/detail/${bestMovie.id}`}>자세히 보기</Link>
+              </button>
             </div>
           </div>
         </div>
