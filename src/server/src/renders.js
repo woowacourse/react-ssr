@@ -1,16 +1,37 @@
 import { renderToString } from 'react-dom/server';
-import App from '../../client/App';
+import { StaticRouter } from 'react-router-dom/server';
 import React from 'react';
+import Main from '../../client/components/Main';
+import Footer from '../../client/components/Footer';
 
-export const getRenderedMovies = (movies, movieListType) => {
-  return renderToString(<App movies={movies} movieListType={movieListType} />);
+export const getRenderedMain = (movies) => {
+  return renderToString(
+    <StaticRouter location={'/'}>
+      <div>
+        <Main movies={movies} />
+        <Footer />
+      </div>
+    </StaticRouter>
+  );
 };
 
-export const getRenderedInitData = (movies) => {
+export const getRenderedMovieDetail = (movies, movieDetail) => {
+  return renderToString(
+    <StaticRouter location={`/detail/${movieDetail.id}`}>
+      <div>
+        <Main movies={movies} />
+        <Footer />
+      </div>
+    </StaticRouter>
+  );
+};
+
+export const getRenderedInitData = (movies, movieDetail) => {
   return `
     <script>
       window.__INITIAL_DATA__ = {
         movies: ${JSON.stringify(movies)}
+        ${movieDetail ? `movieDetail: ${JSON.stringify(movieDetail)}` : ''}
       }
     </script>
   `;

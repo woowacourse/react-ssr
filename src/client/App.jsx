@@ -1,13 +1,11 @@
 import React from 'react';
-import Header from './components/Header';
-import Main from './components/Main';
 import Footer from './components/Footer';
+import { Outlet } from 'react-router-dom';
 
-const App = ({ movies, movieListType }) => {
+const App = () => {
   return (
     <div>
-      <Header movie={movies[0]} />
-      <Main movies={movies} movieListType={movieListType} />
+      <Outlet />
       <Footer />
     </div>
   );
