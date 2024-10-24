@@ -3,8 +3,9 @@ import starEmptyImg from "@images/star_empty.png";
 import CloseButton from "@images/modal_button_close.png";
 import { round } from "../utils";
 import { TMDB_ORIGINAL_URL } from "../constants";
+import { Link } from "react-router-dom";
 
-function MovieItemModal({ movieDetail, onClose }) {
+function MovieItemModal({ movieDetail }) {
   const img = TMDB_ORIGINAL_URL + movieDetail.poster_path;
   const title = movieDetail.title;
   const releaseYear = movieDetail.release_date.split("-")[0];
@@ -14,9 +15,11 @@ function MovieItemModal({ movieDetail, onClose }) {
   return (
     <div className="modal-background active" id="modalBackground">
       <div className="modal">
-        <button className="close-modal" id="closeModal" onClick={onClose}>
-          <img src={CloseButton} />
-        </button>
+        <Link to={`/`}>
+          <button className="close-modal" id="closeModal">
+            <img src={CloseButton} />
+          </button>
+        </Link>
         <div className="modal-container">
           <div className="modal-image">
             <img src={img} />

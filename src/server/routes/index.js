@@ -12,15 +12,16 @@ const router = Router();
 
 router.get("*", async (req, res) => {
   const movies = await fetchMovies();
-
   let movieDetail = null;
-  const id = req.originalUrl.split("/detail/")[1];
-  if (id) {
+
+  const match = req.path.match(/^\/detail\/(\d+)$/);
+  if (match) {
+    const id = match[1];
     movieDetail = await fetchDetailMovie(id);
   }
 
   const renderedApp = renderToString(
-    <StaticRouter location={req.originalUrl}>
+    <StaticRouter location={req.url}>
       <App movies={movies} movieDetail={movieDetail} />
     </StaticRouter>
   );
