@@ -2,7 +2,7 @@ import React from 'react';
 import { round } from '../utils/round';
 import LogoImage from '@images/logo.png';
 import StarEmptyImage from '@images/star_empty.png';
-import { TMDB_BANNER_URL } from '../constants/constant';
+import { TMDB_BANNER_URL } from '../../constants/constant';
 
 const Header = ({ bestMovieItem }) => {
   const { backdrop_path, vote_average, title } = bestMovieItem;

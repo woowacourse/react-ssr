@@ -1,10 +1,5 @@
 import { FETCH_OPTIONS, TMDB_MOVIE_DETAIL_URL } from '../../constants/constant';
 
-export const fetchMovies = async (url) => {
-  const response = await fetch(url, FETCH_OPTIONS);
-  return await response.json();
-};
-
 export const fetchMovieDetail = async (movieId) => {
   const url = `${TMDB_MOVIE_DETAIL_URL}${movieId}?language=ko-KR`;
 
