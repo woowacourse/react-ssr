@@ -10,7 +10,7 @@ function DetailPage({ movies, movieDetail }) {
 
 	useEffect(() => {
 		loadMovieDetail(movieId).then((data) => setMovie(data));
-	}, [movieDetail]);
+	}, [movieId, movieDetail]);
 
 	return (
 		<>
