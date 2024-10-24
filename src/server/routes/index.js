@@ -12,7 +12,6 @@ import { StaticRouter } from 'react-router-dom/server';
 const router = Router();
 
 router.get('/', async (req, res) => {
-  const context = {};
   const location = req.url;
 
   const nowPlayingData = await fetchMovies(TMDB_MOVIE_LISTS.nowPlaying);
@@ -50,7 +49,6 @@ router.get('/', async (req, res) => {
 });
 
 router.get('/detail/:id', async (req, res) => {
-  const context = {};
   const location = req.url;
 
   const movieId = req.params.id;
@@ -64,7 +62,7 @@ router.get('/detail/:id', async (req, res) => {
   }
 
   const app = (
-    <StaticRouter location={location} context={context}>
+    <StaticRouter location={location}>
       <App movies={movies} movieDetail={movieDetail} />
     </StaticRouter>
   );
