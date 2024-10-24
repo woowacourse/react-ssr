@@ -2,22 +2,9 @@ import modal_button_close from "../../../public/images/modal_button_close.png";
 import star_empty from "../../../public/images/star_empty.png";
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import {
-  TMDB_MOVIE_DETAIL_URL,
-  TMDB_ORIGINAL_URL,
-} from "../../server/constants/constants";
+import { TMDB_ORIGINAL_URL } from "../../server/constants/constants";
 
-const getMovieDetailUrl = (movieId) => {
-  return TMDB_MOVIE_DETAIL_URL + `${movieId}?language=ko-KR`;
-};
-
-const FETCH_OPTIONS = {
-  method: "GET",
-  headers: {
-    "Content-Type": "application/json",
-    Authorization: `Bearer ${process.env.TMDB_TOKEN}`,
-  },
-};
+import { getMovieDetail } from "../../apis/movies";
 
 const Modal = ({ movieDetail }) => {
   const { id } = useParams();
@@ -27,16 +14,20 @@ const Modal = ({ movieDetail }) => {
   const navigate = useNavigate();
   const handleModalClose = () => navigate("/");
 
+  const releaseDateString = movie
+    ? `${movie.release_date.split("-")[0]} · `
+    : "";
+  const genresString = movie
+    ? movie.genres.map((genre) => genre.name).join(", ")
+    : "";
+
   useEffect(() => {
     const fetchMovieDetail = async () => {
-      try {
-        const response = await fetch(getMovieDetailUrl(id), FETCH_OPTIONS);
-        const data = await response.json();
-        setMovie(data);
-      } catch (error) {
-        console.error("Error fetching movie:", error);
-      }
+      const movieDetail = await getMovieDetail(id);
+
+      setMovie(movieDetail);
     };
+
     fetchMovieDetail();
   }, [id]);
 
@@ -59,8 +50,8 @@ const Modal = ({ movieDetail }) => {
               <div className="modal-description">
                 <h2>{movie.title}</h2>
                 <p className="category">
-                  {movie.release_date.split("-")[0]} ·{" "}
-                  {movie.genres.map((genre) => genre.name).join(", ")}
+                  {releaseDateString}
+                  {genresString}
                 </p>
                 <p className="rate">
                   <img src={star_empty} className="star" />
