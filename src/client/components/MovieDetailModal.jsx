@@ -13,7 +13,7 @@ const MovieDetailModal = ({ movieDetail }) => {
     <div className="modal-background active">
       <div className="modal">
         <button className="close-modal" onClick={handleClick}>
-          <img src="/static/images/modal_button_close.png" alt="" />
+          <img src="/static/images/modal_button_close.png" alt="닫기" />
         </button>
         <div className="modal-container">
           <div className="modal-image">
