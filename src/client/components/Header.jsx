@@ -1,6 +1,6 @@
 import React from "react";
 
-import { TMDB_BANNER_URL } from "../../server/api/endpoints";
+import { TMDB_BANNER_URL } from "../../api/endpoints";
 
 import logoImage from "@images/logo.png";
 import starEmptyImage from "@images/star_empty.png";
