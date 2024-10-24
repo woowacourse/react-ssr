@@ -1,8 +1,7 @@
 import React from "react";
-import { Outlet } from "react-router-dom";
 import { Header, MovieList } from "./components/index";
 
-const MainLayout = ({ movies }) => (
+const Home = ({ movies }) => (
   <>
     <Header movie={movies[0]} />
     <div className="container">
@@ -14,9 +13,8 @@ const MainLayout = ({ movies }) => (
           </ul>
         </section>
       </main>
-      <Outlet />
     </div>
   </>
 );
 
-export default MainLayout;
+export default Home;
