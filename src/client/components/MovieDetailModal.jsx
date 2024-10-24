@@ -1,22 +1,17 @@
 import React from "react";
 import { TMDB_THUMBNAIL_URL } from "../constants";
 import round from "../util/round";
-import { useNavigate } from "react-router-dom";
 import starEmptyImage from "@images/star_empty.png";
 import closeIcon from "@images/modal_button_close.png";
+import { Link } from "react-router-dom";
 
 const MovieDetailModal = ({ movieDetail }) => {
-  const navigate = useNavigate();
-  const handleClick = () => {
-    navigate("/");
-  };
-
   return (
     <div className="modal-background active">
       <div className="modal">
-        <button className="close-modal" onClick={handleClick}>
+        <Link className="close-modal" to={"/"}>
           <img src={closeIcon} alt="닫기" />
-        </button>
+        </Link>
         <div className="modal-container">
           <div className="modal-image">
             <img

@@ -3,15 +3,9 @@ import { TMDB_BANNER_URL } from "../constants.js";
 import starEmptyImage from "@images/star_empty.png";
 import logoImage from "@images/logo.png";
 import round from "../util/round.js";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const Header = ({ movie }) => {
-  const navigate = useNavigate();
-  const handleClick = () => {
-    const id = movie.id;
-    navigate(`/detail/${id}`);
-  };
-
   return (
     <header id="header">
       <div
@@ -31,9 +25,9 @@ const Header = ({ movie }) => {
               <span className="rate-value">{round(movie.vote_average)}</span>
             </div>
             <div className="title">{movie.title}</div>
-            <button className="primary detail" onClick={handleClick}>
+            <Link className="primary detail" to={`/detail/${movie.id}`}>
               자세히 보기
-            </button>
+            </Link>
           </div>
         </div>
       </div>
