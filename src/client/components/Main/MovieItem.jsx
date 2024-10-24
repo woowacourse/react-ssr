@@ -10,7 +10,7 @@ export default function MovieItem({ movie }) {
 
   const navigate = useNavigate();
 
-  const handleItemClick = async () => {
+  const handleItemClick = () => {
     navigate(ROUTE.detail(id));
   };
 
